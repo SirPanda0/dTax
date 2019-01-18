@@ -9,6 +9,8 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using Microsoft.EntityFrameworkCore;
+using dTax.Models;
 
 namespace dTax
 {
@@ -24,6 +26,11 @@ namespace dTax
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
+
+            services.AddEntityFrameworkNpgsql()
+                .AddDbContext<DbPostrgreContext>(options =>
+                    options.UseNpgsql(Configuration.GetConnectionString("PostgreConnection")));
+
             services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
         }
 
