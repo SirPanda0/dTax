@@ -11,6 +11,12 @@ namespace dTax.Models
         
         public int Id { get; set; }
 
+        public int UserId { get; set; }
+        public User User { get; set; }
+        //or
+        //public string Login { get; set; }
+        //public string Password { get; set; }
+
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }

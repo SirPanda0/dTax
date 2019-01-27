@@ -12,6 +12,8 @@ namespace dTax.Models
         public DbSet<Role> Roles { get; set; }
         public DbSet<Driver> Drivers { get; set; }
         public DbSet<CarModel> CarModels { get; set; }
+        public DbSet<Cab> Cabs { get; set; }
+        public DbSet<Shift> Shifts { get; set; }
 
         public DbPostrgreContext(DbContextOptions<DbPostrgreContext> options) : base(options)
         {
@@ -28,10 +30,10 @@ namespace dTax.Models
               Основные сущности:
 
                 Секция 1(всё что связано с водителями):
-                driver -
-                shift -
-                cab -
-                car model -
+                driver (водитель) -
+                shift (смена) -
+                cab (сам такси) -
+                car model(модель авто) -
 
                 Секция 2(поездки):
                 cab_ride - 
