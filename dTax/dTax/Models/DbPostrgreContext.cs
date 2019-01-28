@@ -10,10 +10,18 @@ namespace dTax.Models
     {
         public DbSet<User> Users { get; set; }
         public DbSet<Role> Roles { get; set; }
-        public DbSet<Driver> Drivers { get; set; }
-        public DbSet<CarModel> CarModels { get; set; }
-        public DbSet<Cab> Cabs { get; set; }
-        public DbSet<Shift> Shifts { get; set; }
+
+        public DbSet<Driver> Drivers { get; set; } //Водители
+        public DbSet<CarModel> CarModels { get; set; } //Модели зарегистрированных автомобилей
+        public DbSet<Cab> Cabs { get; set; } //зарегистрированные автомобили
+        public DbSet<Shift> Shifts { get; set; } //Смена
+
+        public DbSet<CabRide> CabRides { get; set; } //Потенциальные поездки
+        public DbSet<PaymentType> PaymentTypes { get; set; } //Тип оплаты: карта/наличные
+        public DbSet<CabRideStatus> CabRideStatuses { get; set; } //Статус поездки
+        public DbSet<Customer> Customers { get; set; } //Заказчик
+        public DbSet<Status> Statuses { get; set; } // Состояния поездки: новая/назначена/началась/завершилась/отменена
+
 
         public DbPostrgreContext(DbContextOptions<DbPostrgreContext> options) : base(options)
         {
