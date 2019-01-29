@@ -8,6 +8,7 @@ using dTax.Models;
 
 namespace dTax.Migrations
 {
+
     [DbContext(typeof(DbPostrgreContext))]
     [Migration("20190118192657_DbPostgreContext")]
     partial class DbPostgreContext

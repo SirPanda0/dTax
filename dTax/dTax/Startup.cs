@@ -12,6 +12,9 @@ using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
 using dTax.Models;
 using Swashbuckle.AspNetCore.Swagger;
+using Microsoft.AspNetCore.Authentication.Cookies;
+using System.Reflection;
+using System.IO;
 
 namespace dTax
 {
@@ -36,8 +39,30 @@ namespace dTax
 
             services.AddSwaggerGen(c =>
             {
-                c.SwaggerDoc("v1", new Info { Title = "My API", Version = "v1" });
+                c.SwaggerDoc("v1", new Info
+                {
+                    Version = "v1",
+                    Title = "Первая версия API",
+
+                    Contact = new Contact
+                    {
+                        Name = "Нажми для миграции",
+                        Url = "/api/values"
+                    }
+                });
             });
+
+
+
+            services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
+           .AddCookie(options =>
+           {
+
+               options.Cookie.Name = "dTaxCookie";
+
+           });
+
+            services.AddCors();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
@@ -59,8 +84,18 @@ namespace dTax
             app.UseSwaggerUI(c =>
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
+                c.RoutePrefix = string.Empty;
                 
             });
+
+            app.UseCors(builder =>
+            builder.AllowAnyOrigin()
+                .AllowAnyMethod()
+                    .AllowAnyHeader()
+                        .AllowCredentials()
+                        );
+
+            app.UseAuthentication();
 
             app.UseSwagger();
 
@@ -69,6 +104,7 @@ namespace dTax
                 routes.MapRoute(
                     name: "default",
                     template: "api/{controller}/{action}");
+                
             });
         }
     }

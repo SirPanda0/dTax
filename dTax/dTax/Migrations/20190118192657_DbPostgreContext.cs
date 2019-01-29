@@ -3,6 +3,7 @@ using Npgsql.EntityFrameworkCore.PostgreSQL.Metadata;
 
 namespace dTax.Migrations
 {
+
     public partial class DbPostgreContext : Migration
     {
         protected override void Up(MigrationBuilder migrationBuilder)

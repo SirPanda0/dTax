@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Models
 {
+
     public class Cab
     {
         public int Id { get; set; }
