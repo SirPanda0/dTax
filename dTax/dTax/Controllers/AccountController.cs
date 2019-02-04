@@ -56,7 +56,7 @@ namespace dTax.Controllers
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine(e);
+
                 return BadRequest();
             }
         }
@@ -106,10 +106,61 @@ namespace dTax.Controllers
             }
             catch (Exception e)
             {
-                System.Diagnostics.Debug.WriteLine(e);
+
                 return BadRequest();
             }
         }
+
+        [Authorize]
+        [Route("CustomeReg")]
+        [HttpPost]
+        public async Task<IActionResult> CustomeReg([FromBody] DriverRegistration registerModel)
+        {
+            //TODO
+            User user = await db.Users
+                        .FirstOrDefaultAsync(u => u.Id == registerModel.UserId && u.IsDriver == false);
+            return BadRequest();
+        }
+
+        [Authorize]
+        [Route("DriveReg")]
+        [HttpPost]
+        public async Task<IActionResult> DriverReg([FromBody] DriverRegistration registerModel)
+        {
+            try
+            {
+                User user = await db.Users
+                        .FirstOrDefaultAsync(u => u.Id == registerModel.UserId && u.IsDriver == true);
+
+                Driver driver = await db.Drivers
+                    .FirstOrDefaultAsync(dr => dr.UserId == registerModel.UserId || dr.DrivingLicence == registerModel.DrivingLicence);
+
+                if (user != null && driver == null)
+                {
+                    Driver regd = new Driver
+                    {
+                        UserId = registerModel.UserId,
+                        DrivingLicence = registerModel.DrivingLicence,
+                        ExpiryDate = registerModel.ExpiryDate,
+                        Working = false
+                    };
+
+                    await db.Drivers.AddAsync(regd);
+                    await db.SaveChangesAsync();
+
+                    return Json(regd);
+
+                }
+
+                return BadRequest("Проверьте данные!");
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
+        }
+
+
 
         [ApiExplorerSettings(IgnoreApi = true)]
         //[Route("Logout")]
@@ -148,7 +199,7 @@ namespace dTax.Controllers
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
                 new Claim(ClaimsIdentity.DefaultRoleClaimType, user.RoleId.ToString()),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name)
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name),
             };
 
             ClaimsIdentity identity = new ClaimsIdentity(claims, "dTaxCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
