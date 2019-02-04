@@ -10,7 +10,10 @@ using dTax.ApiModel;
 using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
+using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
+using System.Text;
+using System.Security.Cryptography;
 
 namespace dTax.Controllers
 {
@@ -35,8 +38,10 @@ namespace dTax.Controllers
                     return BadRequest();
                 }
 
+                var PasswordHash = GetHash(loginModel.Password);
+
                 User user = await db.Users.Include(u => u.Role)
-                    .FirstOrDefaultAsync(u => u.Login == loginModel.Login && u.Password == loginModel.Password);
+                    .FirstOrDefaultAsync(u => u.Login == loginModel.Login && u.Password == PasswordHash);
 
                 if (user != null)
                 {
@@ -58,7 +63,7 @@ namespace dTax.Controllers
 
         [Route("Register")]
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] UserModel registerModel)
+        public async Task<IActionResult> Register([FromBody] RegisterModel registerModel)
         {
             try
             {
@@ -67,16 +72,37 @@ namespace dTax.Controllers
                     return BadRequest("Проверьте данные");
                 }
 
-                if (registerModel.RoleId != 1)
+                User user = await db.Users.Include(u => u.Role)
+                   .FirstOrDefaultAsync(u => u.Login == registerModel.Login || u.Email == registerModel.Email);
+
+                if (user != null)
                 {
-                    return BadRequest("Проверьте данные");
+                    return BadRequest("Такой пользователь уже существует!");
                 }
+                else
+                {
 
-                User NewUser = registerModel;
-                await db.Users.AddAsync(NewUser);
-                await db.SaveChangesAsync();
+                    var PasswordHash = GetHash(registerModel.Password);
 
-                return Json(NewUser);
+                    User NewUser = new User
+                    {
+                        FirstName = registerModel.FirstName,
+                        LastName = registerModel.LastName,
+                        Login = registerModel.Login,
+                        Password = PasswordHash,
+                        BirthDate = registerModel.BirthDate,
+                        RoleId = 1,//User
+                        Email = registerModel.Email,
+                        IsDriver = registerModel.IsDriver,
+                        FullReg = false
+                    };
+
+
+                    await db.Users.AddAsync(NewUser);
+                    await db.SaveChangesAsync();
+
+                    return Json(NewUser);
+                }
             }
             catch (Exception e)
             {
@@ -119,14 +145,26 @@ namespace dTax.Controllers
         {
             var claims = new List<Claim>
             {
+                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
                 new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role?.Name)
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.RoleId.ToString()),
+                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name)
             };
 
             ClaimsIdentity identity = new ClaimsIdentity(claims, "dTaxCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
 
             await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
         }
+
+        protected string GetHash(string password)
+        {
+            using (var sha256 = SHA256.Create())
+            {
+                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
+                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
+            }
+        }
+
         #endregion
     }
 }

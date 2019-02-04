@@ -6,10 +6,7 @@ using dTax.Models;
 
 namespace dTax.ApiModel
 {
-    public class UserModel :User
+    public class UserModel : User
     {
-
-        
-
     }
 }

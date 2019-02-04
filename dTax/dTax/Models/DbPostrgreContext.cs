@@ -34,19 +34,20 @@ namespace dTax.Models
         private async Task InitializationAsync()
         {
 
-            Role role = new Role() { Name = "Admin" };
-            User user = new User()
-            {
-                Login = "Admin",
-                Password = "Admin",
-                Role = role,
-                BirthDate = DateTime.Now.Date,
-                FirstName = "Админ",
-                LastName = "Админович"
-            };
+            Role role = new Role() { Name = "User", Id = 1};
+
+            //User user = new User()
+            //{
+            //    Login = "Admin",
+            //    Password = "Admin",
+            //    Role = role,
+            //    BirthDate = DateTime.Now.Date,
+            //    FirstName = "Админ",
+            //    LastName = "Админович"
+            //};
 
             Roles.Add(role);
-            Users.Add(user);
+           // Users.Add(user);
             await SaveChangesAsync();
 
             //throw new NotImplementedException();

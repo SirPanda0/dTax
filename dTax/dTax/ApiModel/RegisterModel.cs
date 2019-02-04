@@ -1,14 +1,15 @@
-﻿using Newtonsoft.Json;
-using System;
+﻿using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using dTax.Models;
+using Newtonsoft.Json;
 
-namespace dTax.Models
+namespace dTax.ApiModel
 {
-    public class User
+    public class RegisterModel 
     {
-        public int Id { get; set; }
+
         public string Login { get; set; }
         public string Password { get; set; }
 
@@ -17,11 +18,8 @@ namespace dTax.Models
         public DateTime BirthDate { get; set; }
         public string Email { get; set; }
         public bool IsDriver { get; set; }
-        public bool FullReg { get; set; }
+        
 
-        public int RoleId { get; set; }
-        [JsonIgnore]
-        public Role Role { get; set; }
 
     }
 }
