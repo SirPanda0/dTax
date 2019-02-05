@@ -15,6 +15,7 @@ using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Reflection;
 using System.IO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace dTax
 {
@@ -51,7 +52,6 @@ namespace dTax
                     }
                 });
             });
-
 
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)

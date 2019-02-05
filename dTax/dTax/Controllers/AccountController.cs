@@ -17,7 +17,7 @@ using System.Security.Cryptography;
 
 namespace dTax.Controllers
 {
-    [Route("Account")]
+    [Route("[controller]")]
     public class AccountController : Controller
     {
         private DbPostrgreContext db;
@@ -83,6 +83,12 @@ namespace dTax.Controllers
                 {
 
                     var PasswordHash = GetHash(registerModel.Password);
+                    bool full = false;
+
+                    if (registerModel.IsDriver != true)
+                    {
+                        full = true;
+                    }
 
                     User NewUser = new User
                     {
@@ -94,12 +100,20 @@ namespace dTax.Controllers
                         RoleId = 1,//User
                         Email = registerModel.Email,
                         IsDriver = registerModel.IsDriver,
-                        FullReg = false
+                        FullReg = full
                     };
 
 
                     await db.Users.AddAsync(NewUser);
                     await db.SaveChangesAsync();
+
+                    if (full == true)
+                    {
+                        Customer rCustomer = new Customer { UserId = NewUser.Id };
+
+                        await db.Customers.AddAsync(rCustomer);
+                        await db.SaveChangesAsync();
+                    }
 
                     return Json(NewUser);
                 }
@@ -111,54 +125,31 @@ namespace dTax.Controllers
             }
         }
 
-        [Authorize]
-        [Route("CustomeReg")]
-        [HttpPost]
-        public async Task<IActionResult> CustomeReg([FromBody] DriverRegistration registerModel)
-        {
-            //TODO
-            User user = await db.Users
-                        .FirstOrDefaultAsync(u => u.Id == registerModel.UserId && u.IsDriver == false);
-            return BadRequest();
-        }
+        //[Authorize]
+        //[Route("CustomeReg")]
+        //[HttpPost]
+        //public async Task<IActionResult> CustomeReg([FromQuery] int Id)
+        //{
 
-        [Authorize]
-        [Route("DriveReg")]
-        [HttpPost]
-        public async Task<IActionResult> DriverReg([FromBody] DriverRegistration registerModel)
-        {
-            try
-            {
-                User user = await db.Users
-                        .FirstOrDefaultAsync(u => u.Id == registerModel.UserId && u.IsDriver == true);
+        //    User user = await db.Users
+        //                .FirstOrDefaultAsync(u => u.Id == Id && u.IsDriver == false);
 
-                Driver driver = await db.Drivers
-                    .FirstOrDefaultAsync(dr => dr.UserId == registerModel.UserId || dr.DrivingLicence == registerModel.DrivingLicence);
+        //    Customer customer = await db.Customers.FirstOrDefaultAsync(u => u.UserId == Id);
 
-                if (user != null && driver == null)
-                {
-                    Driver regd = new Driver
-                    {
-                        UserId = registerModel.UserId,
-                        DrivingLicence = registerModel.DrivingLicence,
-                        ExpiryDate = registerModel.ExpiryDate,
-                        Working = false
-                    };
+        //    if (user != null && customer == null)
+        //    {
+        //        Customer rCustomer = new Customer { UserId = Id };
 
-                    await db.Drivers.AddAsync(regd);
-                    await db.SaveChangesAsync();
+        //        await db.Customers.AddAsync(rCustomer);
+        //        await db.SaveChangesAsync();
+        //        return Ok("Успешно!");
+        //    }
+        //    else
+        //        return BadRequest("Проверьте данные!");
+        //}
 
-                    return Json(regd);
 
-                }
-
-                return BadRequest("Проверьте данные!");
-            }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
-        }
+        
 
 
 
