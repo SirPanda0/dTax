@@ -41,8 +41,10 @@ namespace dTax.Controllers
                 User user = await db.Users
                         .FirstOrDefaultAsync(u => u.Id == registerModel.UserId && u.IsDriver == true);
 
+
                 Driver driver = await db.Drivers
-                    .FirstOrDefaultAsync(dr => dr.UserId == registerModel.UserId || dr.DrivingLicence == registerModel.DrivingLicence);
+                    .FirstOrDefaultAsync(dr => dr.UserId == registerModel.UserId 
+                    || dr.DrivingLicence == registerModel.DrivingLicence);
 
                 if (user != null && driver == null)
                 {
@@ -56,9 +58,45 @@ namespace dTax.Controllers
 
                     await db.Drivers.AddAsync(regd);
                     await db.SaveChangesAsync();
+   
+                    CarModel car = new CarModel
+                    {
+                        BrandName = registerModel.BrandName,
+                        ModelName = registerModel.ModelName,
+                        ModelDescription = registerModel.ModelDescription
+                    };
 
-                    
-                    return Json(regd);
+                    await db.CarModels.AddAsync(car);
+                    await db.SaveChangesAsync();
+
+                    Cab cab = new Cab
+                    {
+                        LicensePlate =registerModel.LicensePlate,
+                        CarModelId = car.Id,
+                        ManufactureYear = registerModel.ManufactureYear,
+                        DriverId = regd.Id,
+                        Active = true
+                    };
+
+                    await db.Cabs.AddAsync(cab);
+                    await db.SaveChangesAsync();
+
+                    Shift shift = new Shift
+                    {
+                        CabId = cab.Id,
+                        DriverId = driver.Id,
+                        LoginTime = DateTime.Now
+                    };
+                    await db.Shifts.AddAsync(shift);
+                    await db.SaveChangesAsync();
+
+
+                    //user.FullReg = true;
+
+                    //db.Users.Update(user);
+                    //await db.SaveChangesAsync();
+
+                    return Json("Регистрация окончена!");
 
                 }
 
@@ -69,5 +107,10 @@ namespace dTax.Controllers
                 return BadRequest();
             }
         }
+
+
+
+
+
     }
 }

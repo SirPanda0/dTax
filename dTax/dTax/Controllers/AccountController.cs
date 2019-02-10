@@ -14,6 +14,7 @@ using Microsoft.AspNetCore.Cryptography.KeyDerivation;
 
 using System.Text;
 using System.Security.Cryptography;
+using dTax.ViewModels;
 
 namespace dTax.Controllers
 {
@@ -43,9 +44,26 @@ namespace dTax.Controllers
                 User user = await db.Users.Include(u => u.Role)
                     .FirstOrDefaultAsync(u => u.Login == loginModel.Login && u.Password == PasswordHash);
 
+
                 if (user != null)
                 {
                     await Authenticate(user);
+
+                    if (user.IsDriver != false && user.FullReg != false)
+                    {
+                        Driver driver = await db.Drivers.FirstOrDefaultAsync(d => d.UserId == user.Id);
+
+                        //Cab cab = await db.Cabs.FirstOrDefaultAsync(c =>c.DriverId == driver.Id);
+
+                        Shift shift = await db.Shifts.FirstOrDefaultAsync(s => s.DriverId == driver.Id);
+
+                        shift.LoginTime = DateTime.Now;
+
+                        db.Shifts.Update(shift);
+                        await db.SaveChangesAsync();
+
+                    }
+
                 }
                 else
                 {
@@ -60,6 +78,9 @@ namespace dTax.Controllers
                 return BadRequest();
             }
         }
+
+
+
 
         [Route("Register")]
         [HttpPost]
@@ -102,7 +123,6 @@ namespace dTax.Controllers
                         IsDriver = registerModel.IsDriver,
                         FullReg = full
                     };
-
 
                     await db.Users.AddAsync(NewUser);
                     await db.SaveChangesAsync();
@@ -161,24 +181,52 @@ namespace dTax.Controllers
             return Ok();
         }
 
-        [Authorize]
-        [Route("Edit")]
-        [HttpPut]
-        public async Task<IActionResult> Edit([FromBody] UserModel userModel)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest();
-            }
+        //TODO
+        //[Authorize]
+        //[Route("Edit")]
+        //[HttpPut]
+        //public async Task<IActionResult> Edit([FromBody] UserModel userModel)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest();
+        //    }
 
-            User UserEdit = userModel;
+        //    User UserEdit = new User
+        //    {
+        //        Email = userModel.Email,
+        //        BirthDate = userModel.BirthDate,
+        //        FirstName = userModel.FirstName,
+        //        LastName = userModel.LastName,
+        //        Password = userModel.Password
+        //    };
 
-            db.Users.Update(UserEdit);
-            await db.SaveChangesAsync();
-            return Ok(UserEdit);
+        //    db.Users.Update(UserEdit);
+        //    await db.SaveChangesAsync();
+        //    return Ok(UserEdit);
+
+        //}
+
+        ///TODO
+        //[Authorize]
+        //[Route("GetUserInfo")]
+        //[HttpGet]
+        //public async Task<IActionResult> GetUser([FromQuery] int Id)
+        //{
+        //    User user = await db.Users.FirstOrDefaultAsync(i => i.Id == Id);
+
+        //    UserViewModel userViewModel = new UserViewModel
+        //    {
+        //        Email = user.Email,
+        //        BirthDate = user.BirthDate,
+        //        FirstName = user.FirstName,
+        //        LastName = user.LastName
+        //    };
+
+        //    return Json(userViewModel);
 
 
-        }
+        //}
 
 
 
