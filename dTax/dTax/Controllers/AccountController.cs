@@ -59,6 +59,7 @@ namespace dTax.Controllers
 
                         shift.LoginTime = DateTime.Now;
 
+
                         db.Shifts.Update(shift);
                         await db.SaveChangesAsync();
 
@@ -169,7 +170,7 @@ namespace dTax.Controllers
         //}
 
 
-        
+
 
 
 

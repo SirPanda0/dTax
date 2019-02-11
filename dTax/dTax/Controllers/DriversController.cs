@@ -31,22 +31,24 @@ namespace dTax.Controllers
         [HttpPost]
         public async Task<IActionResult> DriverReg([FromBody] DriverRegistration registerModel)
         {
-            try
+
+            if (!ModelState.IsValid)
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest("Проверьте данные");
-                }
+                return BadRequest("Проверьте данные");
+            }
 
-                User user = await db.Users
-                        .FirstOrDefaultAsync(u => u.Id == registerModel.UserId && u.IsDriver == true);
+            User user = await db.Users
+                    .FirstOrDefaultAsync(u => u.Id == registerModel.UserId && u.IsDriver == true);
 
 
-                Driver driver = await db.Drivers
-                    .FirstOrDefaultAsync(dr => dr.UserId == registerModel.UserId 
-                    || dr.DrivingLicence == registerModel.DrivingLicence);
+            Driver driver = await db.Drivers
+                .FirstOrDefaultAsync(dr => dr.UserId == registerModel.UserId
+                || dr.DrivingLicence == registerModel.DrivingLicence);
 
-                if (user != null && driver == null)
+            if (user != null && driver == null)
+            {
+
+                try
                 {
                     Driver regd = new Driver
                     {
@@ -58,7 +60,9 @@ namespace dTax.Controllers
 
                     await db.Drivers.AddAsync(regd);
                     await db.SaveChangesAsync();
-   
+
+                    int DriverId = regd.Id;
+
                     CarModel car = new CarModel
                     {
                         BrandName = registerModel.BrandName,
@@ -71,7 +75,7 @@ namespace dTax.Controllers
 
                     Cab cab = new Cab
                     {
-                        LicensePlate =registerModel.LicensePlate,
+                        LicensePlate = registerModel.LicensePlate,
                         CarModelId = car.Id,
                         ManufactureYear = registerModel.ManufactureYear,
                         DriverId = regd.Id,
@@ -81,31 +85,40 @@ namespace dTax.Controllers
                     await db.Cabs.AddAsync(cab);
                     await db.SaveChangesAsync();
 
+                    int CabId = cab.Id;
+
                     Shift shift = new Shift
                     {
+                        DriverId = regd.Id,
                         CabId = cab.Id,
-                        DriverId = driver.Id,
                         LoginTime = DateTime.Now
+
                     };
+
                     await db.Shifts.AddAsync(shift);
+
+                    user.FullReg = true;
+                    db.Users.Update(user);
                     await db.SaveChangesAsync();
 
-
-                    //user.FullReg = true;
-
-                    //db.Users.Update(user);
-                    //await db.SaveChangesAsync();
-
                     return Json("Регистрация окончена!");
-
                 }
 
+                catch (Exception e)
+                {
+                    user.FullReg = false;
+                    db.Users.Update(user);
+                    await db.SaveChangesAsync();
+
+                    return BadRequest("Не полная регистрация \n" +e);
+                    
+                }
+
+
+            }
+            else
                 return BadRequest("Проверьте данные!");
-            }
-            catch (Exception e)
-            {
-                return BadRequest();
-            }
+
         }
 
 

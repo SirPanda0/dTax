@@ -14,7 +14,7 @@ namespace dTax.Models
         public int UserId { get; set; }
         public User User { get; set; }
 
-        public int DrivingLicence { get; set; } //номер прав
+        public long DrivingLicence { get; set; } //номер прав
         public DateTime ExpiryDate { get; set; } //дата окончания действия прав
         public bool Working { get; set; }
     }
