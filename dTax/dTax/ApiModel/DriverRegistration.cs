@@ -9,8 +9,8 @@ namespace dTax.ApiModel
     {
         public int UserId { get; set; }
 
-        public int DrivingLicence { get; set; } 
-        public DateTime ExpiryDate { get; set; }
+        public long DrivingLicence { get; set; } 
+        public DateTime ExpiryDate { get; set; } 
         
         //Cab
         public string LicensePlate { get; set; }
