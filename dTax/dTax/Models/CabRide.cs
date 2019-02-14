@@ -7,8 +7,8 @@ namespace dTax.Models
 {
     public class CabRide
     {
-        public int Id { get; set; }
-        public int ShiftId { get; set; } //id смены
+        public Guid Id { get; set; }
+        public Guid ShiftId { get; set; } //id смены
         public Shift Shift { get; set; }
         public DateTime RideStartTime { get; set; }//началась поездка=>занят
         public DateTime RideEndTime { get; set; }//закончилась поездка=>свободен

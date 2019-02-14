@@ -71,7 +71,15 @@ namespace dTax.Controllers
                     return BadRequest("Некорректные логин и(или) пароль");
                 }
 
-                return Json(user);
+                var response = new LoginViewModel
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName
+                };
+
+                return Json(response);
             }
             catch (Exception e)
             {
@@ -136,7 +144,15 @@ namespace dTax.Controllers
                         await db.SaveChangesAsync();
                     }
 
-                    return Json(NewUser);
+                    var response = new LoginViewModel
+                    {
+                        Id = NewUser.Id,
+                        Email = NewUser.Email,
+                        FirstName = NewUser.FirstName,
+                        LastName = NewUser.LastName
+                    };
+
+                    return Json(response);
                 }
             }
             catch (Exception e)

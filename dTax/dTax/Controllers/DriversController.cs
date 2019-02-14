@@ -61,7 +61,7 @@ namespace dTax.Controllers
                     await db.Drivers.AddAsync(regd);
                     await db.SaveChangesAsync();
 
-                    int DriverId = regd.Id;
+                    Guid DriverId = regd.Id;
 
                     CarModel car = new CarModel
                     {
@@ -85,7 +85,7 @@ namespace dTax.Controllers
                     await db.Cabs.AddAsync(cab);
                     await db.SaveChangesAsync();
 
-                    int CabId = cab.Id;
+                    Guid CabId = cab.Id;
 
                     Shift shift = new Shift
                     {

@@ -7,7 +7,7 @@ namespace dTax.ApiModel
 {
     public class DriverRegistration
     {
-        public int UserId { get; set; }
+        public Guid UserId { get; set; }
 
         public long DrivingLicence { get; set; } 
         public DateTime ExpiryDate { get; set; } 
