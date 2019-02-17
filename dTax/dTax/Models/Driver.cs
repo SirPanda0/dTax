@@ -17,5 +17,9 @@ namespace dTax.Models
         public long DrivingLicence { get; set; } //номер прав
         public DateTime ExpiryDate { get; set; } //дата окончания действия прав
         public bool Working { get; set; }
+
+        //TODO
+        //public float? geo_lat { get; set; }
+        //public float? geo_long { get; set; }
     }
 }

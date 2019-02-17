@@ -77,6 +77,7 @@ namespace dTax.Controllers
                     {
                         LicensePlate = registerModel.LicensePlate,
                         CarModelId = car.Id,
+                        VIN = registerModel.VIN,
                         ManufactureYear = registerModel.ManufactureYear,
                         DriverId = regd.Id,
                         Active = true
@@ -92,7 +93,6 @@ namespace dTax.Controllers
                         DriverId = regd.Id,
                         CabId = cab.Id,
                         LoginTime = DateTime.Now
-
                     };
 
                     await db.Shifts.AddAsync(shift);

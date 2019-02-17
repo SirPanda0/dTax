@@ -10,6 +10,7 @@ namespace dTax.Models
     {
         public Guid Id { get; set; }
         public string LicensePlate { get; set; } //номера автомобиля
+        public string VIN { get; set; } //VIN авто
 
         public Guid CarModelId { get; set; } //id модели авто
         public CarModel CarModel { get; set; }
@@ -18,6 +19,8 @@ namespace dTax.Models
 
         public Guid DriverId { get; set; } //id водителя
         public Driver Driver { get; set; }
+
+        
 
         public bool Active { get; set; } 
 

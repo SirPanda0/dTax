@@ -8,18 +8,22 @@ namespace dTax.Models
     public class CabRide
     {
         public Guid Id { get; set; }
-        public Guid ShiftId { get; set; } //id смены
-        public Shift Shift { get; set; }
-        public DateTime RideStartTime { get; set; }//началась поездка=>занят
-        public DateTime RideEndTime { get; set; }//закончилась поездка=>свободен
+
+        public Guid CustomerId { get; set; } //id клиента
+        public Customer Customer { get; set; }
+
         public string AddressStartPoint { get; set; }//Место начала поездки
-        public string StartPointGPS { get; set; }//
+        public float? StartPointGPS { get; set; }//
         public string AddressEndPoint { get; set; }//Место конца поездки
-        public string EndPointGPS { get; set; }//
+        public float? EndPointGPS { get; set; }//
+
         public bool Canceled { get; set; }//Отменена ли поездки
+
         public int PaymentTypeId { get; set; }//Тип оплаты
         public PaymentType PamentType { get; set; }
         public decimal Price { get; set; }//Цена за поездку
+
+        public string BookDetails { get; set; }// доп информация о заказе
 
     }
 }

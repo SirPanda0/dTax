@@ -14,7 +14,8 @@ namespace dTax.ApiModel
         
         //Cab
         public string LicensePlate { get; set; }
-        public int ManufactureYear { get; set; } 
+        public int ManufactureYear { get; set; }
+        public string VIN { get; set; }
 
         //CarModel
         public string BrandName { get; set; }
