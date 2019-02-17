@@ -7,7 +7,7 @@ namespace dTax.ApiModel
 {
     public class Booking
     {
-        public Guid CustomerId { get; set; } //id клиента
+        public Guid UserId { get; set; } //id клиента
 
         public string AddressStartPoint { get; set; }
         public string AddressEndPoint { get; set; }
@@ -15,5 +15,7 @@ namespace dTax.ApiModel
         public int PaymentTypeId { get; set; }//Тип оплаты
 
         public string BookDetails { get; set; }// доп информация о заказе
+
+        public int Distance { get; set; }// дистанция от объекта к объекту
     }
 }

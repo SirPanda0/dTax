@@ -110,8 +110,8 @@ namespace dTax.Controllers
                     db.Users.Update(user);
                     await db.SaveChangesAsync();
 
-                    return BadRequest("Не полная регистрация \n" +e);
-                    
+                    return BadRequest("Не полная регистрация \n" + e);
+
                 }
 
 
@@ -122,8 +122,16 @@ namespace dTax.Controllers
         }
 
 
+        [Authorize]
+        [Route("TakeOrder")]
+        [HttpPost]
+        public async Task<IActionResult> TakeOrder([FromBody] )
+        {
+
+            
 
 
 
+        }
     }
 }

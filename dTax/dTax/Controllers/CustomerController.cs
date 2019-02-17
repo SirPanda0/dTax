@@ -6,6 +6,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using dTax.Common;
+using Microsoft.EntityFrameworkCore;
 
 namespace dTax.Controllers
 {
@@ -29,21 +31,63 @@ namespace dTax.Controllers
                 return BadRequest("Проверьте данные");
             }
 
-            CabRide ride = new CabRide
+            try
             {
-                CustomerId = booking.CustomerId,
-                AddressStartPoint = booking.AddressStartPoint,
-                AddressEndPoint = booking.AddressEndPoint,
-                PaymentTypeId = booking.PaymentTypeId,
-                BookDetails = booking.BookDetails
-            };
+                Customer customer = await db.Customers.FirstOrDefaultAsync(c => c.UserId == booking.UserId);
 
-            await db.CabRides.AddAsync(ride);
-            await db.SaveChangesAsync();
+                //Можно ли создавать несколько заказов сразу?
+                //CabRide ride = await db.CabRides.FirstOrDefaultAsync(r => r.CustomerId == customer.Id && r.Canceled == true);
 
-            return Json(ride);
+                if (customer != null)
+                {
+                    CabRide ride = new CabRide
+                    {
+                        CustomerId = customer.Id,
+                        AddressStartPoint = booking.AddressStartPoint,
+                        AddressEndPoint = booking.AddressEndPoint,
+                        PaymentTypeId = booking.PaymentTypeId,
+                        BookDetails = booking.BookDetails,
+                        Canceled = false,
+                        Price = GetPrice(booking.Distance)
+                    };
 
+                    await db.CabRides.AddAsync(ride);
+                    await db.SaveChangesAsync();
 
+                    return Json(ride);
+                }
+                return BadRequest("Вы не являетесь заказчиком!");
+
+            }
+            catch (Exception e)
+            {
+                return BadRequest();
+            }
         }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+        #region Private
+        //TODO систему тарифов
+        protected int GetPrice(int distance)
+        {
+            return distance * 8;
+        }
+        #endregion
     }
 }
