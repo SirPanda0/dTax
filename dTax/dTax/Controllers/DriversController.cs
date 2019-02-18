@@ -122,16 +122,16 @@ namespace dTax.Controllers
         }
 
 
-        [Authorize]
-        [Route("TakeOrder")]
-        [HttpPost]
-        public async Task<IActionResult> TakeOrder([FromBody] )
-        {
+        //[Authorize]
+        //[Route("TakeOrder")]
+        //[HttpPost]
+        //public async Task<IActionResult> TakeOrder([FromBody] )
+        //{
 
             
 
 
 
-        }
+        //}
     }
 }

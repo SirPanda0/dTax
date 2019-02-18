@@ -26,3 +26,17 @@ C:\Users\hellp\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.Asse
 C:\Users\hellp\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.RazorTargetAssemblyInfo.cache
 C:\Users\hellp\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.dll
 C:\Users\hellp\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.pdb
+C:\Users\ipanagushin\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.csprojAssemblyReference.cache
+C:\Users\ipanagushin\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.csproj.CoreCompileInputs.cache
+C:\Users\ipanagushin\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.RazorAssemblyInfo.cache
+C:\Users\ipanagushin\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.RazorAssemblyInfo.cs
+C:\Users\ipanagushin\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.AssemblyInfoInputs.cache
+C:\Users\ipanagushin\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.AssemblyInfo.cs
+C:\Users\ipanagushin\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.dll
+C:\Users\ipanagushin\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.pdb
+C:\Users\ipanagushin\Documents\GitHub\dTax\dTax\dTax\bin\Debug\netcoreapp2.1\dTax.deps.json
+C:\Users\ipanagushin\Documents\GitHub\dTax\dTax\dTax\bin\Debug\netcoreapp2.1\dTax.runtimeconfig.json
+C:\Users\ipanagushin\Documents\GitHub\dTax\dTax\dTax\bin\Debug\netcoreapp2.1\dTax.runtimeconfig.dev.json
+C:\Users\ipanagushin\Documents\GitHub\dTax\dTax\dTax\bin\Debug\netcoreapp2.1\dTax.dll
+C:\Users\ipanagushin\Documents\GitHub\dTax\dTax\dTax\bin\Debug\netcoreapp2.1\dTax.pdb
+C:\Users\ipanagushin\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.RazorTargetAssemblyInfo.cache
