@@ -81,7 +81,7 @@ namespace dTax.Controllers
 
                 return Json(response);
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 return BadRequest();
@@ -155,7 +155,7 @@ namespace dTax.Controllers
                     return Json(response);
                 }
             }
-            catch (Exception e)
+            catch (Exception)
             {
 
                 return BadRequest();
@@ -190,8 +190,8 @@ namespace dTax.Controllers
 
 
 
-        [ApiExplorerSettings(IgnoreApi = true)]
-        //[Route("Logout")]
+        [HttpGet]
+        [Route("Logout")]
         public async Task<IActionResult> Logout()
         {
             await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);

@@ -59,7 +59,7 @@ namespace dTax.Controllers
                 return BadRequest("Вы не являетесь заказчиком!");
 
             }
-            catch (Exception e)
+            catch (Exception)
             {
                 return BadRequest();
             }

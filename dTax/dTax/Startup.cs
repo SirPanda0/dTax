@@ -16,6 +16,7 @@ using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Reflection;
 using System.IO;
 using Microsoft.AspNetCore.Authorization;
+using System.Net;
 
 namespace dTax
 {
@@ -59,6 +60,21 @@ namespace dTax
            {
 
                options.Cookie.Name = "dTaxCookie";
+
+               options.Events = new CookieAuthenticationEvents
+               {
+                   OnRedirectToLogin = context =>
+                   {
+                       context.Response.StatusCode = (int)HttpStatusCode.Unauthorized;
+
+                       return Task.CompletedTask;
+                   },
+                   OnRedirectToAccessDenied = context =>
+                   {
+                       context.Response.StatusCode = (int)HttpStatusCode.Forbidden;
+                       return Task.CompletedTask;
+                   }
+               };
 
            });
 
