@@ -15,7 +15,6 @@ namespace dTax.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
-        public bool IsDriver { get; set; }
         public bool FullReg { get; set; }
 
         public int RoleId { get; set; }
