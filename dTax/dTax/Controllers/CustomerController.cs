@@ -8,6 +8,8 @@ using System.Linq;
 using System.Threading.Tasks;
 using dTax.Common;
 using Microsoft.EntityFrameworkCore;
+using dTax.Auth;
+using Serilog;
 
 namespace dTax.Controllers
 {
@@ -21,7 +23,9 @@ namespace dTax.Controllers
             db = context;
         }
 
-        [Authorize]
+        
+
+        [PolicyAuthorize(AuthorizePolicy.SystemAdmin)]
         [HttpPost]
         [Route("CabBook")]
         public async Task<IActionResult> CabBook([FromBody] Booking booking)

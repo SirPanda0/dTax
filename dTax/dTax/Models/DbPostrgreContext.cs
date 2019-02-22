@@ -27,31 +27,36 @@ namespace dTax.Models
         public DbPostrgreContext(DbContextOptions<DbPostrgreContext> options) : base(options)
         {
             if (Database.EnsureCreated())
-                InitializationAsync();
+                InitialInitialization();
 
         }
 
-        private async Task InitializationAsync()
+        private void InitialInitialization()
         {
 
-            Role role = new Role() { Name = "User", Id = 1};
+            List<Role> roles = new List<Role>() {
+                new Role() { Name = "SystemAdmin" },
+                new Role() { Name = "Operator" },
+                new Role() { Name = "User" },
+                new Role() { Name = "Driver" }
+            };
 
-            //User user = new User()
-            //{
-            //    Login = "Admin",
-            //    Password = "Admin",
-            //    Role = role,
-            //    BirthDate = DateTime.Now.Date,
-            //    FirstName = "Админ",
-            //    LastName = "Админович"
-            //};
+            User user = new User()
+            {
+                Email = "admin@admin.ru",
+                Password = "admin",
+                Role = roles[0],
+                BirthDate = DateTime.Now,
+                FirstName = "",
+                LastName = "",
+                FullReg = true
+            };
 
-            Roles.Add(role);
-           // Users.Add(user);
-            await SaveChangesAsync();
+            Roles.AddRange(roles);
+            Users.Add(user);
+            SaveChanges();
 
-            //throw new NotImplementedException();
-            
+
             /*
               Основные сущности:
 
@@ -71,6 +76,6 @@ namespace dTax.Models
         }
     }
 
-    
+
 
 }

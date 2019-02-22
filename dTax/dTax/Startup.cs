@@ -17,6 +17,7 @@ using System.Reflection;
 using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using System.Net;
+using dTax.Auth;
 
 namespace dTax
 {
@@ -78,6 +79,20 @@ namespace dTax
 
            });
 
+
+            services.Configure<AuthorizationOptions>(options =>
+            {
+                options.AddPolicy(AuthorizePolicyValues.Operator,
+                    policyBuilder => policyBuilder.AddRequirements(new RoleRequirement(AuthenticationRole.Operator)));
+                options.AddPolicy(AuthorizePolicyValues.SystemAdmin,
+                    policyBuilder => policyBuilder.AddRequirements(new RoleRequirement(AuthenticationRole.SystemAdmin)));
+                options.AddPolicy(AuthorizePolicyValues.Driver,
+                    policyBuilder => policyBuilder.AddRequirements(new RoleRequirement(AuthenticationRole.Driver)));
+                options.AddPolicy(AuthorizePolicyValues.User,
+                    policyBuilder => policyBuilder.AddRequirements(new RoleRequirement(AuthenticationRole.User)));
+            });
+
+
             services.AddCors();
         }
 
@@ -85,7 +100,7 @@ namespace dTax
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
 
-            
+
 
             if (env.IsDevelopment())
             {
@@ -101,7 +116,7 @@ namespace dTax
             {
                 c.SwaggerEndpoint("/swagger/v1/swagger.json", "My API V1");
                 c.RoutePrefix = string.Empty;
-                
+
             });
 
             app.UseCors(builder =>
@@ -120,7 +135,7 @@ namespace dTax
                 routes.MapRoute(
                     name: "default",
                     template: "api/{controller}/{action}");
-                
+
             });
         }
     }

@@ -11,10 +11,12 @@ using System.Security.Claims;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Cryptography.KeyDerivation;
-
+using Serilog;
 using System.Text;
 using System.Security.Cryptography;
 using dTax.ViewModels;
+using dTax.Auth;
+using dTax.Common;
 
 namespace dTax.Controllers
 {
@@ -42,12 +44,13 @@ namespace dTax.Controllers
                 var PasswordHash = GetHash(loginModel.Password);
 
                 User user = await db.Users.Include(u => u.Role)
-                    .FirstOrDefaultAsync(u => u.Login == loginModel.Login && u.Password == PasswordHash);
+                    .FirstOrDefaultAsync(u => u.Email == loginModel.Login && u.Password == PasswordHash);
 
 
                 if (user != null)
                 {
-                    await Authenticate(user);
+                    ClaimsIdentity identity = GetIdentity(user);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 
                     if (user.IsDriver != false && user.FullReg != false)
                     {
@@ -103,7 +106,7 @@ namespace dTax.Controllers
                 }
 
                 User user = await db.Users.Include(u => u.Role)
-                   .FirstOrDefaultAsync(u => u.Login == registerModel.Login || u.Email == registerModel.Email);
+                   .FirstOrDefaultAsync(u => u.Email == registerModel.Login || u.Email == registerModel.Email);
 
                 if (user != null)
                 {
@@ -124,11 +127,10 @@ namespace dTax.Controllers
                     {
                         FirstName = registerModel.FirstName,
                         LastName = registerModel.LastName,
-                        Login = registerModel.Login,
+                        Email = registerModel.Email,
                         Password = PasswordHash,
                         BirthDate = registerModel.BirthDate,
                         RoleId = 1,//User
-                        Email = registerModel.Email,
                         IsDriver = registerModel.IsDriver,
                         FullReg = full
                     };
@@ -194,8 +196,17 @@ namespace dTax.Controllers
         [Route("Logout")]
         public async Task<IActionResult> Logout()
         {
-            await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
-            return Ok();
+            try
+            {
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+
+                return Json("");
+            }
+            catch (Exception e)
+            {
+                Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
+                return StatusCode(500);
+            }
         }
 
         //TODO
@@ -248,19 +259,31 @@ namespace dTax.Controllers
 
 
         #region Приватный регион
-        private async Task Authenticate(User user)
+        private ClaimsIdentity GetIdentity(User user)
         {
-            var claims = new List<Claim>
+            try
             {
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
-                new Claim(ClaimsIdentity.DefaultNameClaimType, user.Login),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.RoleId.ToString()),
-                new Claim(ClaimsIdentity.DefaultRoleClaimType, user.Role.Name),
-            };
+                var claims = new List<Claim>
+                {
+                        new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
+                        new Claim(ClaimsIdentity.DefaultRoleClaimType, user.RoleId.ToString()),
+                        new Claim(ClaimTypes.Surname, user.LastName),
+                        new Claim(CustomClaimType.RoleName, user.Role.Name),
+                        new Claim(CustomClaimType.UserName, user.FirstName),
+                        new Claim(CustomClaimType.UserId, user.Id.ToString())
+                };
 
-            ClaimsIdentity identity = new ClaimsIdentity(claims, "dTaxCookie", ClaimsIdentity.DefaultNameClaimType, ClaimsIdentity.DefaultRoleClaimType);
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "dTaxCookie", ClaimsIdentity.DefaultNameClaimType,
+                    ClaimsIdentity.DefaultRoleClaimType);
 
-            await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+                return claimsIdentity;
+            }
+            catch (Exception e)
+            {
+                Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
+                return null;
+            }
+
         }
 
         protected string GetHash(string password)
