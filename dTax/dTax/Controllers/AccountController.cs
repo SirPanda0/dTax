@@ -17,11 +17,13 @@ using System.Security.Cryptography;
 using dTax.ViewModels;
 using dTax.Auth;
 using dTax.Common;
+using dTax.Services;
+
 
 namespace dTax.Controllers
 {
     [Route("[controller]")]
-    public class AccountController : Controller
+    public class AccountController : BaseUtilsController
     {
         private DbPostrgreContext db;
 
@@ -30,6 +32,7 @@ namespace dTax.Controllers
             db = context;
         }
 
+        
         [Route("Login")]
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
@@ -41,10 +44,10 @@ namespace dTax.Controllers
                     return BadRequest();
                 }
 
-                var PasswordHash = GetHash(loginModel.Password);
+                string PasswordHash = GetHash(loginModel.Password);
 
                 User user = await db.Users.Include(u => u.Role)
-                    .FirstOrDefaultAsync(u => u.Email == loginModel.Login && u.Password == PasswordHash);
+                    .FirstOrDefaultAsync(u => u.Email == loginModel.Email && u.Password == PasswordHash);
 
 
                 if (user != null)
@@ -52,21 +55,21 @@ namespace dTax.Controllers
                     ClaimsIdentity identity = GetIdentity(user);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 
-                    if (user.IsDriver != false && user.FullReg != false)
-                    {
-                        Driver driver = await db.Drivers.FirstOrDefaultAsync(d => d.UserId == user.Id);
+                    //if (user.FullReg != false)
+                    //{
+                    //    Driver driver = await db.Drivers.FirstOrDefaultAsync(d => d.UserId == user.Id);
 
-                        //Cab cab = await db.Cabs.FirstOrDefaultAsync(c =>c.DriverId == driver.Id);
+                    //    //Cab cab = await db.Cabs.FirstOrDefaultAsync(c =>c.DriverId == driver.Id);
 
-                        Shift shift = await db.Shifts.FirstOrDefaultAsync(s => s.DriverId == driver.Id);
+                    //    Shift shift = await db.Shifts.FirstOrDefaultAsync(s => s.DriverId == driver.Id);
 
-                        shift.LoginTime = DateTime.Now;
+                    //    shift.LoginTime = DateTime.Now;
 
 
-                        db.Shifts.Update(shift);
-                        await db.SaveChangesAsync();
+                    //    db.Shifts.Update(shift);
+                    //    await db.SaveChangesAsync();
 
-                    }
+                    //}
 
                 }
                 else
@@ -82,6 +85,8 @@ namespace dTax.Controllers
                     LastName = user.LastName
                 };
 
+                EmailService emailService = new EmailService();
+                await emailService.SendEmailAsync(loginModel.Email, "Авторизация в системе", String.Format("{0} {1} {2} {3}", "Проверка входа!", "Привет:", user.FirstName, user.LastName ));
                 return Json(response);
             }
             catch (Exception)
@@ -131,7 +136,7 @@ namespace dTax.Controllers
                         Password = PasswordHash,
                         BirthDate = registerModel.BirthDate,
                         RoleId = 1,//User
-                        IsDriver = registerModel.IsDriver,
+                        
                         FullReg = full
                     };
 
@@ -286,14 +291,7 @@ namespace dTax.Controllers
 
         }
 
-        protected string GetHash(string password)
-        {
-            using (var sha256 = SHA256.Create())
-            {
-                var hashedBytes = sha256.ComputeHash(Encoding.UTF8.GetBytes(password));
-                return BitConverter.ToString(hashedBytes).Replace("-", "").ToLower();
-            }
-        }
+      
 
         #endregion
     }

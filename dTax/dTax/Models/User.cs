@@ -15,7 +15,12 @@ namespace dTax.Models
         public string FirstName { get; set; }
         public string LastName { get; set; }
         public DateTime BirthDate { get; set; }
+
+        public string PhoneNumber { get; set; }
+
+        //Булевые 1- о полной регистрации, 2- удален ли аккаунт
         public bool FullReg { get; set; }
+        public bool IsDeleted { get; set; }
 
         public int RoleId { get; set; }
         [JsonIgnore]

@@ -38,7 +38,7 @@ namespace dTax.Controllers
             }
 
             User user = await db.Users
-                    .FirstOrDefaultAsync(u => u.Id == registerModel.UserId && u.IsDriver == true);
+                    .FirstOrDefaultAsync(u => u.Id == registerModel.UserId );
 
 
             Driver driver = await db.Drivers
@@ -67,7 +67,7 @@ namespace dTax.Controllers
                     {
                         BrandName = registerModel.BrandName,
                         ModelName = registerModel.ModelName,
-                        ModelDescription = registerModel.ModelDescription
+                        ModelColor = registerModel.ModelDescription
                     };
 
                     await db.CarModels.AddAsync(car);

@@ -13,19 +13,11 @@ namespace dTax.Auth
         {
             switch (role)
             {
-                case AuthenticationRole.SystemAdmin:
-                    roles.Add(AuthenticationRole.SystemAdmin);
-                    roles.Add(AuthenticationRole.Driver);
+                case AuthenticationRole.Operator:
                     roles.Add(AuthenticationRole.Operator);
-                    roles.Add(AuthenticationRole.User);
                     break;
                 case AuthenticationRole.Driver:
                     roles.Add(AuthenticationRole.Driver);
-                    break;
-                case AuthenticationRole.Operator:
-                    roles.Add(AuthenticationRole.Driver);
-                    roles.Add(AuthenticationRole.Operator);
-                    roles.Add(AuthenticationRole.User);
                     break;
                 case AuthenticationRole.User:
                     roles.Add(AuthenticationRole.User);

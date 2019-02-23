@@ -7,7 +7,6 @@ namespace dTax.Auth
 {
     public enum AuthenticationRole
     {
-        SystemAdmin = 0,
         Operator = 1,
         User = 2,
         Driver = 3

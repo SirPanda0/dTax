@@ -79,17 +79,16 @@ namespace dTax
 
            });
 
+            services.AddSingleton<IAuthorizationHandler, AuthRoleHandler>();
 
             services.Configure<AuthorizationOptions>(options =>
             {
                 options.AddPolicy(AuthorizePolicyValues.Operator,
                     policyBuilder => policyBuilder.AddRequirements(new RoleRequirement(AuthenticationRole.Operator)));
-                options.AddPolicy(AuthorizePolicyValues.SystemAdmin,
-                    policyBuilder => policyBuilder.AddRequirements(new RoleRequirement(AuthenticationRole.SystemAdmin)));
-                options.AddPolicy(AuthorizePolicyValues.Driver,
-                    policyBuilder => policyBuilder.AddRequirements(new RoleRequirement(AuthenticationRole.Driver)));
                 options.AddPolicy(AuthorizePolicyValues.User,
                     policyBuilder => policyBuilder.AddRequirements(new RoleRequirement(AuthenticationRole.User)));
+                options.AddPolicy(AuthorizePolicyValues.Driver,
+                    policyBuilder => policyBuilder.AddRequirements(new RoleRequirement(AuthenticationRole.Driver)));
             });
 
 

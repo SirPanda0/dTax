@@ -11,7 +11,8 @@ namespace dTax.Models
         public Guid Id { get; set; }
         public string BrandName { get; set; }
         public string ModelName { get; set; }
-        public string ModelDescription { get; set; }
+        public string ModelType { get; set; }
+        public string ModelColor { get; set; }
 
     }
 }

@@ -8,10 +8,13 @@ namespace dTax.Models
     public class Customer
     {
         public Guid Id { get; set; }
+
         public Guid UserId { get; set; }
         public User User { get; set; }
 
-        //public string PhoneNumber { get; set; }
-        
+        //Фото (аватарка)
+        public Guid? FileStorageId { get; set; }
+        public FileStorage FileStorage { get; set; }
+
     }
 }

@@ -1,4 +1,5 @@
-﻿using dTax.Models;
+﻿using dTax.Auth;
+using dTax.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -20,6 +21,7 @@ namespace dTax.Controllers
         }
 
         //TODO 
+        [PolicyAuthorize(AuthorizePolicy.Operator)]
         [Authorize]
         [Route("list")]
         [HttpGet]

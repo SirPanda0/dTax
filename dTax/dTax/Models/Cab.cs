@@ -9,22 +9,32 @@ namespace dTax.Models
     public class Cab
     {
         public Guid Id { get; set; }
-        public string LicensePlate { get; set; } //номера автомобиля
-        public string VIN { get; set; } //VIN авто
 
-        public Guid CarModelId { get; set; } //id модели авто
+        //номера автомобиля
+        public string LicensePlate { get; set; } 
+
+        //VIN авто
+        public string VIN { get; set; } 
+
+        //id модели авто
+        public Guid CarModelId { get; set; } 
         public CarModel CarModel { get; set; }
 
-        public int ManufactureYear { get; set; } //год выпуска
+        //год выпуска
+        public int ManufactureYear { get; set; } 
 
-        public Guid DriverId { get; set; } //id водителя
+        //id водителя
+        public Guid DriverId { get; set; } 
         public Driver Driver { get; set; }
 
-        
+        //Фото Авто
+        public Guid? FileStorageId { get; set; }
+        public FileStorage FileStorage { get; set; }
 
-        public bool Active { get; set; } 
+        public bool Active { get; set; }
 
-
+        //Проверен ли автомобиль оператором
+        public bool Сonfirmed { get; set; }
 
     }
 }

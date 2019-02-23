@@ -23,6 +23,8 @@ namespace dTax.Models
         public DbSet<Customer> Customers { get; set; } //Заказчик
         public DbSet<Status> Statuses { get; set; } // Состояния поездки: новая/назначена/началась/завершилась/отменена
 
+        public DbSet<FileStorage> FileStorage { get; set; } //Хранилище файлов
+
 
         public DbPostrgreContext(DbContextOptions<DbPostrgreContext> options) : base(options)
         {
@@ -34,25 +36,42 @@ namespace dTax.Models
         private void InitialInitialization()
         {
 
-            List<Role> roles = new List<Role>() {
-                new Role() { Name = "SystemAdmin" },
+            List<Role> roles = new List<Role>()
+            {
                 new Role() { Name = "Operator" },
                 new Role() { Name = "User" },
                 new Role() { Name = "Driver" }
             };
 
+            List<Status> statuses = new List<Status>()
+            {
+                new Status() { StatusName = "Новая поездка"},
+                new Status() { StatusName = "Поездка, назначена водителю"},
+                new Status() { StatusName = "Поездка началась"},
+                new Status() { StatusName = "Поездка завершилась"},
+                new Status() { StatusName = "Поездка отменена"},
+            };
+
+            List<PaymentType> payments = new List<PaymentType>()
+            {
+                new PaymentType() { TypeName = "Наличные"},
+                new PaymentType() { TypeName = "Карта"}
+            };
+
             User user = new User()
             {
-                Email = "admin@admin.ru",
-                Password = "admin",
+                Email = "dTax-mailing@yandex.ru",
+                Password = "cb891b06ce3c1981cc00a1966ddfe98228011de9c582823ecdb2ccfe127a20df", //TODO hash этого пароля M9S206
                 Role = roles[0],
                 BirthDate = DateTime.Now,
-                FirstName = "",
-                LastName = "",
+                FirstName = "Админ",
+                LastName = "Админович",
                 FullReg = true
             };
 
             Roles.AddRange(roles);
+            Statuses.AddRange(statuses);
+            PaymentTypes.AddRange(payments);
             Users.Add(user);
             SaveChanges();
 
