@@ -22,7 +22,7 @@ using dTax.Services;
 
 namespace dTax.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class AccountController : BaseUtilsController
     {
         private DbPostrgreContext db;
@@ -85,8 +85,8 @@ namespace dTax.Controllers
                     LastName = user.LastName
                 };
 
-                EmailService emailService = new EmailService();
-                await emailService.SendEmailAsync(loginModel.Email, "Авторизация в системе", String.Format("{0} {1} {2} {3}", "Проверка входа!", "Привет:", user.FirstName, user.LastName ));
+               // EmailService emailService = new EmailService();
+               // await emailService.SendEmailAsync(loginModel.Email, "Авторизация в системе", String.Format("{0} {1} {2} {3}", "Проверка входа!", "Привет:", user.FirstName, user.LastName ));
                 return Json(response);
             }
             catch (Exception)
