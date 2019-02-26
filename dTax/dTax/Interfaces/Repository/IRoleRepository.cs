@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Interfaces.Repository
 {
-    interface IRoleRepository
+    public interface IRoleRepository
     {
         string FindNameById(int id);
         int FindIdByName(string name);

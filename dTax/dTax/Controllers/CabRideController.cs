@@ -27,6 +27,7 @@ namespace dTax.Controllers
         [HttpGet]
         public async Task<IActionResult> RideList()
         {
+            
             //IEnumerable<CabRide> rides = db.CabRides.ToList();
             return Json(db.CabRides.ToList());
         }

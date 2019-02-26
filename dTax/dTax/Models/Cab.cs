@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 namespace dTax.Models
 {
 
-    public class Cab
+    public class Cab : BaseEntity
     {
-        public Guid Id { get; set; }
+        
 
         //номера автомобиля
         public string LicensePlate { get; set; } 
@@ -34,7 +34,7 @@ namespace dTax.Models
         public bool Active { get; set; }
 
         //Проверен ли автомобиль оператором
-        public bool Сonfirmed { get; set; }
+        //public bool Сonfirmed { get; set; }
 
     }
 }

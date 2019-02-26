@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Interfaces
 {
-    interface IDBWorkFlow
+    public interface IDBWorkFlow
     {
         IRoleRepository RoleRepository { get; }
         IUserRepository UserRepository { get; }

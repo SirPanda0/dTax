@@ -1,0 +1,17 @@
+G:\Git\dTax\dTax\dTax\bin\Release\netcoreapp2.1\win-x64\hostpolicy.dll
+G:\Git\dTax\dTax\dTax\bin\Release\netcoreapp2.1\win-x64\hostfxr.dll
+G:\Git\dTax\dTax\dTax\bin\Release\netcoreapp2.1\win-x64\dTax.exe
+G:\Git\dTax\dTax\dTax\bin\Release\netcoreapp2.1\win-x64\dTax.deps.json
+G:\Git\dTax\dTax\dTax\bin\Release\netcoreapp2.1\win-x64\dTax.runtimeconfig.json
+G:\Git\dTax\dTax\dTax\bin\Release\netcoreapp2.1\win-x64\dTax.runtimeconfig.dev.json
+G:\Git\dTax\dTax\dTax\bin\Release\netcoreapp2.1\win-x64\dTax.dll
+G:\Git\dTax\dTax\dTax\bin\Release\netcoreapp2.1\win-x64\dTax.pdb
+G:\Git\dTax\dTax\dTax\obj\Release\netcoreapp2.1\win-x64\dTax.csprojAssemblyReference.cache
+G:\Git\dTax\dTax\dTax\obj\Release\netcoreapp2.1\win-x64\dTax.csproj.CoreCompileInputs.cache
+G:\Git\dTax\dTax\dTax\obj\Release\netcoreapp2.1\win-x64\dTax.RazorAssemblyInfo.cache
+G:\Git\dTax\dTax\dTax\obj\Release\netcoreapp2.1\win-x64\dTax.RazorAssemblyInfo.cs
+G:\Git\dTax\dTax\dTax\obj\Release\netcoreapp2.1\win-x64\dTax.AssemblyInfoInputs.cache
+G:\Git\dTax\dTax\dTax\obj\Release\netcoreapp2.1\win-x64\dTax.AssemblyInfo.cs
+G:\Git\dTax\dTax\dTax\obj\Release\netcoreapp2.1\win-x64\dTax.RazorTargetAssemblyInfo.cache
+G:\Git\dTax\dTax\dTax\obj\Release\netcoreapp2.1\win-x64\dTax.dll
+G:\Git\dTax\dTax\dTax\obj\Release\netcoreapp2.1\win-x64\dTax.pdb

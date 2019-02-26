@@ -18,6 +18,10 @@ using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using System.Net;
 using dTax.Auth;
+using dTax.Interfaces.Repository;
+using dTax.Repository;
+using dTax.Interfaces;
+using Microsoft.AspNetCore.HttpOverrides;
 
 namespace dTax
 {
@@ -45,7 +49,7 @@ namespace dTax
                 c.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",
-                    Title = "Первая версия API",
+                    Title = "Первая версия API dTax-mailing@yandex.ru M9S206",
 
                     Contact = new Contact
                     {
@@ -55,6 +59,10 @@ namespace dTax
                 });
             });
 
+            services.AddTransient<IUserRepository, UserRepository>();
+            services.AddTransient<IRoleRepository, RoleRepository>();
+
+            services.AddTransient<IDBWorkFlow, DBWorkFlow>();
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
            .AddCookie(options =>
@@ -91,6 +99,10 @@ namespace dTax
                     policyBuilder => policyBuilder.AddRequirements(new RoleRequirement(AuthenticationRole.Driver)));
             });
 
+            services.Configure<ForwardedHeadersOptions>(options =>
+            {
+                options.ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto;
+            });
 
             services.AddCors();
         }
@@ -124,6 +136,8 @@ namespace dTax
                     .AllowAnyHeader()
                         .AllowCredentials()
                         );
+
+            //app.UseForwardedHeaders(new ForwardedHeadersOptions { ForwardedHeaders = ForwardedHeaders.XForwardedFor | ForwardedHeaders.XForwardedProto });
 
             app.UseAuthentication();
 

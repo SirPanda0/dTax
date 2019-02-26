@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace dTax.Models
 {
-    public class Driver
+    public class Driver : BaseEntity
     {
         
-        public Guid Id { get; set; }
+        
 
         public Guid UserId { get; set; }
         public User User { get; set; }

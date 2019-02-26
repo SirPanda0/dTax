@@ -18,21 +18,23 @@ using dTax.ViewModels;
 using dTax.Auth;
 using dTax.Common;
 using dTax.Services;
-
+using dTax.Interfaces;
+using Microsoft.AspNetCore.Http;
+using System.Net;
 
 namespace dTax.Controllers
 {
     [Route("api/[controller]")]
     public class AccountController : BaseUtilsController
     {
-        private DbPostrgreContext db;
-
-        public AccountController(DbPostrgreContext context)
+        private IDBWorkFlow DBWorkflow;
+        public AccountController(IDBWorkFlow dBWorkFlow)
         {
-            db = context;
+            DBWorkflow = dBWorkFlow;
         }
 
-        
+
+
         [Route("Login")]
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
@@ -45,51 +47,52 @@ namespace dTax.Controllers
                 }
 
                 string PasswordHash = GetHash(loginModel.Password);
-
-                User user = await db.Users.Include(u => u.Role)
-                    .FirstOrDefaultAsync(u => u.Email == loginModel.Email && u.Password == PasswordHash);
-
+                User user = DBWorkflow.UserRepository.FindUserLogin(loginModel.Email, PasswordHash);
+               
 
                 if (user != null)
                 {
                     ClaimsIdentity identity = GetIdentity(user);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 
+                    //TODO Обновление времени логина в смене для водителя
                     //if (user.FullReg != false)
                     //{
                     //    Driver driver = await db.Drivers.FirstOrDefaultAsync(d => d.UserId == user.Id);
-
                     //    //Cab cab = await db.Cabs.FirstOrDefaultAsync(c =>c.DriverId == driver.Id);
-
                     //    Shift shift = await db.Shifts.FirstOrDefaultAsync(s => s.DriverId == driver.Id);
-
                     //    shift.LoginTime = DateTime.Now;
-
-
                     //    db.Shifts.Update(shift);
                     //    await db.SaveChangesAsync();
-
                     //}
+                    var response = new LoginResponseModel
+                    {
+                        Id = user.Id,
+                        Email = user.Email,
+                        FirstName = user.FirstName,
+                        LastName = user.LastName,
+                        RoleId = user.Role.Id
+                    };
 
+                    //TODO определение IP пользователя для рассылки на Email при входе
+                    //string remoteIpAddress = HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
+                    //if (Request.Headers.ContainsKey("X-Forwarded-For"))
+                    //    remoteIpAddress = Request.Headers["X-Forwarded-For"];
+
+                    //string ipAddress = HttpContext.Connection.RemoteIpAddress.ToString();
+
+                    var emailService = new EmailService(DBWorkflow);
+                    await emailService.AuthEmailAsync(user.Email);
+
+                    return Json(response);
                 }
                 else
                 {
                     return BadRequest("Некорректные логин и(или) пароль");
                 }
 
-                var response = new LoginViewModel
-                {
-                    Id = user.Id,
-                    Email = user.Email,
-                    FirstName = user.FirstName,
-                    LastName = user.LastName
-                };
-
-               // EmailService emailService = new EmailService();
-               // await emailService.SendEmailAsync(loginModel.Email, "Авторизация в системе", String.Format("{0} {1} {2} {3}", "Проверка входа!", "Привет:", user.FirstName, user.LastName ));
-                return Json(response);
             }
-            catch (Exception)
+            catch (Exception e)
             {
 
                 return BadRequest();
@@ -99,75 +102,75 @@ namespace dTax.Controllers
 
 
 
-        [Route("Register")]
-        [HttpPost]
-        public async Task<IActionResult> Register([FromBody] RegisterModel registerModel)
-        {
-            try
-            {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest("Проверьте данные");
-                }
+        //[Route("Register")]
+        //[HttpPost]
+        //public async Task<IActionResult> Register([FromBody] RegisterModel registerModel)
+        //{
+        //    try
+        //    {
+        //        if (!ModelState.IsValid)
+        //        {
+        //            return BadRequest("Проверьте данные");
+        //        }
 
-                User user = await db.Users.Include(u => u.Role)
-                   .FirstOrDefaultAsync(u => u.Email == registerModel.Login || u.Email == registerModel.Email);
+        //        User user = await db.Users.Include(u => u.Role)
+        //           .FirstOrDefaultAsync(u => u.Email == registerModel.Login || u.Email == registerModel.Email);
 
-                if (user != null)
-                {
-                    return BadRequest("Такой пользователь уже существует!");
-                }
-                else
-                {
+        //        if (user != null)
+        //        {
+        //            return BadRequest("Такой пользователь уже существует!");
+        //        }
+        //        else
+        //        {
 
-                    var PasswordHash = GetHash(registerModel.Password);
-                    bool full = false;
+        //            var PasswordHash = GetHash(registerModel.Password);
+        //            bool full = false;
 
-                    if (registerModel.IsDriver != true)
-                    {
-                        full = true;
-                    }
+        //            if (registerModel.IsDriver != true)
+        //            {
+        //                full = true;
+        //            }
 
-                    User NewUser = new User
-                    {
-                        FirstName = registerModel.FirstName,
-                        LastName = registerModel.LastName,
-                        Email = registerModel.Email,
-                        Password = PasswordHash,
-                        BirthDate = registerModel.BirthDate,
-                        RoleId = 1,//User
+        //            User NewUser = new User
+        //            {
+        //                FirstName = registerModel.FirstName,
+        //                LastName = registerModel.LastName,
+        //                Email = registerModel.Email,
+        //                Password = PasswordHash,
+        //                BirthDate = registerModel.BirthDate,
+        //                RoleId = 1,//User
                         
-                        FullReg = full
-                    };
+        //                FullReg = full
+        //            };
 
-                    await db.Users.AddAsync(NewUser);
-                    await db.SaveChangesAsync();
+        //            await db.Users.AddAsync(NewUser);
+        //            await db.SaveChangesAsync();
 
-                    if (full == true)
-                    {
-                        Customer rCustomer = new Customer { UserId = NewUser.Id };
+        //            if (full == true)
+        //            {
+        //                Customer rCustomer = new Customer { UserId = NewUser.Id };
 
-                        await db.Customers.AddAsync(rCustomer);
-                        await db.SaveChangesAsync();
-                    }
+        //                await db.Customers.AddAsync(rCustomer);
+        //                await db.SaveChangesAsync();
+        //            }
 
-                    var response = new LoginViewModel
-                    {
-                        Id = NewUser.Id,
-                        Email = NewUser.Email,
-                        FirstName = NewUser.FirstName,
-                        LastName = NewUser.LastName
-                    };
+        //            var response = new LoginViewModel
+        //            {
+        //                Id = NewUser.Id,
+        //                Email = NewUser.Email,
+        //                FirstName = NewUser.FirstName,
+        //                LastName = NewUser.LastName
+        //            };
 
-                    return Json(response);
-                }
-            }
-            catch (Exception)
-            {
+        //            return Json(response);
+        //        }
+        //    }
+        //    catch (Exception)
+        //    {
 
-                return BadRequest();
-            }
-        }
+        //        return BadRequest();
+        //    }
+        //}
 
         //[Authorize]
         //[Route("CustomeReg")]
