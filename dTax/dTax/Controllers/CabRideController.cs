@@ -21,7 +21,8 @@ namespace dTax.Controllers
         }
 
         //TODO 
-        [PolicyAuthorize(AuthorizePolicy.Operator)]
+        [PolicyAuthorize(AuthorizePolicy.Driver)]
+        [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [Authorize]
         [Route("list")]
         [HttpGet]

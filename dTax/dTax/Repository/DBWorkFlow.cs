@@ -13,15 +13,19 @@ namespace dTax.Repository
         public DBWorkFlow(
             IUserRepository userRepository,
             IRoleRepository roleRepository,
+            ICustomerRepository customerRepository,
             DbPostrgreContext db
             )
         {
             UserRepository = userRepository;
             RoleRepository = roleRepository;
+            CustomerRepository = customerRepository;
         }
 
         public IUserRepository UserRepository { get; }
 
         public IRoleRepository RoleRepository { get; }
+
+        public ICustomerRepository CustomerRepository { get; }
     }
 }

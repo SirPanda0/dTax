@@ -22,6 +22,7 @@ using dTax.Interfaces.Repository;
 using dTax.Repository;
 using dTax.Interfaces;
 using Microsoft.AspNetCore.HttpOverrides;
+using dTax.Common;
 
 namespace dTax
 {
@@ -61,6 +62,7 @@ namespace dTax
 
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRoleRepository, RoleRepository>();
+            services.AddTransient<ICustomerRepository, CustomerRepository>();
 
             services.AddTransient<IDBWorkFlow, DBWorkFlow>();
 
@@ -97,6 +99,8 @@ namespace dTax
                     policyBuilder => policyBuilder.AddRequirements(new RoleRequirement(AuthenticationRole.User)));
                 options.AddPolicy(AuthorizePolicyValues.Driver,
                     policyBuilder => policyBuilder.AddRequirements(new RoleRequirement(AuthenticationRole.Driver)));
+                options.AddPolicy(AuthorizePolicyValues.FullAccess,
+                    policyBuilder => policyBuilder.RequireClaim(CustomClaimType.FullAccess, "True"));
             });
 
             services.Configure<ForwardedHeadersOptions>(options =>

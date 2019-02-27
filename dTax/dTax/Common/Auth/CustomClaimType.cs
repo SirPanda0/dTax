@@ -10,5 +10,6 @@ namespace dTax.Common
         public const string UserId = "dTax.claims.UserId";
         public const string UserName = "dTax.claims.UserName";
         public const string RoleName = "dTax.claims.RoleName";
+        public const string FullAccess = "dTax.claims.FullAccess";
     }
 }

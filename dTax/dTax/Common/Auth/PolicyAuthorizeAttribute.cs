@@ -8,7 +8,7 @@ namespace dTax.Auth
     {
         public PolicyAuthorizeAttribute(AuthorizePolicy policy)
         {
-            Policy = policy.ToString();
+            this.Policy = policy.ToString();
         }
     }
 }

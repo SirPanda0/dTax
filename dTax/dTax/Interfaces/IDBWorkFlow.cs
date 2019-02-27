@@ -10,5 +10,6 @@ namespace dTax.Interfaces
     {
         IRoleRepository RoleRepository { get; }
         IUserRepository UserRepository { get; }
+        ICustomerRepository CustomerRepository { get; }
     }
 }

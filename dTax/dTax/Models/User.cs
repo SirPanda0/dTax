@@ -18,7 +18,7 @@ namespace dTax.Models
 
         public string PhoneNumber { get; set; }
 
-        public DateTime LastLogin { get; set; }
+        public DateTime LastLogin { get; set; } = DateTime.Now;
 
         //Булевые 1- о полной регистрации, 2- удален ли аккаунт
         public bool FullReg { get; set; }

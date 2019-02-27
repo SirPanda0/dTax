@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Interfaces.Repository
 {
-    public interface IUserRepository
+    public interface IUserRepository: IBaseRepository<User>
     {
         User FindUserLogin(string Email, string Password);
         bool IsUserExists(string Email);

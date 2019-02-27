@@ -34,7 +34,6 @@ namespace dTax.Controllers
         }
 
 
-
         [Route("Login")]
         [HttpPost]
         public async Task<IActionResult> Login([FromBody] LoginModel loginModel)
@@ -48,7 +47,7 @@ namespace dTax.Controllers
 
                 string PasswordHash = GetHash(loginModel.Password);
                 User user = DBWorkflow.UserRepository.FindUserLogin(loginModel.Email, PasswordHash);
-               
+
 
                 if (user != null)
                 {
@@ -81,8 +80,9 @@ namespace dTax.Controllers
 
                     //string ipAddress = HttpContext.Connection.RemoteIpAddress.ToString();
 
-                    var emailService = new EmailService(DBWorkflow);
-                    await emailService.AuthEmailAsync(user.Email);
+                    //При тестировании комментировать
+                    //var emailService = new EmailService(DBWorkflow);
+                    //await emailService.AuthEmailAsync(user.Email);
 
                     return Json(response);
                 }
@@ -94,111 +94,102 @@ namespace dTax.Controllers
             }
             catch (Exception e)
             {
-
-                return BadRequest();
+                Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
+                return StatusCode(500);
             }
         }
 
 
 
 
-        //[Route("Register")]
-        //[HttpPost]
-        //public async Task<IActionResult> Register([FromBody] RegisterModel registerModel)
-        //{
-        //    try
-        //    {
-        //        if (!ModelState.IsValid)
-        //        {
-        //            return BadRequest("Проверьте данные");
-        //        }
+        [Route("Register")]
+        [HttpPost]
+        public async Task<IActionResult> Register([FromBody] RegisterModel registerModel)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Проверьте данные");
+                }
 
-        //        User user = await db.Users.Include(u => u.Role)
-        //           .FirstOrDefaultAsync(u => u.Email == registerModel.Login || u.Email == registerModel.Email);
+                bool exist = DBWorkflow.UserRepository.IsUserExists(registerModel.Email);
 
-        //        if (user != null)
-        //        {
-        //            return BadRequest("Такой пользователь уже существует!");
-        //        }
-        //        else
-        //        {
+                if (exist)
+                {
+                    return BadRequest("Пользователь с таким Email уже существует");
+                }
 
-        //            var PasswordHash = GetHash(registerModel.Password);
-        //            bool full = false;
+                if (registerModel.RoleId == (int)AuthenticationRole.Operator)
+                {
+                    return BadRequest("Проверьте данные");
+                }
 
-        //            if (registerModel.IsDriver != true)
-        //            {
-        //                full = true;
-        //            }
+                bool IsFull = false;
 
-        //            User NewUser = new User
-        //            {
-        //                FirstName = registerModel.FirstName,
-        //                LastName = registerModel.LastName,
-        //                Email = registerModel.Email,
-        //                Password = PasswordHash,
-        //                BirthDate = registerModel.BirthDate,
-        //                RoleId = 1,//User
-                        
-        //                FullReg = full
-        //            };
+                switch (registerModel.RoleId)
+                {
+                    case (int)AuthenticationRole.Driver:
+                        IsFull = false;
+                        break;
+                    case (int)AuthenticationRole.User:
+                        IsFull = true;
+                        break;
+                    default:
+                        break;
+                }
 
-        //            await db.Users.AddAsync(NewUser);
-        //            await db.SaveChangesAsync();
+                string PasswordHash = GetHash(registerModel.Password);
 
-        //            if (full == true)
-        //            {
-        //                Customer rCustomer = new Customer { UserId = NewUser.Id };
+                User user = new User()
+                {
+                    Email = registerModel.Email,
+                    Password = PasswordHash,
+                    FirstName = registerModel.FirstName,
+                    LastName = registerModel.LastName,
+                    PhoneNumber = registerModel.PhoneNumber,
+                    RoleId = registerModel.RoleId,
+                    FullReg = IsFull,
+                    BirthDate = registerModel.BirthDate
+                };
 
-        //                await db.Customers.AddAsync(rCustomer);
-        //                await db.SaveChangesAsync();
-        //            }
+                DBWorkflow.UserRepository.Insert(user);
+                DBWorkflow.UserRepository.Commit();
 
-        //            var response = new LoginViewModel
-        //            {
-        //                Id = NewUser.Id,
-        //                Email = NewUser.Email,
-        //                FirstName = NewUser.FirstName,
-        //                LastName = NewUser.LastName
-        //            };
+                LoginResponseModel responseModel = new LoginResponseModel()
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    RoleId = user.RoleId
+                };
 
-        //            return Json(response);
-        //        }
-        //    }
-        //    catch (Exception)
-        //    {
+                if (IsFull)
+                {
+                    Customer customer = new Customer
+                    {
+                        UserId = user.Id
+                    };
 
-        //        return BadRequest();
-        //    }
-        //}
+                    DBWorkflow.CustomerRepository.Insert(customer);
+                    DBWorkflow.CustomerRepository.Commit();
+                }
 
-        //[Authorize]
-        //[Route("CustomeReg")]
-        //[HttpPost]
-        //public async Task<IActionResult> CustomeReg([FromQuery] int Id)
-        //{
+                //TODO Сервис отправки сообщения при регистрации
+                //var emailService = new EmailService(DBWorkflow);
+                //await emailService.AuthEmailAsync(user.Email);
 
-        //    User user = await db.Users
-        //                .FirstOrDefaultAsync(u => u.Id == Id && u.IsDriver == false);
+                return Json(responseModel);
+            }
+            catch (Exception e)
+            {
+                Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
+                return StatusCode(500);
+            }
 
-        //    Customer customer = await db.Customers.FirstOrDefaultAsync(u => u.UserId == Id);
-
-        //    if (user != null && customer == null)
-        //    {
-        //        Customer rCustomer = new Customer { UserId = Id };
-
-        //        await db.Customers.AddAsync(rCustomer);
-        //        await db.SaveChangesAsync();
-        //        return Ok("Успешно!");
-        //    }
-        //    else
-        //        return BadRequest("Проверьте данные!");
-        //}
-
-
-
-
-
+        }
+       
 
         [HttpGet]
         [Route("Logout")]
@@ -278,7 +269,8 @@ namespace dTax.Controllers
                         new Claim(ClaimTypes.Surname, user.LastName),
                         new Claim(CustomClaimType.RoleName, user.Role.Name),
                         new Claim(CustomClaimType.UserName, user.FirstName),
-                        new Claim(CustomClaimType.UserId, user.Id.ToString())
+                        new Claim(CustomClaimType.UserId, user.Id.ToString()),
+                        new Claim(CustomClaimType.FullAccess , user.FullReg.ToString())
                 };
 
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "dTaxCookie", ClaimsIdentity.DefaultNameClaimType,
@@ -294,7 +286,7 @@ namespace dTax.Controllers
 
         }
 
-      
+
 
         #endregion
     }

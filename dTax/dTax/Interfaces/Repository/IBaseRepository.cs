@@ -6,7 +6,7 @@ using System.Linq.Expressions;
 
 namespace dTax.Interfaces.Repository
 {
-    public interface IBaseRepository<T> where T : class
+    public interface IBaseRepository<T> where T : class, new()
     {
         IQueryable<T> GetQuery();
         T Get(Expression<Func<T, bool>> expression);
