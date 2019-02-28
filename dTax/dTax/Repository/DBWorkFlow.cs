@@ -17,6 +17,13 @@ namespace dTax.Repository
             IFileStorageRepository fileStorageRepository,
             IDriverRepository driverRepository,
             ICabRepository cabRepository,
+
+            ICabRideRepository cabRideRepository,
+            ICabRideStatusRepository cabRideStatusRepository,
+            ICarModelsRepository carModelsRepository,
+            IPaymentTypeRepository paymentTypeRepository,
+            IShiftRepository shiftRepository,
+            IStatusesRepository statusesRepository,
             DbPostrgreContext db
             )
         {
@@ -24,6 +31,12 @@ namespace dTax.Repository
             RoleRepository = roleRepository;
             CustomerRepository = customerRepository;
             CabRepository = cabRepository;
+            CabRideRepository = cabRideRepository;
+            CabRideStatusRepository = cabRideStatusRepository;
+            CarModelsRepository = carModelsRepository;
+            PaymentTypeRepository = paymentTypeRepository;
+            ShiftRepository = shiftRepository;
+            StatusesRepository = statusesRepository;
         }
 
         public IUserRepository UserRepository { get; }
@@ -37,5 +50,12 @@ namespace dTax.Repository
         public IDriverRepository DriverRepository { get; }
 
         public ICabRepository CabRepository { get; }
+
+        public ICabRideRepository CabRideRepository { get; }
+        public ICabRideStatusRepository CabRideStatusRepository { get; }
+        public ICarModelsRepository CarModelsRepository { get; }
+        public IPaymentTypeRepository PaymentTypeRepository { get; }
+        public IShiftRepository ShiftRepository { get; }
+        public IStatusesRepository StatusesRepository { get; }
     }
 }

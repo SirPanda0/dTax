@@ -13,6 +13,13 @@ namespace dTax.Interfaces
         ICustomerRepository CustomerRepository { get; }
         IFileStorageRepository FileStorageRepository { get; }
         IDriverRepository DriverRepository { get; }
+
         ICabRepository CabRepository { get; }
+        ICabRideRepository CabRideRepository { get; }
+        ICabRideStatusRepository CabRideStatusRepository { get; }
+        ICarModelsRepository CarModelsRepository { get; }
+        IPaymentTypeRepository PaymentTypeRepository { get; }
+        IShiftRepository ShiftRepository { get; }
+        IStatusesRepository StatusesRepository { get; }
     }
 }

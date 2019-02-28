@@ -60,8 +60,8 @@ namespace dTax
                 });
             });
 
-            
 
+            #region RepositoryRegion
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
@@ -69,7 +69,16 @@ namespace dTax
             services.AddTransient<IDriverRepository, DriverRepository>();
             services.AddTransient<ICabRepository, CabRepository>();
 
+            services.AddTransient<ICabRideRepository, CabRideRepository>();
+            services.AddTransient<ICabRideStatusRepository, CabRideStatusRepository>();
+            services.AddTransient<ICarModelsRepository, CarModelsRepository>();
+            services.AddTransient<IPaymentTypeRepository, PaymentTypeRepository>();
+
+            services.AddTransient<IShiftRepository, ShiftRepository>();
+            services.AddTransient<IStatusesRepository, StatusesRepository>();
+
             services.AddTransient<IDBWorkFlow, DBWorkFlow>();
+            #endregion
 
             services.AddAuthentication(CookieAuthenticationDefaults.AuthenticationScheme)
            .AddCookie(options =>
