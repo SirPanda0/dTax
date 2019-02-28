@@ -11,9 +11,12 @@ namespace dTax.Models
         [Key]
         public Guid FileId { get; set; }
 
-        public byte[] Data { get; set; }
+        public byte[] ContentData { get; set; }
+
+        public string FileName { get; set; }
 
         //Фото документов или машины или фото пользователя
         public string Type { get; set; }
+
     }
 }

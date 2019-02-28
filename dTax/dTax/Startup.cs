@@ -60,9 +60,14 @@ namespace dTax
                 });
             });
 
+            
+
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
+            services.AddTransient<IFileStorageRepository, FileStorageRepository>();
+            services.AddTransient<IDriverRepository, DriverRepository>();
+            services.AddTransient<ICabRepository, CabRepository>();
 
             services.AddTransient<IDBWorkFlow, DBWorkFlow>();
 

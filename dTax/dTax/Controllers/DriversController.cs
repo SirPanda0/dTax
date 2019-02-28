@@ -9,6 +9,7 @@ using Microsoft.AspNetCore.Authorization;
 using dTax.ApiModel;
 using System.Text;
 using dTax.Auth;
+using dTax.Interfaces.Repository;
 
 namespace dTax.Controllers
 {
@@ -17,19 +18,19 @@ namespace dTax.Controllers
     public class DriversController : Controller
     {
 
-        private DbPostrgreContext db;
-
-        public DriversController(DbPostrgreContext context)
+        private IDriverRepository driverRepository;
+        public DriversController(IDriverRepository injectedriverRepository)
         {
-            db = context;
+            driverRepository = injectedriverRepository;
         }
 
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [Route("DriveReg")]
         [HttpPost]
-        public async Task<IActionResult> DriverReg([FromBody] DriverRegistration registerModel)
+        public async Task<IActionResult> DriverReg(Guid guid)
         {
-            return Ok();
+            return Json(driverRepository.GetDriverById(guid));
+            //return Ok();
         }
 
 

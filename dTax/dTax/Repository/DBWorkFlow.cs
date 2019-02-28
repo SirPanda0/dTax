@@ -14,12 +14,16 @@ namespace dTax.Repository
             IUserRepository userRepository,
             IRoleRepository roleRepository,
             ICustomerRepository customerRepository,
+            IFileStorageRepository fileStorageRepository,
+            IDriverRepository driverRepository,
+            ICabRepository cabRepository,
             DbPostrgreContext db
             )
         {
             UserRepository = userRepository;
             RoleRepository = roleRepository;
             CustomerRepository = customerRepository;
+            CabRepository = cabRepository;
         }
 
         public IUserRepository UserRepository { get; }
@@ -27,5 +31,11 @@ namespace dTax.Repository
         public IRoleRepository RoleRepository { get; }
 
         public ICustomerRepository CustomerRepository { get; }
+
+        public IFileStorageRepository FileStorageRepository { get; }
+
+        public IDriverRepository DriverRepository { get; }
+
+        public ICabRepository CabRepository { get; }
     }
 }

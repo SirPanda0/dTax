@@ -11,5 +11,8 @@ namespace dTax.Interfaces
         IRoleRepository RoleRepository { get; }
         IUserRepository UserRepository { get; }
         ICustomerRepository CustomerRepository { get; }
+        IFileStorageRepository FileStorageRepository { get; }
+        IDriverRepository DriverRepository { get; }
+        ICabRepository CabRepository { get; }
     }
 }

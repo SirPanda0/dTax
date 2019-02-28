@@ -26,7 +26,7 @@ namespace dTax.Models
         //Фото документов
         public Guid? FileStorageId { get; set; }
         public FileStorage FileStorage { get; set; }
-        
+
         public bool Working { get; set; }
 
         //Проверены ли документы водителя и его авто

@@ -58,21 +58,52 @@ namespace dTax.Models
                 new PaymentType() { TypeName = "Карта"}
             };
 
-            User user = new User()
+            List<User> user = new List<User>()
             {
-                Email = "dTax-mailing@yandex.ru",
-                Password = "cb891b06ce3c1981cc00a1966ddfe98228011de9c582823ecdb2ccfe127a20df", //TODO hash этого пароля M9S206
-                Role = roles[0],
-                BirthDate = DateTime.Now,
-                FirstName = "Админ",
-                LastName = "Админович",
-                FullReg = true
+                new User()
+                {
+                    Email = "dTax-mailing@yandex.ru",
+                    Password = "cb891b06ce3c1981cc00a1966ddfe98228011de9c582823ecdb2ccfe127a20df", //TODO hash этого пароля M9S206
+                    Role = roles[0],
+                    BirthDate = DateTime.Now,
+                    FirstName = "Админ",
+                    LastName = "Админович",
+                    FullReg = true
+                },
+                new User()
+                {
+                    Id = new Guid("73556bc9-522d-4c3c-a94b-707aa8e1d82b"),
+                    Email = "string",
+                    Password = "cb891b06ce3c1981cc00a1966ddfe98228011de9c582823ecdb2ccfe127a20df", //TODO hash этого пароля M9S206
+                    Role = roles[2],
+                    BirthDate = DateTime.Now,
+                    FirstName = "Водитель",
+                    LastName = "Водителевич",
+                    FullReg = false
+                }
+
             };
+
+            Driver driver = new Driver()
+            {
+                UserId = user[1].Id,
+                DrivingLicence = 1234567,
+                ExpiryDate = DateTime.Now,
+                RegistrationDate = DateTime.Now,
+                PassportSerial = "",
+                PassportNumber = "",
+                FileStorageId = null,
+                Working = false,
+                Сonfirmed = false
+            };
+
+
 
             Roles.AddRange(roles);
             Statuses.AddRange(statuses);
             PaymentTypes.AddRange(payments);
-            Users.Add(user);
+            Users.AddRange(user);
+            Drivers.Add(driver);
             SaveChanges();
 
 

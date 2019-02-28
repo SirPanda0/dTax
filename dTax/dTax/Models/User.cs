@@ -21,7 +21,7 @@ namespace dTax.Models
         public DateTime LastLogin { get; set; } = DateTime.Now;
 
         //Булевые 1- о полной регистрации, 2- удален ли аккаунт
-        public bool FullReg { get; set; }
+        public bool FullReg { get; set; } = false;
         
         public int RoleId { get; set; }
         [JsonIgnore]
