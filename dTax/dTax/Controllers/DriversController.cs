@@ -39,18 +39,19 @@ namespace dTax.Controllers
         {
             try
             {
+                if (registerModel.FileStorageId == Guid.Empty)
+                {
+                    return BadRequest("Файлы документов не прикреплены!");
+                }
+
                 if (!ModelState.IsValid)
                 {
-                    if (registerModel.FileStorageId == null)
-                    {
-                        return BadRequest("Файлы документов не прикреплены!");
-                    }
                     return BadRequest("Проверьте данные!");
                 }
 
                 Guid id = GetUserIdByContext();
 
-                bool exist = driverRepository.IsExists(registerModel.DrivingLicence,
+                bool exist = driverRepository.IsExists(id, registerModel.DrivingLicence,
                     registerModel.PassportSerial, registerModel.PassportNumber);
 
                 if (exist)
@@ -88,12 +89,12 @@ namespace dTax.Controllers
         {
             try
             {
+                if (registerModel.FileStorageId == Guid.Empty)
+                {
+                    return BadRequest("Файлы документов не прикреплены!");
+                }
                 if (!ModelState.IsValid)
                 {
-                    if (registerModel.FileStorageId == null)
-                    {
-                        return BadRequest("Файлы документов не прикреплены!");
-                    }
                     return BadRequest("Проверьте данные!");
                 }
 

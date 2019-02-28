@@ -11,7 +11,7 @@ namespace dTax.Interfaces.Repository
         
         Driver GetDriverByFileId(Guid fileId);
         Driver GetDriverById(Guid Id);
-        bool IsExists(long DrivingLicence, string PassportSerial, string PassportNumber);
+        bool IsExists(Guid userid, long DrivingLicence, string PassportSerial, string PassportNumber);
         
 
     }

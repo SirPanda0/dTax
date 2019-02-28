@@ -24,7 +24,7 @@ namespace dTax.Repository
             return await this.GetQuery().FirstOrDefaultAsync(_ => _.IsDeleted == false && _.Id == id);
         }
 
-       
+
 
         public Driver GetDriverByFileId(Guid fileId)
         {
@@ -37,10 +37,10 @@ namespace dTax.Repository
         }
 
 
-        public bool IsExists(long DrivingLicence, string PassportSerial, string PassportNumber)
+        public bool IsExists(Guid userid, long DrivingLicence, string PassportSerial, string PassportNumber)
         {
             var user = GetQuery()
-                .FirstOrDefault(_ => _.DrivingLicence == DrivingLicence 
+                .FirstOrDefault(_ => _.DrivingLicence == DrivingLicence
                 || _.PassportSerial == PassportSerial || _.PassportNumber == PassportNumber);
             if (user == null)
                 return false;
