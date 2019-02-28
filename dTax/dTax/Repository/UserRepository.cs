@@ -10,16 +10,13 @@ namespace dTax.Repository
 {
     public class UserRepository : BaseRepository<User>, IUserRepository
     {
-        DbPostrgreContext CommonDbContext;
-
-        public UserRepository(DbPostrgreContext commonDbContext) : base(commonDbContext)
+        public UserRepository(DbPostrgreContext context) : base(context)
         {
-            CommonDbContext = commonDbContext; ;
         }
 
         public User FindUserLogin(string Email, string password)
         {
-            return CommonDbContext.Users
+            return GetQuery()
                  .Include(_ => _.Role)
                  .FirstOrDefault<User>(
                 _ => _.Email == Email && _.Password == password);
@@ -27,7 +24,7 @@ namespace dTax.Repository
 
         public bool IsUserExists(string Email)
         {
-            var user = CommonDbContext.Users.FirstOrDefault(_ => _.Email == Email);
+            var user = GetQuery().FirstOrDefault(_ => _.Email == Email);
             if (user == null)
                 return false;
             return true;
@@ -35,7 +32,7 @@ namespace dTax.Repository
 
         public User FindUserEmail(string Email)
         {
-            return CommonDbContext.Users.FirstOrDefault(_ => _.Email == Email);
+            return GetQuery().FirstOrDefault(_ => _.Email == Email);
         }
     }
 }

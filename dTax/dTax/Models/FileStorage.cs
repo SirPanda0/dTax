@@ -16,7 +16,7 @@ namespace dTax.Models
         public string FileName { get; set; }
 
         //Фото документов или машины или фото пользователя
-        public string Type { get; set; }
+        //public string Type { get; set; }
 
     }
 }

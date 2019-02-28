@@ -27,10 +27,10 @@ namespace dTax.Models
         public Guid? FileStorageId { get; set; }
         public FileStorage FileStorage { get; set; }
 
-        public bool Working { get; set; }
+        public bool Working { get; set; } = false;
 
         //Проверены ли документы водителя и его авто
-        public bool Сonfirmed { get; set; }
+        public bool Сonfirmed { get; set; } = false;
 
         //TODO
         //public float? geo_lat { get; set; }

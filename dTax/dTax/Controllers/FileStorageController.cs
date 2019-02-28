@@ -18,16 +18,6 @@ namespace dTax.Controllers
     public class FileStorageController : BaseUtilsController
     {
 
-        [Route("GetTest")]
-        [HttpGet]
-        public async Task<IActionResult> RideList()
-        {
-
-            //IEnumerable<CabRide> rides = db.CabRides.ToList();
-            return Json("");
-        }
-
-
         private IFileStorageRepository fileStorageRepository;
         public FileStorageController(IFileStorageRepository injectedfileStorageRepository)
         {

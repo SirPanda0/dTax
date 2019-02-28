@@ -104,7 +104,7 @@ namespace dTax.Controllers
 
         [Route("Register")]
         [HttpPost]
-        public async Task<IActionResult> Register([FromBody] RegisterModel registerModel)
+        public ActionResult Register([FromBody] RegisterModel registerModel)
         {
             try
             {
