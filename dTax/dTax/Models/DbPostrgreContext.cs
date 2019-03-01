@@ -84,18 +84,26 @@ namespace dTax.Models
 
             };
 
-            Driver driver = new Driver()
-            {
-                UserId = user[1].Id,
-                DrivingLicence = 1234567,
-                ExpiryDate = DateTime.Now,
-                RegistrationDate = DateTime.Now,
-                PassportSerial = "",
-                PassportNumber = "",
-                FileStorageId = null,
-                Working = false,
-                Сonfirmed = false
-            };
+            //byte[] fileStream = new byte[0];
+            //FileStorage fileStorage = new FileStorage()
+            //{
+            //    FileId = 0,
+            //    ContentData = fileStream,
+            //    FileName = "TestFile.txt"
+            //};
+
+            //Driver driver = new Driver()
+            //{
+            //    UserId = user[1].Id,
+            //    DrivingLicence = 1234567,
+            //    ExpiryDate = DateTime.Now,
+            //    RegistrationDate = DateTime.Now,
+            //    PassportSerial = "",
+            //    PassportNumber = "",
+            //    FileStorageId = fileStorage.FileId,
+            //    Working = false,
+            //    Сonfirmed = false
+            //};
 
 
 
@@ -103,7 +111,8 @@ namespace dTax.Models
             Statuses.AddRange(statuses);
             PaymentTypes.AddRange(payments);
             Users.AddRange(user);
-            Drivers.Add(driver);
+            //FileStorage.Add(fileStorage);
+            //Drivers.Add(driver);
             SaveChanges();
 
 

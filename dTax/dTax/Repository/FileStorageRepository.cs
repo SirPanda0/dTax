@@ -53,10 +53,12 @@ namespace dTax.Repository
 
         public bool IsExists(long fileid)
         {
-            var file = GetQuery().FirstOrDefault(_ => _.FileId == fileid);
-            if (file == null)
-                return false;
-            return true;
+            
+                var file = GetQuery().FirstOrDefault(_ => _.FileId == fileid);
+                if (file == null)
+                    return false;
+                return true;
+           
         }
 
     }

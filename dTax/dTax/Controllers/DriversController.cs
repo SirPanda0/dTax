@@ -32,6 +32,7 @@ namespace dTax.Controllers
             driverRepository = injectedriverRepository;
             cabRepository = injectedcabRepository;
             carModelsRepository = injectedcarModelsRepository;
+            fileStorageRepository = injectedfileStorageRepository;
         }
 
         [PolicyAuthorize(AuthorizePolicy.Driver)]
@@ -47,7 +48,7 @@ namespace dTax.Controllers
                 }
 
                 bool ExistFile = fileStorageRepository.IsExists(registerModel.FileStorageId);
-                if (ExistFile)
+                if (!ExistFile)
                 {
                     return BadRequest("Проверьте прикрепленные файлы!");
                 }
@@ -99,7 +100,7 @@ namespace dTax.Controllers
                 }
 
                 bool ExistFile = fileStorageRepository.IsExists(registerModel.FileStorageId);
-                if (ExistFile)
+                if (!ExistFile)
                 {
                     return BadRequest("Проверьте прикрепленные файлы!");
                 }
