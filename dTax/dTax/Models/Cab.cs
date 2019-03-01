@@ -28,7 +28,7 @@ namespace dTax.Models
         public Driver Driver { get; set; }
 
         //Фото Авто
-        public Guid FileStorageId { get; set; }
+        public long FileStorageId { get; set; }
         public FileStorage FileStorage { get; set; }
 
         public bool Active { get; set; } = false;

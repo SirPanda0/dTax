@@ -9,7 +9,7 @@ namespace dTax.Interfaces.Repository
     public interface IDriverRepository : IBaseRepository<Driver>
     {
         
-        Driver GetDriverByFileId(Guid fileId);
+        Driver GetDriverByFileId(long fileId);
         Driver GetDriverById(Guid Id);
         bool IsExists(Guid userid, long DrivingLicence, string PassportSerial, string PassportNumber);
         

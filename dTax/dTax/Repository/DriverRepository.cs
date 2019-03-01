@@ -26,12 +26,12 @@ namespace dTax.Repository
 
 
 
-        public Driver GetDriverByFileId(Guid fileId)
+        public Driver GetDriverByFileId(long fileId)
         {
             return GetDriverByFileIdAsync(fileId).Result;
         }
 
-        private async Task<Driver> GetDriverByFileIdAsync(Guid fileId)
+        private async Task<Driver> GetDriverByFileIdAsync(long fileId)
         {
             return await GetQuery().FirstOrDefaultAsync(_ => _.FileStorage.FileId == fileId);
         }

@@ -24,7 +24,7 @@ namespace dTax.Models
         public string PassportNumber { get; set; }
 
         //Фото документов
-        public Guid? FileStorageId { get; set; }
+        public long FileStorageId { get; set; }
         public FileStorage FileStorage { get; set; }
 
         public bool Working { get; set; } = false;

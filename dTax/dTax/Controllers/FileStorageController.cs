@@ -31,7 +31,7 @@ namespace dTax.Controllers
         {
             Log.Information("Загружаем файл");
 
-            Guid id = new Guid();
+            long id = 0;
 
             if (uploadedFile != null)
             {
@@ -73,7 +73,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [HttpGet]
         [Route("Download")]
-        public IActionResult DownloadFile(Guid id)
+        public IActionResult DownloadFile(long id)
         {
             var fileStorageModel = fileStorageRepository.GetById(id);
             if (fileStorageModel != null)

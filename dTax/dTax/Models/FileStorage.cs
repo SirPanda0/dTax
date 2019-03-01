@@ -9,7 +9,7 @@ namespace dTax.Models
     public class FileStorage
     {
         [Key]
-        public Guid FileId { get; set; }
+        public long FileId { get; set; }
 
         public byte[] ContentData { get; set; }
 

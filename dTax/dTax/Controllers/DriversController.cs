@@ -21,10 +21,12 @@ namespace dTax.Controllers
         private IDriverRepository driverRepository;
         private ICabRepository cabRepository;
         private ICarModelsRepository carModelsRepository;
+        private IFileStorageRepository fileStorageRepository;
         public DriversController(
             IDriverRepository injectedriverRepository,
              ICabRepository injectedcabRepository,
-             ICarModelsRepository injectedcarModelsRepository
+             ICarModelsRepository injectedcarModelsRepository,
+             IFileStorageRepository injectedfileStorageRepository
             )
         {
             driverRepository = injectedriverRepository;
@@ -39,14 +41,15 @@ namespace dTax.Controllers
         {
             try
             {
-                if (registerModel.FileStorageId == Guid.Empty)
-                {
-                    return BadRequest("Файлы документов не прикреплены!");
-                }
-
                 if (!ModelState.IsValid)
                 {
                     return BadRequest("Проверьте данные!");
+                }
+
+                bool ExistFile = fileStorageRepository.IsExists(registerModel.FileStorageId);
+                if (ExistFile)
+                {
+                    return BadRequest("Проверьте прикрепленные файлы!");
                 }
 
                 Guid id = GetUserIdByContext();
@@ -56,7 +59,7 @@ namespace dTax.Controllers
 
                 if (exist)
                 {
-                    BadRequest("Проверьте данные!");
+                    return BadRequest("Проверьте данные!");
                 }
 
                 Driver driver = new Driver()
@@ -89,13 +92,16 @@ namespace dTax.Controllers
         {
             try
             {
-                if (registerModel.FileStorageId == Guid.Empty)
-                {
-                    return BadRequest("Файлы документов не прикреплены!");
-                }
+               
                 if (!ModelState.IsValid)
                 {
                     return BadRequest("Проверьте данные!");
+                }
+
+                bool ExistFile = fileStorageRepository.IsExists(registerModel.FileStorageId);
+                if (ExistFile)
+                {
+                    return BadRequest("Проверьте прикрепленные файлы!");
                 }
 
                 bool exist = cabRepository.IsExists(registerModel.LicensePlate, registerModel.VIN);
