@@ -37,6 +37,8 @@ namespace dTax.Repository
             PaymentTypeRepository = paymentTypeRepository;
             ShiftRepository = shiftRepository;
             StatusesRepository = statusesRepository;
+            DriverRepository = driverRepository;
+            FileStorageRepository = fileStorageRepository;
         }
 
         public IUserRepository UserRepository { get; }

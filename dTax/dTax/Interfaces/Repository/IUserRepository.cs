@@ -11,5 +11,8 @@ namespace dTax.Interfaces.Repository
         User FindUserLogin(string Email, string Password);
         bool IsUserExists(string Email);
         User FindUserEmail(string Email);
+        User GetUserById(Guid Id);
+        string GetUserFioById(Guid Id);
+        void IsFullReg(Guid UserId);
     }
 }

@@ -8,5 +8,6 @@ namespace dTax.Interfaces.Repository
 {
     public interface ICarModelsRepository : IBaseRepository<CarModel>
     {
+        CarModel GetCarModelById(Guid Id);
     }
 }

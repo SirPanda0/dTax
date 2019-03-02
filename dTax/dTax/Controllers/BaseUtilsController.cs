@@ -12,8 +12,6 @@ namespace dTax.Controllers
 {
     public class BaseUtilsController : Controller
     {
-        
-
         protected string GetHash(string password)
         {
             using (var sha256 = SHA256.Create())
@@ -26,6 +24,22 @@ namespace dTax.Controllers
         protected Guid GetUserIdByContext()
         {
             return Guid.Parse(HttpContext.User.FindFirst(c => c.Type == CustomClaimType.UserId).Value);
+        }
+
+        protected object GetPagingCollections<T>(IEnumerable<T> collection, int page = 1, int size = 10) where T : class
+        {
+            var count = collection.Count();
+
+            var pager = new Pager(count, page, size);
+            var skip = (pager.CurrentPage - 1) * pager.PageSize;
+            var maxPage = count / size;
+
+            return new
+            {
+                Collection = collection.Skip(skip).Take(pager.PageSize),
+                Pager = pager
+            };
+
         }
     }
 }

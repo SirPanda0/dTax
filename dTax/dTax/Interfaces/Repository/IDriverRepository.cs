@@ -12,7 +12,9 @@ namespace dTax.Interfaces.Repository
         Driver GetDriverByFileId(long fileId);
         Driver GetDriverById(Guid Id);
         bool IsExists(Guid userid, long DrivingLicence, string PassportSerial, string PassportNumber);
-        
+        IEnumerable<Driver> GetUnconfirmedDrivers();
+        Driver IsConfirmed(Guid DriverId);
+        IEnumerable<Driver> GetListDrivers();
 
     }
 }

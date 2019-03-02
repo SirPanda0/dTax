@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
@@ -18,6 +19,7 @@ namespace dTax.Models
 
         //id модели авто
         public Guid CarModelId { get; set; }
+        [JsonIgnore]
         public CarModel CarModel { get; set; }
 
         //год выпуска
@@ -25,6 +27,7 @@ namespace dTax.Models
 
         //id водителя
         public Guid DriverId { get; set; }
+        [JsonIgnore]
         public Driver Driver { get; set; }
 
         //Фото Авто

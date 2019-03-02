@@ -25,7 +25,6 @@ namespace dTax.Repository
         }
 
 
-
         public Driver GetDriverByFileId(long fileId)
         {
             return GetDriverByFileIdAsync(fileId).Result;
@@ -34,6 +33,26 @@ namespace dTax.Repository
         private async Task<Driver> GetDriverByFileIdAsync(long fileId)
         {
             return await GetQuery().FirstOrDefaultAsync(_ => _.FileStorage.FileId == fileId);
+        }
+
+        public IEnumerable<Driver> GetListDrivers()
+        {
+            return GetListDriversAsync().Result;
+        }
+
+        private async Task<IEnumerable<Driver>> GetListDriversAsync()
+        {
+            return await GetQuery().Where(_ => _.IsDeleted != true && _.Сonfirmed != false).ToListAsync();
+        }
+
+        public IEnumerable<Driver> GetUnconfirmedDrivers()
+        {
+            return GetUnconfirmedDriversAsync().Result;
+        }
+
+        private async Task<IEnumerable<Driver>> GetUnconfirmedDriversAsync()
+        {
+            return await GetQuery().Where(_ => _.IsDeleted != true && _.Сonfirmed != true).ToListAsync();
         }
 
 
@@ -45,6 +64,15 @@ namespace dTax.Repository
             if (user == null)
                 return false;
             return true;
+        }
+
+        public Driver IsConfirmed(Guid DriverId)
+        {
+            Driver driver = GetDriverById(DriverId);
+            driver.Сonfirmed = true;
+            Update(driver);
+            Commit();
+            return driver;
         }
 
 

@@ -30,9 +30,37 @@ namespace dTax.Repository
             return true;
         }
 
+        public void IsFullReg(Guid UserId)
+        {
+            User user = GetUserByIdAsync(UserId).Result;
+            user.FullReg = true;
+            Update(user);
+            Commit();
+        }
+
+
         public User FindUserEmail(string Email)
         {
             return GetQuery().FirstOrDefault(_ => _.Email == Email);
         }
+
+        public User GetUserById(Guid Id)
+        {
+            return GetUserByIdAsync(Id).Result;
+        }
+
+        public string GetUserFioById(Guid Id)
+        {
+            var user = GetUserByIdAsync(Id).Result;
+
+            return String.Format("{0} {1}", user.FirstName, user.LastName);
+        }
+
+        private async Task<User> GetUserByIdAsync(Guid id)
+        {
+            return await this.GetQuery().FirstOrDefaultAsync(_ => _.IsDeleted == false && _.Id == id);
+        }
+
+
     }
 }
