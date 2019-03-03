@@ -24,8 +24,7 @@ namespace dTax.Controllers
         }
 
         
-        [Authorize]
-        [PolicyAuthorize(AuthorizePolicy.Operator)]
+        
         [HttpPost]
         [Route("CabBook")]
         public async Task<IActionResult> CabBook([FromBody] Booking booking)

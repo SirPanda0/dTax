@@ -25,7 +25,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [HttpGet]
         [Route("GetList")]
-        public IActionResult GetList(int page, int size = 20)
+        public async Task<IActionResult> GetListAsync(int page, int size = 20)
         {
             try
             {
@@ -45,11 +45,11 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [HttpGet]
         [Route("GetUnconfirmedList")]
-        public IActionResult GetUnconfirmedList(int page, int size = 20)
+        public async Task<IActionResult> GetUnconfirmedList(int page, int size = 20)
         {
             try
             {
-                var list = GetStatementModelList(DBWorkflow.DriverRepository.GetUnconfirmedDrivers());
+                var list =  GetStatementModelList(DBWorkflow.DriverRepository.GetUnconfirmedDrivers());
                 return Json(GetPagingCollections(list, page, size));
 
             }

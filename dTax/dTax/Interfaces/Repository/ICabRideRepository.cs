@@ -8,5 +8,8 @@ namespace dTax.Interfaces.Repository
 {
     public interface ICabRideRepository : IBaseRepository<CabRide>
     {
+        CabRide GetCabRideById(Guid Id);
+        IEnumerable<CabRide> GetCabRideList();
+
     }
 }

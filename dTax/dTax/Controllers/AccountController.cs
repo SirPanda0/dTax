@@ -104,7 +104,7 @@ namespace dTax.Controllers
 
         [Route("Register")]
         [HttpPost]
-        public ActionResult Register([FromBody] RegisterModel registerModel)
+        public async Task<IActionResult> Register([FromBody] RegisterModel registerModel)
         {
             try
             {
@@ -156,6 +156,8 @@ namespace dTax.Controllers
                 DBWorkflow.UserRepository.Insert(user);
                 DBWorkflow.UserRepository.Commit();
 
+                
+
                 LoginResponseModel responseModel = new LoginResponseModel()
                 {
                     Id = user.Id,
@@ -176,9 +178,14 @@ namespace dTax.Controllers
                     DBWorkflow.CustomerRepository.Commit();
                 }
 
+                ClaimsIdentity identity = GetIdentity(user);
+                await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
+
                 //TODO Сервис отправки сообщения при регистрации
                 //var emailService = new EmailService(DBWorkflow);
                 //await emailService.AuthEmailAsync(user.Email);
+
+
 
                 return Json(responseModel);
             }
@@ -267,7 +274,7 @@ namespace dTax.Controllers
                         new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
                         new Claim(ClaimsIdentity.DefaultRoleClaimType, user.RoleId.ToString()),
                         new Claim(ClaimTypes.Surname, user.LastName),
-                        new Claim(CustomClaimType.RoleName, user.Role.Name),
+                        //new Claim(CustomClaimType.RoleName, user.Role.Name),
                         new Claim(CustomClaimType.UserName, user.FirstName),
                         new Claim(CustomClaimType.UserId, user.Id.ToString()),
                         new Claim(CustomClaimType.FullAccess , user.FullReg.ToString())
