@@ -7,7 +7,7 @@
 
 <body>
 
-	<form #LogForm="ngForm" (ngSubmit)="reg(LogForm)"class='reg-form'novalidate >
+	<form #RegForm="ngForm" (ngSubmit)="reg(RegForm)"class='reg-form'novalidate >
 
 		<div class='form-row'>
 			<label for='form_fname'>First Name: </label>
@@ -31,11 +31,18 @@
     <div class='form-row'>
 			<label for='roleId'>roleId: </label>
 			<select name="roleId" ngModel >
-        <option>Роль2  </option>
-        <option>Роль3</option>
+        <option value="2" >Заказчик  </option>
+        <option value="3" >Водитель</option>
       </select>
 		</div>
-
+		<div class='form-row'>
+			<label for='date'>date: </label>
+			<input type='date' id='date' name='birthDate'ngModel >
+		</div>
+		<div class='form-row'>
+			<label for='password'>Password: </label>
+			<input type='text' id='Password' name='password'ngModel >
+		</div>
 		<div class="form-row">
 			<input type="submit" value='Зарегистрироваться'>
 		</div>
