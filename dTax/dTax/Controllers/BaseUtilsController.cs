@@ -21,10 +21,25 @@ namespace dTax.Controllers
             }
         }
 
+        protected decimal CalculateBookPrice(int dist)
+        {
+            if (dist != 0)
+            { 
+            if (DateTime.Now.Hour < 17 && DateTime.Now.Hour > 8)
+                return (dist * 9) + 50;
+            else
+            if (DateTime.Now.Hour > 17)
+                return (dist * 11) + 50;
+            }
+            return 50;
+        }
+
+
         protected Guid GetUserIdByContext()
         {
             return Guid.Parse(HttpContext.User.FindFirst(c => c.Type == CustomClaimType.UserId).Value);
         }
+
 
         protected object GetPagingCollections<T>(IEnumerable<T> collection, int page = 1, int size = 10) where T : class
         {

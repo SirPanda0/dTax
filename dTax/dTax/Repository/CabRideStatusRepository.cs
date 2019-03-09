@@ -1,5 +1,6 @@
 ﻿using dTax.Interfaces.Repository;
 using dTax.Models;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -7,10 +8,23 @@ using System.Threading.Tasks;
 
 namespace dTax.Repository
 {
-    public class CabRideStatusRepository : BaseRepository<CabRide>, ICabRideStatusRepository
+    public class CabRideStatusRepository : BaseRepository<CabRideStatus>, ICabRideStatusRepository
     {
         public CabRideStatusRepository(DbPostrgreContext context) : base(context)
         {
         }
+
+        public CabRideStatus GetCarModelById(Guid Id)
+        {
+            return GetCabRideByIdAsync(Id).Result;
+        }
+
+        private async Task<CabRideStatus> GetCabRideByIdAsync(Guid id)
+        {
+            return await GetQuery()
+                .Include(ride => ride.CabRide)
+                .FirstOrDefaultAsync(_ => _.Id == id);
+        }
+
     }
 }

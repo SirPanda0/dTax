@@ -13,7 +13,7 @@ using Serilog;
 
 namespace dTax.Controllers
 {
-    [Route("[controller]")]
+    [Route("api/[controller]")]
     public class CustomerController : Controller
     {
         private DbPostrgreContext db;
@@ -25,48 +25,48 @@ namespace dTax.Controllers
 
         
         
-        [HttpPost]
-        [Route("CabBook")]
-        public async Task<IActionResult> CabBook([FromBody] Booking booking)
-        {
-            if (!ModelState.IsValid)
-            {
-                return BadRequest("Проверьте данные");
-            }
+        //[HttpPost]
+        //[Route("CabBook")]
+        //public async Task<IActionResult> CabBook([FromBody] Booking booking)
+        //{
+        //    if (!ModelState.IsValid)
+        //    {
+        //        return BadRequest("Проверьте данные");
+        //    }
 
-            try
-            {
-                Customer customer = await db.Customers.FirstOrDefaultAsync(c => c.UserId == booking.UserId);
+        //    try
+        //    {
+        //        Customer customer = await db.Customers.FirstOrDefaultAsync(c => c.UserId == booking.UserId);
 
-                //Можно ли создавать несколько заказов сразу?
-                //CabRide ride = await db.CabRides.FirstOrDefaultAsync(r => r.CustomerId == customer.Id && r.Canceled == true);
+        //        //Можно ли создавать несколько заказов сразу?
+        //        //CabRide ride = await db.CabRides.FirstOrDefaultAsync(r => r.CustomerId == customer.Id && r.Canceled == true);
 
-                if (customer != null)
-                {
-                    CabRide ride = new CabRide
-                    {
-                        CustomerId = customer.Id,
-                        AddressStartPoint = booking.AddressStartPoint,
-                        AddressEndPoint = booking.AddressEndPoint,
-                        PaymentTypeId = booking.PaymentTypeId,
-                        BookDetails = booking.BookDetails,
-                        Canceled = false,
-                        Price = GetPrice(booking.Distance)
-                    };
+        //        if (customer != null)
+        //        {
+        //            CabRide ride = new CabRide
+        //            {
+        //                CustomerId = customer.Id,
+        //                AddressStartPoint = booking.AddressStartPoint,
+        //                AddressEndPoint = booking.AddressEndPoint,
+        //                PaymentTypeId = booking.PaymentTypeId,
+        //                BookDetails = booking.BookDetails,
+        //                Canceled = false,
+        //                Price = GetPrice(booking.Distance)
+        //            };
 
-                    await db.CabRides.AddAsync(ride);
-                    await db.SaveChangesAsync();
+        //            await db.CabRides.AddAsync(ride);
+        //            await db.SaveChangesAsync();
 
-                    return Json(ride);
-                }
-                return BadRequest("Вы не являетесь заказчиком!");
+        //            return Json(ride);
+        //        }
+        //        return BadRequest("Вы не являетесь заказчиком!");
 
-            }
-            catch (Exception)
-            {
-                return BadRequest();
-            }
-        }
+        //    }
+        //    catch (Exception)
+        //    {
+        //        return BadRequest();
+        //    }
+        //}
 
 
 

@@ -8,6 +8,6 @@ namespace dTax.Interfaces.Repository
 {
     public interface ICustomerRepository: IBaseRepository<Customer>
     {
-
+        Guid GetCustomerByUserId(Guid Id);
     }
 }

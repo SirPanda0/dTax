@@ -6,7 +6,8 @@ using System.Threading.Tasks;
 
 namespace dTax.Interfaces.Repository
 {
-    public interface ICabRideStatusRepository : IBaseRepository<CabRide>
+    public interface ICabRideStatusRepository : IBaseRepository<CabRideStatus>
     {
+        CabRideStatus GetCarModelById(Guid Id);
     }
 }

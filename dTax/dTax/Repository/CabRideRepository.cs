@@ -34,5 +34,13 @@ namespace dTax.Repository
             return await GetQuery().Where(_ => _.Canceled != true).ToListAsync();
         }
 
+        public bool ActiveBookExist (Guid Id)
+        {
+            var book = GetQuery().FirstOrDefault(_ => _.Canceled != true && _.CustomerId == Id);
+            if (book == null)
+                return false;
+            return true;
+        }
+
     }
 }

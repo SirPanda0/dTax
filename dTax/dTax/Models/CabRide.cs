@@ -17,7 +17,7 @@ namespace dTax.Models
         public string AddressEndPoint { get; set; }//Место конца поездки
         public float? EndPointGPS { get; set; }//
 
-        public bool Canceled { get; set; }//Отменена ли поездки
+        public bool Canceled { get; set; } = false;//Отменена ли поездки
 
         public int PaymentTypeId { get; set; }//Тип оплаты
         public PaymentType PamentType { get; set; }
