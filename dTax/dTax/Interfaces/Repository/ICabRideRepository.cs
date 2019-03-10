@@ -11,6 +11,7 @@ namespace dTax.Interfaces.Repository
         CabRide GetCabRideById(Guid Id);
         IEnumerable<CabRide> GetCabRideList();
         bool ActiveBookExist(Guid Id);
+        void UpdateEntity(CabRide entity);
 
     }
 }

@@ -42,5 +42,11 @@ namespace dTax.Repository
             return true;
         }
 
+        public void UpdateEntity(CabRide entity)
+        {
+            Update(entity);
+            Commit();
+        }
+
     }
 }

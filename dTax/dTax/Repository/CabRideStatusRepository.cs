@@ -14,6 +14,16 @@ namespace dTax.Repository
         {
         }
 
+        public CabRideStatus GetCabRideStatusByRideId(Guid Id)
+        {
+            return GetCabRideStatusByRideIdAsync(Id).Result;
+        }
+
+        private async Task<CabRideStatus> GetCabRideStatusByRideIdAsync(Guid id)
+        {
+            return await GetQuery().FirstOrDefaultAsync(_ => _.CabRideId == id);
+        }
+
         public CabRideStatus GetCarModelById(Guid Id)
         {
             return GetCabRideByIdAsync(Id).Result;
@@ -24,6 +34,12 @@ namespace dTax.Repository
             return await GetQuery()
                 .Include(ride => ride.CabRide)
                 .FirstOrDefaultAsync(_ => _.Id == id);
+        }
+
+        public void UpdateEntity(CabRideStatus entity)
+        {
+            Update(entity);
+            Commit();
         }
 
     }
