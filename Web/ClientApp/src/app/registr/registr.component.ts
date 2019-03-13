@@ -17,10 +17,12 @@ export class RegistrComponent implements OnInit {
   }
   reg(Form: NgForm) {
     console.log(Form.value);
-    this.http.post('account/register', Form.value).subscribe(data => {
-      this.route.navigateByUrl('home');
+    this.http.post('account/register', Form.value ).subscribe(data => {
+      if (Form.value['roleId'] == 2) {this.route.navigateByUrl('home');} 
+      else  {this.route.navigateByUrl('voditregistr');}
+      
     }, err => {
-      alert('Хрень');
+      alert('Ошибка регистрации, проверьте правильность данных');
     });
   }
 
