@@ -10,14 +10,14 @@ import { LoginComponent } from './login/login.component';
 import { HttpClientModule } from '@angular/common/http';
 import { HomeComponent } from './home/home.component';
 import { RegistrComponent } from './registr/registr.component';
-import { OditregistrComponent } from './oditregistr/oditregistr.component';
 import { VoditregistrComponent } from './voditregistr/voditregistr.component';
 
 
 const Routs: Routes = [
   {path: '', component: LoginComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'registr', component:RegistrComponent}
+  {path: 'registr', component:RegistrComponent},
+  {path: 'voditregistr', component:VoditregistrComponent}
 
 
 
@@ -29,7 +29,6 @@ const Routs: Routes = [
     LoginComponent,
     HomeComponent,
     RegistrComponent,
-    OditregistrComponent,
     VoditregistrComponent,
     
   ],
