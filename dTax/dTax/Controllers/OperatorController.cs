@@ -76,13 +76,13 @@ namespace dTax.Controllers
                 DriverResponse driverResponse = new DriverResponse()
                 {
                     Id = DriverId,
-                    FIO = DBWorkflow.UserRepository.GetUserFioById(driver.UserId),
+                    Name= DBWorkflow.UserRepository.GetUserFioById(driver.UserId),
                     DrivingLicence = driver.DrivingLicence,
                     ExpiryDate = driver.ExpiryDate,
                     RegistrationDate = driver.RegistrationDate,
                     PassportSerial = driver.PassportSerial,
                     PassportNumber = driver.PassportNumber,
-                    DriverFileStorageId = driver.FileStorageId,
+                    // TODO DriverFileStorageId = driver.FileLink,
                     Cab = cab,
                     CarModel = DBWorkflow.CarModelsRepository.GetCarModelById(cab.CarModelId)
                 };

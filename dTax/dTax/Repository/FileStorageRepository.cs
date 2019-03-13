@@ -18,22 +18,22 @@ namespace dTax.Repository
         }
 
 
-        public FileStorage GetById(long fileId)
+        public FileStorage GetById(Guid fileId)
         {
             return GetByIdAsync(fileId).Result;
         }
 
-        private async Task<FileStorage> GetByIdAsync(long fileId)
+        private async Task<FileStorage> GetByIdAsync(Guid fileId)
         {
             return await GetQuery().FirstOrDefaultAsync(_ => _.FileId == fileId);
         }
 
-        public IEnumerable<FileStorage> GetFilesByIds(IEnumerable<long> fileIds)
+        public IEnumerable<FileStorage> GetFilesByIds(IEnumerable<Guid> fileIds)
         {
             return GetFilesByIdsAsync(fileIds).Result;
         }
 
-        private async Task<IEnumerable<FileStorage>> GetFilesByIdsAsync(IEnumerable<long> fileIds)
+        private async Task<IEnumerable<FileStorage>> GetFilesByIdsAsync(IEnumerable<Guid> fileIds)
         {
             return await GetQuery().Where(_ => fileIds.Contains(_.FileId)).ToListAsync();
         }
@@ -44,14 +44,14 @@ namespace dTax.Repository
             this.Commit();
         }
 
-        public long InsertFileStorage(FileStorage entity)
+        public Guid InsertFileStorage(FileStorage entity)
         {
             this.Insert(entity);
             this.Commit();
             return entity.FileId;
         }
 
-        public bool IsExists(long fileid)
+        public bool IsExists(Guid fileid)
         {
             
                 var file = GetQuery().FirstOrDefault(_ => _.FileId == fileid);

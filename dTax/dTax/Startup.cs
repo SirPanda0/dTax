@@ -77,6 +77,9 @@ namespace dTax
             services.AddTransient<IShiftRepository, ShiftRepository>();
             services.AddTransient<IStatusesRepository, StatusesRepository>();
 
+            services.AddTransient<IDriverFileRepository, DriverFileRepository>();
+
+
             services.AddTransient<IDBWorkFlow, DBWorkFlow>();
             #endregion
 

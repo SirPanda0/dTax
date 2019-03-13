@@ -146,6 +146,7 @@ namespace dTax.Controllers
                     Email = registerModel.Email,
                     Password = PasswordHash,
                     FirstName = registerModel.FirstName,
+                    MiddleName = registerModel.MiddleName,
                     LastName = registerModel.LastName,
                     PhoneNumber = registerModel.PhoneNumber,
                     RoleId = registerModel.RoleId,

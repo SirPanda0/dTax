@@ -13,7 +13,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace dTax.Controllers
 {
-    
+
     [Route("api/[controller]")]
     public class FileStorageController : BaseUtilsController
     {
@@ -31,7 +31,7 @@ namespace dTax.Controllers
         {
             Log.Information("Загружаем файл");
 
-            long id = 0;
+            Guid id = Guid.Empty;
 
             if (uploadedFile != null)
             {
@@ -73,7 +73,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.Operator)]
         [HttpGet]
         [Route("Download")]
-        public IActionResult DownloadFile(long id)
+        public IActionResult DownloadFile(Guid id)
         {
             var fileStorageModel = fileStorageRepository.GetById(id);
             if (fileStorageModel != null)

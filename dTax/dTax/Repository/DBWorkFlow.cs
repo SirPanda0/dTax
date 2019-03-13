@@ -24,6 +24,7 @@ namespace dTax.Repository
             IPaymentTypeRepository paymentTypeRepository,
             IShiftRepository shiftRepository,
             IStatusesRepository statusesRepository,
+            IDriverFileRepository driverFileRepository,
             DbPostrgreContext db
             )
         {
@@ -39,6 +40,7 @@ namespace dTax.Repository
             StatusesRepository = statusesRepository;
             DriverRepository = driverRepository;
             FileStorageRepository = fileStorageRepository;
+            DriverFileRepository = driverFileRepository;
         }
 
         public IUserRepository UserRepository { get; }
@@ -59,5 +61,7 @@ namespace dTax.Repository
         public IPaymentTypeRepository PaymentTypeRepository { get; }
         public IShiftRepository ShiftRepository { get; }
         public IStatusesRepository StatusesRepository { get; }
+
+        public IDriverFileRepository DriverFileRepository { get; }
     }
 }

@@ -121,8 +121,6 @@ namespace dTax.Controllers
             try
             {
 
-                //Guid id = DBWorkflow.CustomerRepository.GetCustomerByUserId(GetUserIdByContext());
-
                 CabRide ride = DBWorkflow.CabRideRepository.GetCabRideById(id);
 
                 ride.Canceled = true;
@@ -135,7 +133,6 @@ namespace dTax.Controllers
                 DBWorkflow.CabRideStatusRepository.UpdateEntity(rideStatus);
 
                 return Ok("Поездка отменена успешно!");
-
             }
             catch (Exception e)
             {

@@ -10,6 +10,7 @@ using dTax.ApiModel;
 using System.Text;
 using dTax.Auth;
 using dTax.Interfaces.Repository;
+using dTax.Models.Many;
 
 namespace dTax.Controllers
 {
@@ -22,17 +23,20 @@ namespace dTax.Controllers
         private ICabRepository cabRepository;
         private ICarModelsRepository carModelsRepository;
         private IFileStorageRepository fileStorageRepository;
+        private IDriverFileRepository driverFileRepository;
         public DriversController(
             IDriverRepository injectedriverRepository,
              ICabRepository injectedcabRepository,
              ICarModelsRepository injectedcarModelsRepository,
-             IFileStorageRepository injectedfileStorageRepository
+             IFileStorageRepository injectedfileStorageRepository,
+             IDriverFileRepository injectedriverFileRepository
             )
         {
             driverRepository = injectedriverRepository;
             cabRepository = injectedcabRepository;
             carModelsRepository = injectedcarModelsRepository;
             fileStorageRepository = injectedfileStorageRepository;
+            driverFileRepository = injectedriverFileRepository;
         }
 
         [PolicyAuthorize(AuthorizePolicy.Driver)]
@@ -47,11 +51,7 @@ namespace dTax.Controllers
                     return BadRequest("Проверьте данные!");
                 }
 
-                bool ExistFile = fileStorageRepository.IsExists(registerModel.FileStorageId);
-                if (!ExistFile)
-                {
-                    return BadRequest("Проверьте прикрепленные файлы!");
-                }
+                
 
                 Guid id = GetUserIdByContext();
 
@@ -69,8 +69,7 @@ namespace dTax.Controllers
                     DrivingLicence = registerModel.DrivingLicence,
                     ExpiryDate = registerModel.ExpiryDate,
                     PassportSerial = registerModel.PassportSerial,
-                    PassportNumber = registerModel.PassportNumber,
-                    FileStorageId = registerModel.FileStorageId
+                    PassportNumber = registerModel.PassportNumber
                 };
 
                 driverRepository.Insert(driver);
@@ -85,7 +84,14 @@ namespace dTax.Controllers
             }
         }
 
-
+        [PolicyAuthorize(AuthorizePolicy.Driver)]
+        [Route("FileToDriver")]
+        [HttpPost]
+        public ActionResult AddFile(Guid DriverId, Guid FileId)
+        {
+           driverFileRepository.AddLinkDriver(DriverId, FileId);
+           return Ok();
+        }
 
 
 

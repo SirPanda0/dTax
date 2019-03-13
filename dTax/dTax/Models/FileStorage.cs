@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dTax.Models.Many;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -9,11 +10,13 @@ namespace dTax.Models
     public class FileStorage
     {
         [Key]
-        public long FileId { get; set; }
+        public Guid FileId { get; set; }
 
         public byte[] ContentData { get; set; }
 
         public string FileName { get; set; }
+
+        public ICollection<FilesToDriver> DriversLink { get; set; }
 
         //Фото документов или машины или фото пользователя
         //public string Type { get; set; }

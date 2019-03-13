@@ -53,7 +53,7 @@ namespace dTax.Repository
         {
             var user = GetUserByIdAsync(Id).Result;
 
-            return String.Format("{0} {1}", user.FirstName, user.LastName);
+            return String.Format("{0} {1} {2}", user.FirstName, user.MiddleName, user.LastName);
         }
 
         private async Task<User> GetUserByIdAsync(Guid id)

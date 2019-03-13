@@ -21,5 +21,6 @@ namespace dTax.Interfaces
         IPaymentTypeRepository PaymentTypeRepository { get; }
         IShiftRepository ShiftRepository { get; }
         IStatusesRepository StatusesRepository { get; }
+        IDriverFileRepository DriverFileRepository { get; }
     }
 }

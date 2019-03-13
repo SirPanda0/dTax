@@ -16,7 +16,7 @@ namespace dTax.ApiModel
         public string PassportSerial { get; set; }
         public string PassportNumber { get; set; }
 
-        public long FileStorageId { get; set; }
+        //public long FileStorageId { get; set; }
 
         ////Cab
         //public string LicensePlate { get; set; }

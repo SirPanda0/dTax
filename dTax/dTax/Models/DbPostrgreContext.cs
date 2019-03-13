@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using dTax.Models.Many;
 using Microsoft.EntityFrameworkCore;
 
 namespace dTax.Models
@@ -24,6 +25,8 @@ namespace dTax.Models
         public DbSet<Status> Statuses { get; set; } // Состояния поездки: новая/назначена/началась/завершилась/отменена
 
         public DbSet<FileStorage> FileStorage { get; set; } //Хранилище файлов
+
+        public DbSet<FilesToDriver> FilesToDrivers { get; set; }
 
 
         public DbPostrgreContext(DbContextOptions<DbPostrgreContext> options) : base(options)

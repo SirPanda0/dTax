@@ -8,10 +8,10 @@ namespace dTax.Interfaces.Repository
 {
     public interface IFileStorageRepository : IBaseRepository<FileStorage>
     {
-        FileStorage GetById(long fileId);
-        IEnumerable<FileStorage> GetFilesByIds(IEnumerable<long> fileIds);
+        FileStorage GetById(Guid fileId);
+        IEnumerable<FileStorage> GetFilesByIds(IEnumerable<Guid> fileIds);
         void UpdateEntity(FileStorage entity);
-        long InsertFileStorage(FileStorage entity);
-        bool IsExists(long fileid);
+        Guid InsertFileStorage(FileStorage entity);
+        bool IsExists(Guid fileid);
     }
 }

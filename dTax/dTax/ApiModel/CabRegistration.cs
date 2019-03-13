@@ -13,7 +13,7 @@ namespace dTax.ApiModel
         public int ManufactureYear { get; set; }
         public string VIN { get; set; }
 
-        public long FileStorageId { get; set; }
+        public Guid FileStorageId { get; set; }
 
         public string BrandName { get; set; }
         public string ModelName { get; set; }

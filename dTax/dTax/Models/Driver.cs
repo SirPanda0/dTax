@@ -1,4 +1,5 @@
-﻿using System;
+﻿using dTax.Models.Many;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -24,9 +25,11 @@ namespace dTax.Models
         public string PassportSerial { get; set; }
         public string PassportNumber { get; set; }
 
+
         //Фото документов
-        public long FileStorageId { get; set; }
-        public FileStorage FileStorage { get; set; }
+        //public long FileStorageId { get; set; }
+        [NotMapped]
+        public virtual ICollection<FilesToDriver> FileLink { get; set; }
 
         public bool Working { get; set; } = false;
 
