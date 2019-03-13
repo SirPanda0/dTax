@@ -9,7 +9,7 @@ import {NgForm} from '@angular/forms';
   styleUrls: ['./voditregistr.component.css']
 })
 
-export class HomeComponent implements OnInit {
+export class VoditregistrComponent implements OnInit {
 
   constructor() { }
 
