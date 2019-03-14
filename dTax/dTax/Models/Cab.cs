@@ -1,6 +1,8 @@
-﻿using Newtonsoft.Json;
+﻿using dTax.Models.Many;
+using Newtonsoft.Json;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -31,10 +33,13 @@ namespace dTax.Models
         public Driver Driver { get; set; }
 
         //Фото Авто
-        public Guid FileStorageId { get; set; }
-        public FileStorage FileStorage { get; set; }
+        //public Guid FileStorageId { get; set; }
+        //public FileStorage FileStorage { get; set; }
 
         public bool Active { get; set; } = false;
+
+        [NotMapped]
+        public virtual ICollection<FilesToCab> FileLink { get; set; }
 
         //Проверен ли автомобиль оператором
         //public bool Сonfirmed { get; set; }

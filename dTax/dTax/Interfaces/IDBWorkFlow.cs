@@ -22,5 +22,6 @@ namespace dTax.Interfaces
         IShiftRepository ShiftRepository { get; }
         IStatusesRepository StatusesRepository { get; }
         IDriverFileRepository DriverFileRepository { get; }
+        ICabFileRepository CabFileRepository { get; }
     }
 }

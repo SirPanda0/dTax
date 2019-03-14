@@ -34,11 +34,11 @@ namespace dTax.Controllers
                     return BadRequest("Проверьте данные!");
                 }
 
-                bool ExistFile = DBWorkflow.FileStorageRepository.IsExists(registerModel.FileStorageId);
-                if (!ExistFile)
-                {
-                    return BadRequest("Проверьте прикрепленные файлы!");
-                }
+                //bool ExistFile = DBWorkflow.FileStorageRepository.IsExists(registerModel.FileStorageId);
+                //if (!ExistFile)
+                //{
+                //    return BadRequest("Проверьте прикрепленные файлы!");
+                //}
 
                 bool exist = DBWorkflow.CabRepository.IsExists(registerModel.LicensePlate, registerModel.VIN);
 
@@ -64,8 +64,7 @@ namespace dTax.Controllers
                     VIN = registerModel.VIN,
                     CarModelId = carModel.Id,
                     ManufactureYear = registerModel.ManufactureYear,
-                    DriverId = registerModel.DriverId,
-                    FileStorageId = registerModel.FileStorageId
+                    DriverId = registerModel.DriverId
                 };
                 DBWorkflow.CabRepository.Insert(cab);
                 DBWorkflow.CabRepository.Commit();
@@ -77,6 +76,16 @@ namespace dTax.Controllers
                 Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
                 return StatusCode(500);
             }
+        }
+
+        [PolicyAuthorize(AuthorizePolicy.Driver)]
+        [Route("FileToCab")]
+        [HttpPost]
+        public ActionResult AddFile(Guid CabId, Guid FileId)
+        {
+            DBWorkflow.CabFileRepository.AddLinkCab(CabId, FileId);
+            
+            return Ok();
         }
 
     }

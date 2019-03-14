@@ -28,6 +28,9 @@ namespace dTax.Models
 
         public DbSet<FilesToDriver> FilesToDrivers { get; set; }
 
+        public DbSet<FilesToCab> FilesToCab { get; set; }
+        
+
 
         public DbPostrgreContext(DbContextOptions<DbPostrgreContext> options) : base(options)
         {

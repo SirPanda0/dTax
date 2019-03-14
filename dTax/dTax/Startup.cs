@@ -79,6 +79,8 @@ namespace dTax
 
             services.AddTransient<IDriverFileRepository, DriverFileRepository>();
 
+            services.AddTransient<ICabFileRepository, CabFileRepository>();
+
 
             services.AddTransient<IDBWorkFlow, DBWorkFlow>();
             #endregion
