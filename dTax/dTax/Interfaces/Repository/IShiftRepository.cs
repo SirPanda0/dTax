@@ -8,5 +8,6 @@ namespace dTax.Interfaces.Repository
 {
     public interface IShiftRepository : IBaseRepository<Shift>
     {
+        Shift GetShiftByDriverId(Guid Id);
     }
 }

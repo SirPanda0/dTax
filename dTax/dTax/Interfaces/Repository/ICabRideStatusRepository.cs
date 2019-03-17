@@ -11,5 +11,6 @@ namespace dTax.Interfaces.Repository
         CabRideStatus GetCarModelById(Guid Id);
         CabRideStatus GetCabRideStatusByRideId(Guid Id);
         void UpdateEntity(CabRideStatus entity);
+        IEnumerable<CabRideStatus> GetCabRideList();
     }
 }

@@ -49,7 +49,7 @@ namespace dTax.Controllers
         {
             try
             {
-                var list =  GetStatementModelList(DBWorkflow.DriverRepository.GetUnconfirmedDrivers());
+                var list = GetStatementModelList(DBWorkflow.DriverRepository.GetUnconfirmedDrivers());
                 return Json(GetPagingCollections(list, page, size));
 
             }
@@ -76,7 +76,7 @@ namespace dTax.Controllers
                 DriverResponse driverResponse = new DriverResponse()
                 {
                     Id = DriverId,
-                    Name= DBWorkflow.UserRepository.GetUserFioById(driver.UserId),
+                    Name = DBWorkflow.UserRepository.GetUserFioById(driver.UserId),
                     DrivingLicence = driver.DrivingLicence,
                     ExpiryDate = driver.ExpiryDate,
                     RegistrationDate = driver.RegistrationDate,
@@ -99,7 +99,7 @@ namespace dTax.Controllers
 
         [PolicyAuthorize(AuthorizePolicy.Operator)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
-        [HttpGet]
+        [HttpPost]
         [Route("ConfirmDriver")]
         public IActionResult ConfirmDriver(Guid DriverId)
         {
@@ -107,6 +107,19 @@ namespace dTax.Controllers
             {
                 var driver = DBWorkflow.DriverRepository.IsConfirmed(DriverId);
                 DBWorkflow.UserRepository.IsFullReg(driver.UserId);
+
+                var shift = DBWorkflow.ShiftRepository.GetShiftByDriverId(driver.Id);
+                var cab = DBWorkflow.CabRepository.GetCabByDriverId(driver.Id);
+
+                if (shift == null)
+                {
+                    DBWorkflow.ShiftRepository.Insert(new Shift
+                    {
+                        DriverId = driver.Id,
+                        CabId = cab.Id,
+                        LoginTime = DateTime.Now
+                    });
+                }
 
                 return Ok("Водитель подтвержден!");
             }
@@ -120,18 +133,18 @@ namespace dTax.Controllers
         #region Private Region
         private IEnumerable<DriverViewModel> GetStatementModelList(IEnumerable<Driver> drivers)
         {
-            return drivers.Where(_=> DBWorkflow.CabRepository.GetCabByDriverId(_.Id) !=null).Select(_ =>
-            
-            {
-                var driverlist = new DriverViewModel()
-                {
-                    DriverId = _.Id,
-                    FIO = DBWorkflow.UserRepository.GetUserFioById(_.UserId),
-                    CreateDate = _.Created
+            return drivers.Where(_ => DBWorkflow.CabRepository.GetCabByDriverId(_.Id) != null).Select(_ =>
 
-                };
-                return driverlist;
-            }).ToList();
+              {
+                  var driverlist = new DriverViewModel()
+                  {
+                      DriverId = _.Id,
+                      FIO = DBWorkflow.UserRepository.GetUserFioById(_.UserId),
+                      CreateDate = _.Created
+
+                  };
+                  return driverlist;
+              }).ToList();
         }
         #endregion
 

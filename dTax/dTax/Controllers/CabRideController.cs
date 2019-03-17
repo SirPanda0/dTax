@@ -3,6 +3,7 @@ using dTax.Auth;
 using dTax.Enums;
 using dTax.Interfaces;
 using dTax.Models;
+using dTax.ResponseModels;
 using dTax.ViewModels;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -28,20 +29,20 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [Authorize]
-        [Route("GetList")]
+        [Route("GetRideList")]
         [HttpGet]
         public IActionResult RideList(int page, int size = 20)
         {
 
             var list = DBWorkflow.CabRideRepository.GetCabRideList();
-            return Json(GetPagingCollections(list, page, size));
+            return Json(GetPagingCollections(GetRideModelList(list), page, size));
 
         }
 
         [PolicyAuthorize(AuthorizePolicy.User)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [Authorize]
-        [Route("GetStatus")]
+        [Route("GetRideStatus")]
         [HttpPost]
         public async Task<IActionResult> GetRideStatus(Guid id)
         {
@@ -54,7 +55,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.User)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [Authorize]
-        [Route("Add")]
+        [Route("AddOrder")]
         [HttpPost]
         public IActionResult AddRide([FromBody] Booking booking)
         {
@@ -87,11 +88,11 @@ namespace dTax.Controllers
                     Price = Price
                 };
                 DBWorkflow.CabRideRepository.Insert(ride);
-                
+
 
                 CabRideStatus rideStatus = new CabRideStatus()
                 {
-                    CabRideId =  ride.Id,
+                    CabRideId = ride.Id,
                     StatusId = (int)RideStatusEnum.New,
                     StatusTime = DateTime.Now
                 };
@@ -101,7 +102,20 @@ namespace dTax.Controllers
                 DBWorkflow.CabRideRepository.Commit();
                 DBWorkflow.CabRideStatusRepository.Commit();
 
-                return Ok(ride);
+                RideResponse response = new RideResponse
+                {
+                    Id = ride.Id,
+                    AddressStartPoint = ride.AddressStartPoint,
+                    AddressEndPoint = ride.AddressEndPoint,
+                    StartPointGPS = ride.StartPointGPS,
+                    EndPointGPS = ride.EndPointGPS,
+                    PaymentTypeId = ride.PaymentTypeId,
+                    Price = ride.Price,
+                    BookDetails = ride.BookDetails
+                };
+
+
+                return Ok(response);
 
             }
             catch (Exception e)
@@ -111,10 +125,79 @@ namespace dTax.Controllers
             }
         }
 
+        //[PolicyAuthorize(AuthorizePolicy.User)]
+        //[PolicyAuthorize(AuthorizePolicy.FullAccess)]
+        //[Authorize]
+        //[Route("EditOrder")]
+        //[HttpPost]
+        //public IActionResult EditOrder([FromBody] Booking booking)
+        //{
+        //    try
+        //    {
+        //        if (!ModelState.IsValid)
+        //        {
+        //            return BadRequest("Проверьте данные!");
+        //        }
+
+        //        Guid id = DBWorkflow.CustomerRepository.GetCustomerByUserId(GetUserIdByContext());
+
+        //        decimal Price = CalculateBookPrice(booking.Distance);
+
+        //        DBWorkflow.CabRideRepository.GetCabRideById();
+
+        //        CabRide ride = new CabRide()
+        //        {
+        //            CustomerId = id,
+        //            AddressStartPoint = booking.AddressStartPoint,
+        //            AddressEndPoint = booking.AddressEndPoint,
+        //            StartPointGPS = booking.StartPointGPS,
+        //            EndPointGPS = booking.EndPointGPS,
+        //            PaymentTypeId = booking.PaymentTypeId,
+        //            BookDetails = booking.BookDetails,
+        //            Price = Price
+        //        };
+        //        DBWorkflow.CabRideRepository.UpdateEntity(ride);
+
+
+        //        CabRideStatus rideStatus = new CabRideStatus()
+        //        {
+        //            CabRideId = ride.Id,
+        //            StatusId = (int)RideStatusEnum.New,
+        //            StatusTime = DateTime.Now
+        //        };
+
+        //        DBWorkflow.CabRideStatusRepository.Insert(rideStatus);
+
+        //        DBWorkflow.CabRideRepository.Commit();
+        //        DBWorkflow.CabRideStatusRepository.Commit();
+
+        //        RideResponse response = new RideResponse
+        //        {
+        //            Id = ride.Id,
+        //            AddressStartPoint = ride.AddressStartPoint,
+        //            AddressEndPoint = ride.AddressEndPoint,
+        //            StartPointGPS = ride.StartPointGPS,
+        //            EndPointGPS = ride.EndPointGPS,
+        //            PaymentTypeId = ride.PaymentTypeId,
+        //            Price = ride.Price,
+        //            BookDetails = ride.BookDetails
+        //        };
+
+
+        //        return Ok(response);
+
+        //    }
+        //    catch (Exception e)
+        //    {
+        //        Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
+        //        return StatusCode(500);
+        //    }
+        //}
+
         [PolicyAuthorize(AuthorizePolicy.User)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [Authorize]
-        [Route("Cancel")]
+        [Route("CancelOrder")]
         [HttpPost]
         public IActionResult CancelRide(Guid id)
         {
@@ -128,6 +211,7 @@ namespace dTax.Controllers
                 CabRideStatus rideStatus = DBWorkflow.CabRideStatusRepository.GetCabRideStatusByRideId(id);
 
                 rideStatus.StatusId = (int)RideStatusEnum.Canceled;
+                rideStatus.StatusTime = DateTime.Now;
 
                 DBWorkflow.CabRideRepository.UpdateEntity(ride);
                 DBWorkflow.CabRideStatusRepository.UpdateEntity(rideStatus);
@@ -141,10 +225,122 @@ namespace dTax.Controllers
             }
         }
 
+        [PolicyAuthorize(AuthorizePolicy.Driver)]
+        [PolicyAuthorize(AuthorizePolicy.FullAccess)]
+        [Route("TakeOrder")]
+        [HttpPost]
+        public ActionResult TakeOrder(Guid id)
+        {
+            try
+            {
+                var driver = DBWorkflow.DriverRepository.GetDriverByUserId(GetUserIdByContext());
+
+                var shift = DBWorkflow.ShiftRepository.GetShiftByDriverId(driver.Id);
+
+                //RideId не статуса а поездки
+                var ride = DBWorkflow.CabRideStatusRepository.GetCabRideStatusByRideId(id);
+
+                var check = DBWorkflow.CabRideStatusRepository.GetCabRideList().Where(_=>_.ShiftId == shift.Id).Count();
+
+                if (check != 0)
+                {
+                    return BadRequest("У вас есть незаконченные поездки!");
+                }
+
+                ride.StatusId = (int)RideStatusEnum.Assigned;
+                ride.StatusTime = DateTime.Now;
+
+                ride.ShiftId = DBWorkflow.ShiftRepository.GetShiftByDriverId(DBWorkflow.DriverRepository.GetDriverByUserId(GetUserIdByContext()).Id).Id;
+
+                DBWorkflow.CabRideStatusRepository.UpdateEntity(ride);
+
+                return Ok("Поездка взята!");
+            }
+            catch (Exception e)
+            {
+                Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
+                return StatusCode(500);
+            }
+        }
+
+        [PolicyAuthorize(AuthorizePolicy.Driver)]
+        [PolicyAuthorize(AuthorizePolicy.FullAccess)]
+        [Route("StartRide")]
+        [HttpPost]
+        public ActionResult StartRide(Guid id)
+        {
+            try
+            {
+                //RideId не статуса а поездки
+                var ride = DBWorkflow.CabRideStatusRepository.GetCabRideStatusByRideId(id);
+
+                var driver = DBWorkflow.DriverRepository.GetDriverByUserId(GetUserIdByContext());
+
+                var shift = DBWorkflow.ShiftRepository.GetShiftByDriverId(driver.Id);
+
+                if (ride.ShiftId != shift.Id)
+                {
+                    return BadRequest();
+                }
+
+                ride.StatusId = (int)RideStatusEnum.Started;
+
+                ride.RideStartTime = DateTime.Now;
+
+                ride.StatusTime = DateTime.Now;
+
+                DBWorkflow.CabRideStatusRepository.UpdateEntity(ride);
+
+                return Ok("Поездка начата!");
+            }
+            catch (Exception e)
+            {
+                Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
+                return StatusCode(500);
+            }
+        }
+
+        [PolicyAuthorize(AuthorizePolicy.Driver)]
+        [PolicyAuthorize(AuthorizePolicy.FullAccess)]
+        [Route("EndRide")]
+        [HttpPost]
+        public ActionResult EndRide(Guid id)
+        {
+            try
+            {
+                //RideId не статуса а поездки
+                var ride = DBWorkflow.CabRideStatusRepository.GetCabRideStatusByRideId(id);
+
+                var driver = DBWorkflow.DriverRepository.GetDriverByUserId(GetUserIdByContext());
+
+                var shift = DBWorkflow.ShiftRepository.GetShiftByDriverId(driver.Id);
+
+                if (ride.ShiftId != shift.Id)
+                {
+                    return BadRequest();
+                }
+
+                ride.StatusId = (int)RideStatusEnum.Ended;
+
+                ride.RideEndTime = DateTime.Now;
+                ride.StatusTime = DateTime.Now;
+
+                DBWorkflow.CabRideStatusRepository.UpdateEntity(ride);
+
+                return Ok("Поездка завершена!");
+            }
+            catch (Exception e)
+            {
+                Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
+                return StatusCode(500);
+            }
+        }
+
         #region Private Region
         private IEnumerable<CabRideViewModel> GetRideModelList(IEnumerable<CabRide> rides)
         {
-            return rides.Where(_ => DBWorkflow.CabRepository.GetCabByDriverId(_.Id) != null).Select(_ =>
+            return rides.Where(_ => DBWorkflow.CabRideStatusRepository.GetCabRideStatusByRideId(_.Id).StatusId == (int)RideStatusEnum.New)
+                .Select(_ =>
 
             {
                 var ridelist = new CabRideViewModel()
@@ -158,7 +354,7 @@ namespace dTax.Controllers
             }).ToList();
         }
 
-        private async Task<CabRideStatus> GetStatus (Guid id)
+        private async Task<CabRideStatus> GetStatus(Guid id)
         {
             return await DBWorkflow.CabRideStatusRepository.GetQuery().FirstOrDefaultAsync(_ => _.CabRideId == id);
         }

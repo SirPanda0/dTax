@@ -95,17 +95,6 @@ namespace dTax.Controllers
 
 
 
-        [PolicyAuthorize(AuthorizePolicy.Driver)]
-        [PolicyAuthorize(AuthorizePolicy.FullAccess)]
-        [Route("TakeOrder")]
-        [HttpPost]
-        public ActionResult TakeOrder([FromBody] Guid id )
-        {
-
-
-
-
-            return Ok("WIP");
-        }
+        
     }
 }

@@ -64,6 +64,30 @@ namespace dTax.Controllers
                     //    db.Shifts.Update(shift);
                     //    await db.SaveChangesAsync();
                     //}
+                    if (user.FullReg != false)
+                    {
+                        var driver = DBWorkflow.DriverRepository.GetDriverByUserId(user.Id);
+                        var cab = DBWorkflow.CabRepository.GetCabByDriverId(driver.Id);
+                        var shift = DBWorkflow.ShiftRepository.GetShiftByDriverId(driver.Id);
+
+                        if (shift == null)
+                        {
+                            DBWorkflow.ShiftRepository.Insert(new Shift
+                            {
+                                DriverId = driver.Id,
+                                CabId = cab.Id,
+                                LoginTime = DateTime.Now
+                            });
+                        }
+                        else
+                        {
+                            shift.LoginTime = DateTime.Now;
+                            DBWorkflow.ShiftRepository.Update(shift);
+                        }
+                        DBWorkflow.ShiftRepository.Commit();
+                    }
+
+
                     var response = new LoginResponseModel
                     {
                         Id = user.Id,
@@ -157,7 +181,7 @@ namespace dTax.Controllers
                 DBWorkflow.UserRepository.Insert(user);
                 DBWorkflow.UserRepository.Commit();
 
-                
+
 
                 LoginResponseModel responseModel = new LoginResponseModel()
                 {
@@ -197,7 +221,7 @@ namespace dTax.Controllers
             }
 
         }
-       
+
 
         [HttpGet]
         [Route("Logout")]

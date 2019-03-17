@@ -70,6 +70,8 @@ namespace dTax.Repository
             entityEntry.State = EntityState.Modified;
         }
 
+
+
         public IEnumerable<T> GetList()
         {
             throw new NotImplementedException();
@@ -79,5 +81,7 @@ namespace dTax.Repository
         {
             return expression == null ? context.Set<T>() : context.Set<T>().Where(expression);
         }
+
+
     }
 }

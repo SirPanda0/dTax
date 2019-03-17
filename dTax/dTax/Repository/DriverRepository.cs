@@ -24,6 +24,16 @@ namespace dTax.Repository
             return await this.GetQuery().FirstOrDefaultAsync(_ => _.IsDeleted == false && _.Id == id);
         }
 
+        public Driver GetDriverByUserId(Guid Id)
+        {
+            return GetDriverByUserIdAsync(Id).Result;
+        }
+
+        private async Task<Driver> GetDriverByUserIdAsync(Guid id)
+        {
+            return await this.GetQuery().FirstOrDefaultAsync(_ => _.IsDeleted == false && _.UserId == id);
+        }
+
 
         public Driver GetDriverByFileId(Guid fileId)
         {

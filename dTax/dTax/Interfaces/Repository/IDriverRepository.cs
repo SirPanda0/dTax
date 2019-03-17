@@ -15,6 +15,7 @@ namespace dTax.Interfaces.Repository
         IEnumerable<Driver> GetUnconfirmedDrivers();
         Driver IsConfirmed(Guid DriverId);
         IEnumerable<Driver> GetListDrivers();
+        Driver GetDriverByUserId(Guid Id);
 
     }
 }
