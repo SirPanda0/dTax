@@ -1,11 +1,4 @@
-<!DOCTYPE html>
-<html>
 
-<head>
-  <title>Form</title>
-</head>
-
-<body>
 
 	<form #RegForm="ngForm" (ngSubmit)="reg(RegForm)"class='reg-form'novalidate >
 
@@ -17,6 +10,11 @@
   		<div class='form-row'>
     		<label for='form_sname'>Last Name: </label>
     		<input type='text' id='form_sname' name='lastname'ngModel >
+		</div>
+
+		<div class='form-row'>
+    		<label for='form_mname'>Middle Name: </label>
+    		<input type='text' id='form_sname' name='middleName'ngModel >
 		</div>
 
 		<div class='form-row'>
@@ -48,7 +46,3 @@
 		</div>
 
 	</form>
-
-</body>
-
-</html>

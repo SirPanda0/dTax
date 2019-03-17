@@ -18,8 +18,7 @@ export class LoginComponent implements OnInit {
     console.log(Form.value);
     this.http.post('account/login', Form.value).subscribe(data => {
       this.route.navigateByUrl('home');
-    }, err => {
-      alert('Хрень');
+    }, err => {      alert('Ошибка');
     });
   }
 
