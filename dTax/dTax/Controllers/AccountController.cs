@@ -64,7 +64,7 @@ namespace dTax.Controllers
                     //    db.Shifts.Update(shift);
                     //    await db.SaveChangesAsync();
                     //}
-                    if (user.FullReg != false)
+                    if (user.FullReg != false && user.RoleId == 3)
                     {
                         var driver = DBWorkflow.DriverRepository.GetDriverByUserId(user.Id);
                         var cab = DBWorkflow.CabRepository.GetCabByDriverId(driver.Id);
