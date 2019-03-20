@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using dTax.Models.Dictionary;
 using dTax.Models.Many;
 using Microsoft.EntityFrameworkCore;
 
@@ -29,7 +30,15 @@ namespace dTax.Models
         public DbSet<FilesToDriver> FilesToDrivers { get; set; }
 
         public DbSet<FilesToCab> FilesToCab { get; set; }
-        
+
+        public DbSet<DCarsBrand> DCarsBrands { get; set; }
+
+        public DbSet<DCarsModel> DCarsModels { get; set; }
+
+        public DbSet<DColor> DColors { get; set; }
+
+        public DbSet<DType> DTypes { get; set; }
+
 
 
         public DbPostrgreContext(DbContextOptions<DbPostrgreContext> options) : base(options)
@@ -90,26 +99,7 @@ namespace dTax.Models
 
             };
 
-            //byte[] fileStream = new byte[0];
-            //FileStorage fileStorage = new FileStorage()
-            //{
-            //    FileId = 0,
-            //    ContentData = fileStream,
-            //    FileName = "TestFile.txt"
-            //};
-
-            //Driver driver = new Driver()
-            //{
-            //    UserId = user[1].Id,
-            //    DrivingLicence = 1234567,
-            //    ExpiryDate = DateTime.Now,
-            //    RegistrationDate = DateTime.Now,
-            //    PassportSerial = "",
-            //    PassportNumber = "",
-            //    FileStorageId = fileStorage.FileId,
-            //    Working = false,
-            //    Сonfirmed = false
-            //};
+            
 
 
 
@@ -117,8 +107,7 @@ namespace dTax.Models
             Statuses.AddRange(statuses);
             PaymentTypes.AddRange(payments);
             Users.AddRange(user);
-            //FileStorage.Add(fileStorage);
-            //Drivers.Add(driver);
+            
             SaveChanges();
 
 
