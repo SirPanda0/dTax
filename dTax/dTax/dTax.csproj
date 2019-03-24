@@ -9,6 +9,7 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Folder Include="Repository\Dictionary\" />
     <Folder Include="wwwroot\" />
     <Folder Include="Enums\" />
   </ItemGroup>

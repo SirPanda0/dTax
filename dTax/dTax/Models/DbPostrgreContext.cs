@@ -44,7 +44,7 @@ namespace dTax.Models
         public DbPostrgreContext(DbContextOptions<DbPostrgreContext> options) : base(options)
         {
             if (Database.EnsureCreated())
-                InitialInitialization();
+               InitialInitialization();
 
         }
 
@@ -87,13 +87,14 @@ namespace dTax.Models
                 },
                 new User()
                 {
-                    Id = new Guid("73556bc9-522d-4c3c-a94b-707aa8e1d82b"),
-                    Email = "string",
+                    Email = "hellpanda44@gmail.com",
                     Password = "cb891b06ce3c1981cc00a1966ddfe98228011de9c582823ecdb2ccfe127a20df", //TODO hash этого пароля M9S206
                     Role = roles[2],
                     BirthDate = DateTime.Now,
-                    FirstName = "Водитель",
-                    LastName = "Водителевич",
+                    FirstName = "Иван",
+                    MiddleName = "Александрович",
+                    LastName = "Панагушин",
+                    PhoneNumber = "89159287903",
                     FullReg = false
                 }
 

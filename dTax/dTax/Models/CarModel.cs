@@ -1,6 +1,7 @@
 ﻿using dTax.Models.Dictionary;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 using System.Linq;
 using System.Threading.Tasks;
 
@@ -12,16 +13,20 @@ namespace dTax.Models
         public Guid Id { get; set; }
 
         public long BrandNameCode { get; set; }
-        public virtual ICollection<DCarsBrand> DCarsBrands { get; set; }
+        //[NotMapped]
+        //public virtual DCarsBrand DCarsBrands { get; set; }
 
         public long ModelNameCode { get; set; }
-        public virtual ICollection<DCarsModel> DCarsModel { get; set; }
+        //[NotMapped]
+        //public virtual DCarsModel DCarsModel { get; set; }
 
         public long ModelTypeCode { get; set; }
-        public virtual ICollection<DType> DTypes { get; set; }
+        //[NotMapped]
+        //public virtual DType DTypes { get; set; }
 
         public long ModelColorCode { get; set; }
-        public virtual ICollection<DColor> DColors { get; set; }
+        //[NotMapped]
+        //public virtual DColor DColors { get; set; }
 
     }
 }
