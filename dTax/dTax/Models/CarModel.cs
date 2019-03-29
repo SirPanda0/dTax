@@ -8,25 +8,14 @@ using System.Threading.Tasks;
 namespace dTax.Models
 {
 
-    public class CarModel
+    public class CarModel : BaseEntity
     {
-        public Guid Id { get; set; }
+        public ICollection<Cab> Cabs { get; set; }
 
-        public long BrandNameCode { get; set; }
-        //[NotMapped]
-        //public virtual DCarsBrand DCarsBrands { get; set; }
+        public Guid CarModelId { get; set; }
+        public CarBrand CarBrand  { get; set; }
 
-        public long ModelNameCode { get; set; }
-        //[NotMapped]
-        //public virtual DCarsModel DCarsModel { get; set; }
-
-        public long ModelTypeCode { get; set; }
-        //[NotMapped]
-        //public virtual DType DTypes { get; set; }
-
-        public long ModelColorCode { get; set; }
-        //[NotMapped]
-        //public virtual DColor DColors { get; set; }
+       
 
     }
 }

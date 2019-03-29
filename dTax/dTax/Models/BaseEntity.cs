@@ -11,8 +11,6 @@ namespace dTax.Models
         [Key]
         public Guid Id { get; set; }
 
-
-
         public DateTime Created { get; set; } = DateTime.Now.ToLocalTime();
         public bool IsDeleted { get; set; } = false;
         public DateTime? DeletedDate { get; set; }
