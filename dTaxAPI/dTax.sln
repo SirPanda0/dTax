@@ -3,7 +3,24 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.28307.271
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dTax", "dTax\dTax.csproj", "{9E39BE56-4E4D-4877-AF06-221EF5462085}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "dTax", "dTax\dTax.csproj", "{9E39BE56-4E4D-4877-AF06-221EF5462085}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4C50B5BB-CA37-4FDD-A8FC-34C3801645A6} = {4C50B5BB-CA37-4FDD-A8FC-34C3801645A6}
+		{E63009C5-892F-4A37-8C61-34F7CD4559CD} = {E63009C5-892F-4A37-8C61-34F7CD4559CD}
+		{A8BAD9FF-C22A-46A2-937B-7DC4F2780CED} = {A8BAD9FF-C22A-46A2-937B-7DC4F2780CED}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dTax.Data", "dTax.Data\dTax.Data.csproj", "{4C50B5BB-CA37-4FDD-A8FC-34C3801645A6}"
+	ProjectSection(ProjectDependencies) = postProject
+		{E63009C5-892F-4A37-8C61-34F7CD4559CD} = {E63009C5-892F-4A37-8C61-34F7CD4559CD}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dTax.Entity", "dTax.Entity\dTax.Entity.csproj", "{E63009C5-892F-4A37-8C61-34F7CD4559CD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{A8BAD9FF-C22A-46A2-937B-7DC4F2780CED} = {A8BAD9FF-C22A-46A2-937B-7DC4F2780CED}
+	EndProjectSection
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "dTax.Common", "dTax.Common\dTax.Common.csproj", "{A8BAD9FF-C22A-46A2-937B-7DC4F2780CED}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -15,6 +32,18 @@ Global
 		{9E39BE56-4E4D-4877-AF06-221EF5462085}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{9E39BE56-4E4D-4877-AF06-221EF5462085}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{9E39BE56-4E4D-4877-AF06-221EF5462085}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4C50B5BB-CA37-4FDD-A8FC-34C3801645A6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4C50B5BB-CA37-4FDD-A8FC-34C3801645A6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4C50B5BB-CA37-4FDD-A8FC-34C3801645A6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4C50B5BB-CA37-4FDD-A8FC-34C3801645A6}.Release|Any CPU.Build.0 = Release|Any CPU
+		{E63009C5-892F-4A37-8C61-34F7CD4559CD}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{E63009C5-892F-4A37-8C61-34F7CD4559CD}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{E63009C5-892F-4A37-8C61-34F7CD4559CD}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{E63009C5-892F-4A37-8C61-34F7CD4559CD}.Release|Any CPU.Build.0 = Release|Any CPU
+		{A8BAD9FF-C22A-46A2-937B-7DC4F2780CED}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{A8BAD9FF-C22A-46A2-937B-7DC4F2780CED}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{A8BAD9FF-C22A-46A2-937B-7DC4F2780CED}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{A8BAD9FF-C22A-46A2-937B-7DC4F2780CED}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

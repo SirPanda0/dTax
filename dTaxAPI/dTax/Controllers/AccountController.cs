@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using dTax.Models;
+using dTax.Entity;
 using Microsoft.AspNetCore.Authorization;
 using dTax.ApiModel;
 using System.Security.Claims;

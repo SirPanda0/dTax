@@ -1,0 +1,9 @@
+G:\Git\dTax\dTaxAPI\dTax.Common\bin\Debug\netcoreapp2.1\dTax.Common.deps.json
+G:\Git\dTax\dTaxAPI\dTax.Common\bin\Debug\netcoreapp2.1\dTax.Common.dll
+G:\Git\dTax\dTaxAPI\dTax.Common\bin\Debug\netcoreapp2.1\dTax.Common.pdb
+G:\Git\dTax\dTaxAPI\dTax.Common\obj\Debug\netcoreapp2.1\dTax.Common.csproj.CoreCompileInputs.cache
+G:\Git\dTax\dTaxAPI\dTax.Common\obj\Debug\netcoreapp2.1\dTax.Common.AssemblyInfoInputs.cache
+G:\Git\dTax\dTaxAPI\dTax.Common\obj\Debug\netcoreapp2.1\dTax.Common.AssemblyInfo.cs
+G:\Git\dTax\dTaxAPI\dTax.Common\obj\Debug\netcoreapp2.1\dTax.Common.dll
+G:\Git\dTax\dTaxAPI\dTax.Common\obj\Debug\netcoreapp2.1\dTax.Common.pdb
+G:\Git\dTax\dTaxAPI\dTax.Common\obj\Debug\netcoreapp2.1\dTax.Common.csprojAssemblyReference.cache
