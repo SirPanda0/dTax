@@ -31,7 +31,7 @@ namespace dTax.Models
 
         public DbSet<FilesToCab> FilesToCab { get; set; }
 
-        public DbSet<DCarsBrand> DCarsBrands { get; set; }
+        public DbSet<CarBrand> CarBrands { get; set; }
 
         public DbSet<DCarsModel> DCarsModels { get; set; }
 

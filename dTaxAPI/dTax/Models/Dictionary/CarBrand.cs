@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace dTax.Models.Dictionary
 {
-    public class DCarsBrand
+    public class CarBrand : BaseEntity
     {
-        [Key]
-        public long BrandCode { get; set; }
-        public string BrandName { get; set; }
+        public long Code { get; set; }
+        public string Name { get; set; }
     }
 }

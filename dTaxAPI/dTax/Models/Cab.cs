@@ -21,7 +21,6 @@ namespace dTax.Models
 
         //id модели авто
         public Guid CarModelId { get; set; }
-        [JsonIgnore]
         public CarModel CarModel { get; set; }
 
         //год выпуска
