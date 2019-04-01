@@ -15,6 +15,12 @@ export class VoditregistrComponent implements OnInit {
 
   ngOnInit() {
   }
-
+  Vodit(Form: NgForm) {
+    console.log(Form.value);
+    this.http.post('account/login', Form.value).subscribe(data => {
+      this.route.navigateByUrl('home');
+    }, err => {      alert('Ошибка');
+    });
+  }
 }
 

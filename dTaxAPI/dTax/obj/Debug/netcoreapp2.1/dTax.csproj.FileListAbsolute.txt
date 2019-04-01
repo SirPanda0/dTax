@@ -54,3 +54,17 @@ C:\Users\arozov\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.Ass
 C:\Users\arozov\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.RazorTargetAssemblyInfo.cache
 C:\Users\arozov\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.dll
 C:\Users\arozov\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.pdb
+C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\obj\Debug\netcoreapp2.1\dTax.csprojAssemblyReference.cache
+C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\obj\Debug\netcoreapp2.1\dTax.csproj.CoreCompileInputs.cache
+C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\obj\Debug\netcoreapp2.1\dTax.RazorAssemblyInfo.cache
+C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\obj\Debug\netcoreapp2.1\dTax.RazorAssemblyInfo.cs
+C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\obj\Debug\netcoreapp2.1\dTax.AssemblyInfoInputs.cache
+C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\obj\Debug\netcoreapp2.1\dTax.AssemblyInfo.cs
+C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\obj\Debug\netcoreapp2.1\dTax.dll
+C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\obj\Debug\netcoreapp2.1\dTax.pdb
+C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\bin\Debug\netcoreapp2.1\dTax.deps.json
+C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\bin\Debug\netcoreapp2.1\dTax.runtimeconfig.json
+C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\bin\Debug\netcoreapp2.1\dTax.runtimeconfig.dev.json
+C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\bin\Debug\netcoreapp2.1\dTax.dll
+C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\bin\Debug\netcoreapp2.1\dTax.pdb
+C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\obj\Debug\netcoreapp2.1\dTax.RazorTargetAssemblyInfo.cache
