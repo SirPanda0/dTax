@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import {NgForm} from '@angular/forms';
 import { HttpService } from '../Servise/http.service';
+import { CookieService } from 'ngx-cookie-service';
 
 @Component({
   selector: 'app-login',
@@ -10,7 +11,7 @@ import { HttpService } from '../Servise/http.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private route: Router, private http: HttpService) { }
+  constructor(private route: Router, private http: HttpService, private cookieService: CookieService) { }
 
   ngOnInit() {
   }
