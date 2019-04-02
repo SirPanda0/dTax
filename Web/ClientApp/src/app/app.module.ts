@@ -13,9 +13,9 @@ import { HomeComponent } from './home/home.component';
 import { RegistrComponent } from './registr/registr.component';
 import { VoditregistrComponent } from './voditregistr/voditregistr.component';
 import { AvtoregistrComponent } from './avtoregistr/avtoregistr.component';
-import { OperatorComponent } from './operator/operator.component';
 import { DriverComponent } from './driver/driver.component';
 import * as $ from 'jquery';
+import { OperatorComponent } from './operator/operator.component';
 
 
 const Routs: Routes = [
@@ -24,8 +24,8 @@ const Routs: Routes = [
   {path: 'registr', component:RegistrComponent},//Регистрация
   {path: 'voditregistr', component:VoditregistrComponent}, //регистрация водителя
   {path: 'avtoregistr', component:AvtoregistrComponent}, // регистрация авто
-  {path: 'operator', component:OperatorComponent}, //главная страница оператора
-  {path: 'driver', component:DriverComponent}   //главная страница драйвера
+  {path: 'driver', component:DriverComponent},   //главная страница драйвера
+  {path: 'operator', component:OperatorComponent} // главная страница оператора
 
 
 
@@ -39,6 +39,8 @@ const Routs: Routes = [
     RegistrComponent,
     VoditregistrComponent,
     AvtoregistrComponent,
+    DriverComponent,
+    OperatorComponent,
     
   ],
   imports: [

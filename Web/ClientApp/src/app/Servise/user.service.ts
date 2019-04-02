@@ -1,8 +1,7 @@
 import { Injectable } from '@angular/core';
-import { CookieService } from './cookie.service';
+import { CookieService } from '../Servise/cookies.service';
 import { DataHashService } from './data-hash.service';
-import { UserModel } from '../_models/user.model';
-import {Guid} from '../_models/guid';
+import { UserModel } from '../login/UserModel';
 import { HttpService } from './http.service';
 
 const USERCOOKIEKEY = 'user';

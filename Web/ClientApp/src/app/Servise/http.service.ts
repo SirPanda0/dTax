@@ -15,4 +15,10 @@ export class HttpService {
   post(link, value) {
    return this.http.post(this.api + link, value).pipe(response => response);
   }
+  get(apig){
+    return this.http
+    .get(this.api + apig, this.httpOptions );
+  
+}
+
 }
