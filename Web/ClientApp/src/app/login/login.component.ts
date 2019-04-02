@@ -17,8 +17,9 @@ export class LoginComponent implements OnInit {
   }
   xer(Form: NgForm) {
     console.log(Form.value);
-    this.http.post('account/login', Form.value).subscribe(data => {
-      this.route.navigateByUrl('home');
+    this.http.post('account/login', Form.value).subscribe  ((data:any) => {
+      if (data.roleId == 2) {this.route.navigateByUrl('home');}
+     else {this.route.navigateByUrl('driver');}
     }, err => {      alert('Ошибка');
     });
   }

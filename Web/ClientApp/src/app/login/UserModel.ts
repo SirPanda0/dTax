@@ -1,14 +1,12 @@
 
-
+import { Guid } from "guid-typescript";
 export class UserModel {
-  company: string;
+  id:string;
   email: string;
-  isRealKey: boolean;
-  operatorGroup: string;
-  operatorGroupId: number;
-  operatorID: number;
-  userName: string;
-  userRole: string;
-  userSurName: string;
-  writeAccess: boolean;
+  firstName: string;
+  middleName: string;
+  lastName: string;
+  phoneNubmer: string;
+  roleId: number;
+
 }

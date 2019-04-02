@@ -27,12 +27,12 @@ export class UserService {
     return this.dataSeq.DecodeJSON(this.cookie.getCookie(USERCOOKIEKEY));
   }
 
-  public IsAuth(): boolean {
-    if (!(this.GetCurrentUser().operatorID)) {
-      return false;
-    }
-    return true;
-  }
+ // public IsAuth(): boolean {
+ //   if (!(this.GetCurrentUser().operatorID)) {
+//      return false;
+ //   }
+ //   return true;
+ // }
 
   public LogOut() {
     this.cookie.deleteCookie(USERCOOKIEKEY);
