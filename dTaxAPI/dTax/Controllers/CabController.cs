@@ -49,10 +49,17 @@ namespace dTax.Controllers
 
                 CarModel carModel = new CarModel()
                 {
+<<<<<<< HEAD
                   //  BrandNameCode = registerModel.BrandNameCode,
                   //  ModelNameCode = registerModel.ModelNameCode,
                   //  ModelTypeCode = registerModel.ModelTypeCode,
                   //  ModelColorCode = registerModel.ModelColorCode
+=======
+                    BrandNameCode = registerModel.BrandNameCode,
+                    ModelNameCode = registerModel.ModelNameCode,
+                    ModelTypeCode = registerModel.ModelTypeCode,
+                    ModelColorCode = registerModel.ModelColorCode
+>>>>>>> parent of 9b30e30... fix 1.0
                 };
 
                 DBWorkflow.CarModelsRepository.Insert(carModel);

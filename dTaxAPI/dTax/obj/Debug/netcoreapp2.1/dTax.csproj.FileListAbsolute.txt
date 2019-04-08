@@ -54,6 +54,7 @@ C:\Users\arozov\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.Ass
 C:\Users\arozov\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.RazorTargetAssemblyInfo.cache
 C:\Users\arozov\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.dll
 C:\Users\arozov\Documents\GitHub\dTax\dTax\dTax\obj\Debug\netcoreapp2.1\dTax.pdb
+<<<<<<< HEAD
 C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\obj\Debug\netcoreapp2.1\dTax.csprojAssemblyReference.cache
 C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\obj\Debug\netcoreapp2.1\dTax.csproj.CoreCompileInputs.cache
 C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\obj\Debug\netcoreapp2.1\dTax.RazorAssemblyInfo.cache
@@ -68,3 +69,5 @@ C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\bin\Debug\netcoreapp2.1\dTax.r
 C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\bin\Debug\netcoreapp2.1\dTax.dll
 C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\bin\Debug\netcoreapp2.1\dTax.pdb
 C:\Users\anton\Documents\GitHub\dTax\dTaxAPI\dTax\obj\Debug\netcoreapp2.1\dTax.RazorTargetAssemblyInfo.cache
+=======
+>>>>>>> parent of 9b30e30... fix 1.0
