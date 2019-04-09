@@ -16,7 +16,9 @@ import { AvtoregistrComponent } from './avtoregistr/avtoregistr.component';
 import { DriverComponent } from './driver/driver.component';
 import * as $ from 'jquery';
 import { OperatorComponent } from './operator/operator.component';
-
+import { UserService } from '../app/Servise/user.service'
+import { DataHashService } from '../app/Servise/data-hash.service'
+ 
 
 const Routs: Routes = [
   {path: '', component: LoginComponent}, // авторизация
@@ -40,6 +42,8 @@ const Routs: Routes = [
     VoditregistrComponent,
     AvtoregistrComponent,
     DriverComponent,
+    UserService,
+    DataHashService,
     OperatorComponent,
     
   ],
@@ -49,10 +53,16 @@ const Routs: Routes = [
     FormsModule,
     RouterModule.forRoot(Routs),
     HttpClientModule,
+    UserService,
+    DataHashService
 
   ],
   providers: [
-    [ CookieService ]
+    CookieService,
+    UserService,
+    DataHashService,
+
+
   ],
   bootstrap: [AppComponent]
 })
