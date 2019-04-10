@@ -42,8 +42,6 @@ const Routs: Routes = [
     VoditregistrComponent,
     AvtoregistrComponent,
     DriverComponent,
-    UserService,
-    DataHashService,
     OperatorComponent,
     
   ],
@@ -53,14 +51,13 @@ const Routs: Routes = [
     FormsModule,
     RouterModule.forRoot(Routs),
     HttpClientModule,
-    UserService,
-    DataHashService
+
 
   ],
   providers: [
     CookieService,
-    UserService,
-    DataHashService,
+   // UserService,
+  //  DataHashService,
 
 
   ],
