@@ -1,6 +1,7 @@
 ﻿using dTax.Data.Interfaces;
 using dTax.Entity;
 using dTax.Entity.Models.CarBrands;
+using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +13,22 @@ namespace dTax.Data.Repository
     {
         public CarBrandRepository(DbPostrgreContext context) : base(context)
         {
+        }
+
+        public IEnumerable<CarBrandView> GetListBrands()
+        {
+            return GetListBrandsAsync().Result;
+        }
+
+        private async Task<IEnumerable<CarBrandView>> GetListBrandsAsync()
+        {
+            return await GetQuery().Where(_ => _.IsDeleted != true).Select(_=>
+                new CarBrandView()
+                {
+                    CarBrandId = _.CarBrandId,
+                    Name = _.Name
+                })
+                .ToListAsync();
         }
     }
 }

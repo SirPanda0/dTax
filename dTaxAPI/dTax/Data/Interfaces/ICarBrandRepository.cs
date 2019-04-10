@@ -9,5 +9,6 @@ namespace dTax.Data.Interfaces
 {
     public interface ICarBrandRepository : IBaseRepository<CarBrand>
     {
+        IEnumerable<CarBrandView> GetListBrands();
     }
 }
