@@ -17,7 +17,11 @@ import { DriverComponent } from './driver/driver.component';
 import * as $ from 'jquery';
 import { OperatorComponent } from './operator/operator.component';
 import { UserService } from '../app/Servise/user.service'
-import { DataHashService } from '../app/Servise/data-hash.service'
+import { DataHashService } from '../app/Servise/data-hash.service';
+import { MapComponent } from './map/map.component';
+import { YamapngModule } from 'projects/yamapng/src/public_api';
+import { YaCoreModule } from 'projects/yamapng/src/lib/core.module';
+
  
 
 const Routs: Routes = [
@@ -27,7 +31,8 @@ const Routs: Routes = [
   {path: 'voditregistr', component:VoditregistrComponent}, //регистрация водителя
   {path: 'avtoregistr', component:AvtoregistrComponent}, // регистрация авто
   {path: 'driver', component:DriverComponent},   //главная страница драйвера
-  {path: 'operator', component:OperatorComponent} // главная страница оператора
+  {path: 'operator', component:OperatorComponent}, // главная страница оператора
+  {path:'map', component:MapComponent}
 
 
 
@@ -43,6 +48,7 @@ const Routs: Routes = [
     AvtoregistrComponent,
     DriverComponent,
     OperatorComponent,
+    MapComponent,
     
   ],
   imports: [
@@ -51,7 +57,10 @@ const Routs: Routes = [
     FormsModule,
     RouterModule.forRoot(Routs),
     HttpClientModule,
-
+    BrowserModule,
+    YamapngModule,
+    YaCoreModule.forRoot({
+      apiKey: ''}),
 
   ],
   providers: [
