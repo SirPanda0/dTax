@@ -1,5 +1,5 @@
 ﻿using dTax.Auth;
-using dTax.Interfaces.Repository;
+using dTax.Data.Repository;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -7,9 +7,12 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Serilog;
-using dTax.Models;
 using System.IO;
 using Microsoft.AspNetCore.Authorization;
+using dTax.Entity.Models;
+using dTax.Data.Interfaces;
+using dTax.Entity.Models.FileContents;
+using dTax.Entity.Models.FileStorages;
 
 namespace dTax.Controllers
 {
@@ -19,9 +22,11 @@ namespace dTax.Controllers
     {
 
         private IFileStorageRepository fileStorageRepository;
-        public FileStorageController(IFileStorageRepository injectedfileStorageRepository)
+        private IFileContentRepository fileContentRepository;
+        public FileStorageController(IFileStorageRepository injectedfileStorageRepository, IFileContentRepository injectedfileContentRepository)
         {
             fileStorageRepository = injectedfileStorageRepository;
+            fileContentRepository = injectedfileContentRepository;
         }
 
         [PolicyAuthorize(AuthorizePolicy.Driver)]
@@ -44,15 +49,23 @@ namespace dTax.Controllers
                         fileData = memoryStream.ToArray();
                     }
 
-                    var fileStorage = new FileStorage()
+                    FileContent filecontent = new FileContent()
                     {
-                        ContentData = fileData,
+                        ContentData = fileData
+                    };
+                    fileContentRepository.Insert(filecontent);
+                    fileContentRepository.Commit();
+
+                    FileStorage fileStorage = new FileStorage()
+                    {
+                        FileContentId = filecontent.Id,
                         FileName = uploadedFile.FileName
+
                         //Drivers =uploadedFile.
                     };
                     fileStorageRepository.Insert(fileStorage);
                     fileStorageRepository.Commit();
-                    id = fileStorage.FileId;
+                    id = fileStorage.Id;
                     Log.Debug("Успешно загружено outdata id = {0}", id);
                 }
                 catch (Exception e)
@@ -78,7 +91,7 @@ namespace dTax.Controllers
             var fileStorageModel = fileStorageRepository.GetById(id);
             if (fileStorageModel != null)
             {
-                var content = fileStorageModel.ContentData;
+                var content = fileStorageModel.FileContent.ContentData;
                 var contentType = System.Net.Mime.MediaTypeNames.Application.Octet;
                 string fileName = fileStorageModel.FileName;
                 return File(content, contentType, fileName);

@@ -1,8 +1,8 @@
 ﻿using dTax.ApiModel;
 using dTax.Auth;
-using dTax.Interfaces;
-using dTax.Models;
-using dTax.Repository;
+using dTax.Data.Interfaces;
+using dTax.Entity.Models.Cabs;
+using dTax.Entity.Models.CarModels;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System;

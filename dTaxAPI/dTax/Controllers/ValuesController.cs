@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using dTax.Auth;
-using dTax.Models;
+using dTax.Entity;
 using Microsoft.AspNetCore.Mvc;
 
 namespace dTax.Controllers

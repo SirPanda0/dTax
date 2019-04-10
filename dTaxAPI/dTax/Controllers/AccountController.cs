@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using dTax.Models;
+ 
 using Microsoft.AspNetCore.Authorization;
 using dTax.ApiModel;
 using System.Security.Claims;
@@ -18,9 +18,13 @@ using dTax.ViewModels;
 using dTax.Auth;
 using dTax.Common;
 using dTax.Services;
-using dTax.Interfaces;
 using Microsoft.AspNetCore.Http;
 using System.Net;
+using dTax.Data.Interfaces;
+using dTax.Entity.Models.Users;
+using dTax.Entity.Models.Shifts;
+using dTax.Entity.Models.Customers;
+using System.Net.Mail;
 
 namespace dTax.Controllers
 {
@@ -64,7 +68,7 @@ namespace dTax.Controllers
                     //    db.Shifts.Update(shift);
                     //    await db.SaveChangesAsync();
                     //}
-                    if (user.FullReg != false && user.RoleId == 3)
+                    if (user.IsFullReg != false && user.RoleId == 3)
                     {
                         var driver = DBWorkflow.DriverRepository.GetDriverByUserId(user.Id);
                         var cab = DBWorkflow.CabRepository.GetCabByDriverId(driver.Id);
@@ -133,6 +137,7 @@ namespace dTax.Controllers
         {
             try
             {
+                
                 if (!ModelState.IsValid)
                 {
                     return BadRequest("Проверьте данные");
@@ -175,7 +180,7 @@ namespace dTax.Controllers
                     LastName = registerModel.LastName,
                     PhoneNumber = registerModel.PhoneNumber,
                     RoleId = registerModel.RoleId,
-                    FullReg = IsFull,
+                    IsFullReg = IsFull,
                     BirthDate = registerModel.BirthDate
                 };
 
@@ -303,7 +308,7 @@ namespace dTax.Controllers
                         //new Claim(CustomClaimType.RoleName, user.Role.Name),
                         new Claim(CustomClaimType.UserName, user.FirstName),
                         new Claim(CustomClaimType.UserId, user.Id.ToString()),
-                        new Claim(CustomClaimType.FullAccess , user.FullReg.ToString())
+                        new Claim(CustomClaimType.FullAccess , user.IsFullReg.ToString())
                 };
 
                 ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "dTaxCookie", ClaimsIdentity.DefaultNameClaimType,

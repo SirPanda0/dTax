@@ -4,13 +4,12 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-using dTax.Models;
 using Serilog;
 using dTax.ApiModel;
 using System.Text;
 using dTax.Auth;
-using dTax.Interfaces.Repository;
-using dTax.Models.Many;
+using dTax.Data.Interfaces;
+using dTax.Entity.Models.Drivers;
 
 namespace dTax.Controllers
 {

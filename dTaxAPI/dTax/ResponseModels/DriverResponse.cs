@@ -1,5 +1,6 @@
-﻿using dTax.Models;
-using dTax.Models.Many;
+﻿
+using dTax.Entity.Models.Cabs;
+using dTax.Entity.Models.CarModels;
 using System;
 using System.Collections.Generic;
 using System.Linq;

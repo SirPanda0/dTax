@@ -10,7 +10,7 @@ using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using Microsoft.EntityFrameworkCore;
-using dTax.Models;
+ 
 using Swashbuckle.AspNetCore.Swagger;
 using Microsoft.AspNetCore.Authentication.Cookies;
 using System.Reflection;
@@ -18,11 +18,11 @@ using System.IO;
 using Microsoft.AspNetCore.Authorization;
 using System.Net;
 using dTax.Auth;
-using dTax.Interfaces.Repository;
-using dTax.Repository;
-using dTax.Interfaces;
+using dTax.Data.Interfaces;
 using Microsoft.AspNetCore.HttpOverrides;
 using dTax.Common;
+using dTax.Data.Repository;
+using dTax.Entity;
 
 namespace dTax
 {
@@ -61,8 +61,8 @@ namespace dTax
             });
 
 
-            #region RepositoryRegion
-            services.AddTransient<IUserRepository, UserRepository>();
+        #region RepositoryRegion
+        services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IRoleRepository, RoleRepository>();
             services.AddTransient<ICustomerRepository, CustomerRepository>();
             services.AddTransient<IFileStorageRepository, FileStorageRepository>();
@@ -81,6 +81,11 @@ namespace dTax
 
             services.AddTransient<ICabFileRepository, CabFileRepository>();
 
+            services.AddTransient<ICarBrandRepository, CarBrandRepository>();
+            services.AddTransient<ICarColorRepository, CarColorRepository>();
+            services.AddTransient<ICarModelRepository, CarModelRepository>();
+            services.AddTransient<ICarTypeRepository, CarTypeRepository>();
+            services.AddTransient<IFileContentRepository, FileContentRepository>();
 
             services.AddTransient<IDBWorkFlow, DBWorkFlow>();
             #endregion

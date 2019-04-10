@@ -1,6 +1,7 @@
 ﻿using dTax.Auth;
-using dTax.Interfaces;
-using dTax.Models;
+using dTax.Data.Interfaces;
+using dTax.Entity.Models.Drivers;
+using dTax.Entity.Models.Shifts;
 using dTax.ResponseModels;
 using dTax.ViewModels;
 using Microsoft.AspNetCore.Mvc;
@@ -25,7 +26,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [HttpGet]
         [Route("GetList")]
-        public async Task<IActionResult> GetListAsync(int page, int size = 20)
+        public IActionResult GetListAsync(int page, int size = 20)
         {
             try
             {
@@ -45,7 +46,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [HttpGet]
         [Route("GetUnconfirmedList")]
-        public async Task<IActionResult> GetUnconfirmedList(int page, int size = 20)
+        public IActionResult GetUnconfirmedList(int page, int size = 20)
         {
             try
             {

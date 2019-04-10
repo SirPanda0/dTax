@@ -1,8 +1,10 @@
 ﻿using dTax.ApiModel;
 using dTax.Auth;
+using dTax.Data.Interfaces;
+using dTax.Entity.Models.CabRides;
+using dTax.Entity.Models.CabRideStatuses;
 using dTax.Enums;
-using dTax.Interfaces;
-using dTax.Models;
+ 
 using dTax.ResponseModels;
 using dTax.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -206,7 +208,7 @@ namespace dTax.Controllers
 
                 CabRide ride = DBWorkflow.CabRideRepository.GetCabRideById(id);
 
-                ride.Canceled = true;
+                ride.IsCanceled = true;
 
                 CabRideStatus rideStatus = DBWorkflow.CabRideStatusRepository.GetCabRideStatusByRideId(id);
 

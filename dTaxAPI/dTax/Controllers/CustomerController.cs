@@ -1,5 +1,4 @@
 ﻿using dTax.ApiModel;
-using dTax.Models;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using System;
@@ -10,6 +9,7 @@ using dTax.Common;
 using Microsoft.EntityFrameworkCore;
 using dTax.Auth;
 using Serilog;
+using dTax.Entity;
 
 namespace dTax.Controllers
 {

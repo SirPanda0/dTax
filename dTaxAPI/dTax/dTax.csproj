@@ -9,9 +9,15 @@
   </PropertyGroup>
 
   <ItemGroup>
-    <Folder Include="Repository\Dictionary\" />
+    <Compile Remove="Data\Repository\Dictionary\**" />
+    <Content Remove="Data\Repository\Dictionary\**" />
+    <EmbeddedResource Remove="Data\Repository\Dictionary\**" />
+    <None Remove="Data\Repository\Dictionary\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <Folder Include="wwwroot\" />
-    <Folder Include="Enums\" />
+    <Folder Include="Common\Enums\" />
   </ItemGroup>
 
   <ItemGroup>
