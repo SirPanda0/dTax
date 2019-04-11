@@ -1,34 +1,16 @@
 
-
-	<form #Reg2Form="ngForm" (ngSubmit)="reg2(Reg2Form)"class='reg-form'novalidate >
-
-		<div class='form-row'>
-			<label for='form_fname'>DrivingLicence: </label>
-    		<input type='text' id='form_fname' name='drivingLicence' ngModel >
-  		</div>
-
-  		<div class='form-row'>
-    		<label for='form_sname'>expiryDate </label>
-    		<input type='date' id='form_sname' name='expiryDate' ngModel >
-		</div>
-
-		<div class='form-row'>
-    		<label for='form_mname'>registrationDate </label>
-    		<input type='date' id='form_sname' name='registrationDate'ngModel >
-		</div>
-
-		<div class='form-row'>
-			<label for='form_email'>passportSerial </label>
-			<input type='text' id='form_email' name='passportSerial'ngModel >
-		</div>
-
-		<div class='form-row'>
-			<label for='form_phone'>passportNumber </label>
-			<input type='text' id='form_phone' name='passportNumber'ngModel >
-		</div>
-
-		<div class="form-row">
-			<input type="submit" value='Зарегистрироваться'>
-		</div>
-
-	</form>
+	<form #RegForm="ngForm" (ngSubmit)="reg2(Reg2Form)"class='reg-form'novalidate >
+		<div class="login-page">
+			<div class="form">
+		   
+				
+				<input type="text" placeholder="DrivingLicence:" name="drivingLicence" ngModel />
+				<input type="text" placeholder="ExpiryDate" name="expiryDate" ngModel  />
+				<input type="text" placeholder="RegistrationDate" name="registrationDate" ngModel  />
+				<input type="text" placeholder="PassportSerial" name="passportSerial" ngModel  />
+				<input type="text" placeholder="PassportNumber" name="passportNumber" ngModel  />
+				<input type="submit" value='Зарегистрироваться'>
+		
+			</div>
+		  </div>
+		</form>
