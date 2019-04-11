@@ -20,20 +20,17 @@ namespace dTax.Controllers
 
         private IDriverRepository driverRepository;
         private ICabRepository cabRepository;
-        private ICarModelsRepository carModelsRepository;
         private IFileStorageRepository fileStorageRepository;
         private IDriverFileRepository driverFileRepository;
         public DriversController(
             IDriverRepository injectedriverRepository,
              ICabRepository injectedcabRepository,
-             ICarModelsRepository injectedcarModelsRepository,
              IFileStorageRepository injectedfileStorageRepository,
              IDriverFileRepository injectedriverFileRepository
             )
         {
             driverRepository = injectedriverRepository;
             cabRepository = injectedcabRepository;
-            carModelsRepository = injectedcarModelsRepository;
             fileStorageRepository = injectedfileStorageRepository;
             driverFileRepository = injectedriverFileRepository;
         }

@@ -71,7 +71,6 @@ namespace dTax
 
             services.AddTransient<ICabRideRepository, CabRideRepository>();
             services.AddTransient<ICabRideStatusRepository, CabRideStatusRepository>();
-            services.AddTransient<ICarModelsRepository, CarModelsRepository>();
             services.AddTransient<IPaymentTypeRepository, PaymentTypeRepository>();
 
             services.AddTransient<IShiftRepository, ShiftRepository>();

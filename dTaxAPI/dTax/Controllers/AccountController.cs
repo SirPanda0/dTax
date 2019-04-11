@@ -194,6 +194,7 @@ namespace dTax.Controllers
                     Id = user.Id,
                     Email = user.Email,
                     FirstName = user.FirstName,
+                    MiddleName = user.MiddleName,
                     LastName = user.LastName,
                     RoleId = user.RoleId
                 };

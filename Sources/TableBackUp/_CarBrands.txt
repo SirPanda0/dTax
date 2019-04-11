@@ -1,0 +1,45 @@
+﻿|Id|CreatedDate|IsDeleted|DeletedDate|Name|
+|d9e571bb-4821-47c6-8296-a90fd1f4c9c7|2019-04-11 00:18:12|false|[NULL]|LADA|
+|7113ea7f-cf42-41ad-8a47-f2de9fe53fcd|2019-04-11 00:18:12|false|[NULL]|ВАЗ|
+|5568ec1a-4ac6-4816-ad9f-3e3b7badd59f|2019-04-11 00:18:12|false|[NULL]|Volvo|
+|4d3a8c08-ce4a-4c4f-80e7-6382296ea706|2019-04-11 00:18:12|false|[NULL]|Volkswagen|
+|a41c6c48-ba6d-4e00-ae84-cc3f15ac3a27|2019-04-11 00:18:12|false|[NULL]|Toyota|
+|4c42f6d4-e63f-484a-90c4-ad4d65f517b1|2019-04-11 00:18:12|false|[NULL]|Tesla|
+|8b0a1c27-ddc0-4fd5-bc1d-2f4b4b63535a|2019-04-11 00:18:12|false|[NULL]|Suzuki|
+|8d865e57-1d6d-4934-8da0-9710d3e9663c|2019-04-11 00:18:12|false|[NULL]|Subaru|
+|34f2f93d-3528-4b83-9cc0-f50bc7f99b9a|2019-04-11 00:18:12|false|[NULL]|Ssang Yong|
+|52435748-6a33-4090-87e1-e1de8d730fa6|2019-04-11 00:18:12|false|[NULL]|Skoda|
+|fcf71a61-e1dd-4441-828c-26d875622008|2019-04-11 00:18:12|false|[NULL]|Seat|
+|c3f87d40-52f6-4158-a00e-912b8920449d|2019-04-11 00:18:12|false|[NULL]|Saab|
+|4614ae1d-b820-417d-9f3e-c2fea8ac52ac|2019-04-11 00:18:12|false|[NULL]|Rolls-Royce|
+|3007608b-8600-455d-a971-9225fe0396be|2019-04-11 00:18:12|false|[NULL]|Renault|
+|728ffbf6-a6d8-42ee-aed9-4512309b85eb|2019-04-11 00:18:12|false|[NULL]|Porsche|
+|6d32bc7a-7485-45c3-bfbe-c2b66a3b37fd|2019-04-11 00:18:12|false|[NULL]|Peugeot|
+|5766efca-9e67-4930-a182-c4821a507aa4|2019-04-11 00:18:12|false|[NULL]|Pontiac|
+|d4fd44fe-7bc6-4990-a7b8-7413a62e5854|2019-04-11 00:18:12|false|[NULL]|Opel|
+|f4d073a8-568b-43b4-8e86-36e4b55b1259|2019-04-11 00:18:12|false|[NULL]|Nissan|
+|4084946d-e51e-4cc0-ab96-23f0cbf59b42|2019-04-11 00:18:12|false|[NULL]|Mitsubishi|
+|374ec471-4179-45bc-aa27-9a70599ba460|2019-04-11 00:18:12|false|[NULL]|Mini|
+|8752e0a2-edc8-4b46-a152-9afb8325865b|2019-04-11 00:18:12|false|[NULL]|Mercedes|
+|e05e4684-62c4-460c-be05-df13334037b5|2019-04-11 00:18:12|false|[NULL]|Mazda|
+|4754a549-e472-410c-9c2e-32e3c1eae119|2019-04-11 00:18:12|false|[NULL]|Lexus|
+|b7125c7f-e95e-4fad-a17c-61e171e2dd80|2019-04-11 00:18:12|false|[NULL]|Land Rover|
+|01e778e9-6487-4c74-ad14-4796f1870f9f|2019-04-11 00:18:12|false|[NULL]|Kia|
+|0f405fde-de04-40ef-b61f-7efdec795ed8|2019-04-11 00:18:12|false|[NULL]|Jeep|
+|514f202d-ba10-4062-bd61-bda8801a3b1d|2019-04-11 00:18:12|false|[NULL]|Infiniti|
+|23481ac4-a12d-4949-9f95-0a99312573ef|2019-04-11 00:18:12|false|[NULL]|Hyundai|
+|729c7403-b269-4528-8423-a1a63167ceb3|2019-04-11 00:18:12|false|[NULL]|Honda|
+|9abe1990-59be-4969-b220-ffb58b4d0bbd|2019-04-11 00:18:12|false|[NULL]|Geely|
+|b1c8fe1f-f723-4fcf-8631-4d4f8f56f9ff|2019-04-11 00:18:12|false|[NULL]|Ford|
+|cbb542fe-8b5e-48c4-87d4-c7acc1c6b856|2019-04-11 00:18:12|false|[NULL]|Fiat|
+|c44f621c-ee94-4bc0-b17b-535517940f8b|2019-04-11 00:18:12|false|[NULL]|Ferrari|
+|da4db0bb-0482-42dc-a20b-07aa4f3247f3|2019-04-11 00:18:12|false|[NULL]|Dodge|
+|fece528d-e385-4618-8907-8cec4e29a767|2019-04-11 00:18:12|false|[NULL]|Daewoo|
+|fd9d746a-6ac4-4884-a66a-d4a3a275dc54|2019-04-11 00:18:12|false|[NULL]|Citroen|
+|10b8bb46-c686-4ca7-a123-ba83ff6a7e7c|2019-04-11 00:18:12|false|[NULL]|Chevrolet|
+|9b09e22f-8012-40b6-b523-7076cc7857a4|2019-04-11 00:18:12|false|[NULL]|BMW|
+|9f5607c7-1906-46ce-8a89-736a8bbbcdd0|2019-04-11 00:18:12|false|[NULL]|Bentley|
+|693b760e-d87a-4dae-84ae-adc16473f1d7|2019-04-11 00:18:12|false|[NULL]|Audi|
+|eba3b317-cb70-4cac-a03e-ef194d86bb1d|2019-04-11 00:18:12|false|[NULL]|Aston Martin|
+|13cf1661-2d9a-4944-bd43-e72f1375dc69|2019-04-11 00:18:12|false|[NULL]|Alfa Romeo|
+|c3ac8c65-9e55-425d-aac1-3a6ca0ad5ddb|2019-04-11 00:18:12|false|[NULL]|Chrysler|

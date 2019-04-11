@@ -14,9 +14,9 @@ namespace dTax.ApiModel
         public string VIN { get; set; }
 
 
-        public long BrandNameCode { get; set; }
-        public long ModelNameCode { get; set; }
-        public long ModelTypeCode { get; set; }
-        public long ModelColorCode { get; set; }
+        public Guid CarBrandId { get; set; }
+        public Guid CarModelId{ get; set; }
+        public Guid CarTypeId { get; set; }
+        public Guid CarColorId { get; set; }
     }
 }

@@ -18,7 +18,6 @@ namespace dTax.Data.Interfaces
         ICabRepository CabRepository { get; }
         ICabRideRepository CabRideRepository { get; }
         ICabRideStatusRepository CabRideStatusRepository { get; }
-        ICarModelsRepository CarModelsRepository { get; }
         IPaymentTypeRepository PaymentTypeRepository { get; }
         IShiftRepository ShiftRepository { get; }
         IStatusesRepository StatusesRepository { get; }

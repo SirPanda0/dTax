@@ -19,7 +19,6 @@ namespace dTax.Data.Repository
 
             ICabRideRepository cabRideRepository,
             ICabRideStatusRepository cabRideStatusRepository,
-            ICarModelsRepository carModelsRepository,
             IPaymentTypeRepository paymentTypeRepository,
             IShiftRepository shiftRepository,
             IStatusesRepository statusesRepository,
@@ -40,7 +39,6 @@ namespace dTax.Data.Repository
             CabRepository = cabRepository;
             CabRideRepository = cabRideRepository;
             CabRideStatusRepository = cabRideStatusRepository;
-            CarModelsRepository = carModelsRepository;
             PaymentTypeRepository = paymentTypeRepository;
             ShiftRepository = shiftRepository;
             StatusesRepository = statusesRepository;
@@ -69,7 +67,6 @@ namespace dTax.Data.Repository
 
         public ICabRideRepository CabRideRepository { get; }
         public ICabRideStatusRepository CabRideStatusRepository { get; }
-        public ICarModelsRepository CarModelsRepository { get; }
         public IPaymentTypeRepository PaymentTypeRepository { get; }
         public IShiftRepository ShiftRepository { get; }
         public IStatusesRepository StatusesRepository { get; }

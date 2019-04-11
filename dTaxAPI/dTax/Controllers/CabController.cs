@@ -47,24 +47,17 @@ namespace dTax.Controllers
                    return BadRequest("Проверьте данные!");
                 }
 
-                CarModel carModel = new CarModel()
-                {
-                    //BrandNameCode = registerModel.BrandNameCode,
-                    //ModelNameCode = registerModel.ModelNameCode,
-                    //ModelTypeCode = registerModel.ModelTypeCode,
-                    //ModelColorCode = registerModel.ModelColorCode
-                };
-
-                DBWorkflow.CarModelsRepository.Insert(carModel);
-                DBWorkflow.CarModelsRepository.Commit();
-
                 Cab cab = new Cab()
                 {
                     LicensePlate = registerModel.LicensePlate,
                     VIN = registerModel.VIN,
-                    CarModelId = carModel.Id,
+                    CarModelId = registerModel.CarModelId,
                     ManufactureYear = registerModel.ManufactureYear,
-                    DriverId = registerModel.DriverId
+                    DriverId = registerModel.DriverId,
+                    CarBrandId = registerModel.CarBrandId,
+                    CarTypeId = registerModel.CarTypeId,
+                    CarColorId = registerModel.CarColorId
+
                 };
                 DBWorkflow.CabRepository.Insert(cab);
                 DBWorkflow.CabRepository.Commit();

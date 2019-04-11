@@ -85,7 +85,8 @@ namespace dTax.Controllers
                     PassportNumber = driver.PassportNumber,
                     // TODO DriverFileStorageId = driver.FileLink,
                     Cab = cab,
-                    CarModel = DBWorkflow.CarModelsRepository.GetCarModelById(cab.CarModelId)
+                    //TODO
+                    //CarModel = DBWorkflow.CarModelsRepository.GetCarModelById(cab.CarModelId)
                 };
 
                 return Ok(driverResponse);

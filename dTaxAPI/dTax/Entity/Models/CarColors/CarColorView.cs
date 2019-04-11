@@ -7,5 +7,7 @@ namespace dTax.Entity.Models.CarColors
 {
     public class CarColorView
     {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace dTax.Data.Interfaces
 {
     public interface ICarColorRepository : IBaseRepository<CarColor>
     {
+        IEnumerable<CarColorView> GetListColors();
     }
 }

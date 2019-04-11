@@ -7,5 +7,7 @@ namespace dTax.Entity.Models.CarModels
 {
     public class CarModelView
     {
+        public Guid Id { get; set; }
+        public string Name { get; set; }
     }
 }
