@@ -1,48 +1,19 @@
-
-
-	<form #RegForm="ngForm" (ngSubmit)="reg(RegForm)"class='reg-form'novalidate >
-
-		<div class='form-row'>
-			<label for='form_fname'>First Name: </label>
-    		<input type='text' id='form_fname' name='firstname'ngModel >
-  		</div>
-
-  		<div class='form-row'>
-    		<label for='form_sname'>Last Name: </label>
-    		<input type='text' id='form_sname' name='lastname'ngModel >
-		</div>
-
-		<div class='form-row'>
-    		<label for='form_mname'>Middle Name: </label>
-    		<input type='text' id='form_sname' name='middleName'ngModel >
-		</div>
-
-		<div class='form-row'>
-			<label for='form_email'>Email: </label>
-			<input type='email' id='form_email' name='email'ngModel >
-		</div>
-
-		<div class='form-row'>
-			<label for='form_phone'>Phone: </label>
-			<input type='text' id='form_phone' name='phoneNumber'ngModel >
-		</div>
-    <div class='form-row'>
-			<label for='roleId'>roleId: </label>
-			<select name="roleId" ngModel >
-        <option value="2" >Заказчик  </option>
-        <option value="3" >Водитель</option>
-      </select>
-		</div>
-		<div class='form-row'>
-			<label for='date'>date: </label>
-			<input type='date' id='date' name='birthDate'ngModel >
-		</div>
-		<div class='form-row'>
-			<label for='password'>Password: </label>
-			<input type='text' id='Password' name='password'ngModel >
-		</div>
-		<div class="form-row">
+<form #RegForm="ngForm" (ngSubmit)="reg(RegForm)"class='reg-form'novalidate >
+	<div class="login-page">
+		<div class="form">
+	   
+			
+			<input type="text" placeholder="First Name" name="firstname" ngModel />
+			<input type="text" placeholder="Last Name" name="lastname" ngModel  />
+			<input type="text" placeholder="Middle Name" name="middleName" ngModel  />
+			<input type="email" placeholder="Email" name="email" ngModel  />
+			<input type="password" placeholder="Password" name="password" ngModel  />
+			<input type="text" placeholder="Phone" name="phoneNumber" ngModel  />
+			<input type="radio" value="2" placeholder="RoleId" name="roleId" ngModel  /> Водитель
+			<input type="radio" value="3" placeholder="RoleId" name="roleId" ngModel  /> Заказчик
+			<input type="date" id="date" placeholder="Date" name="birthDate" ngModel  />
 			<input type="submit" value='Зарегистрироваться'>
+	
 		</div>
-
+	  </div>
 	</form>

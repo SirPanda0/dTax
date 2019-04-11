@@ -14,7 +14,7 @@ import { RegistrComponent } from './registr/registr.component';
 import { VoditregistrComponent } from './voditregistr/voditregistr.component';
 import { AvtoregistrComponent } from './avtoregistr/avtoregistr.component';
 import { DriverComponent } from './driver/driver.component';
-import * as $ from 'jquery';
+import $ from "jquery";
 import { OperatorComponent } from './operator/operator.component';
 import { UserService } from '../app/Servise/user.service'
 import { DataHashService } from '../app/Servise/data-hash.service';
@@ -61,10 +61,12 @@ const Routs: Routes = [
     YamapngModule,
     YaCoreModule.forRoot({
       apiKey: ''}),
+   
 
   ],
   providers: [
     CookieService,
+    
    // UserService,
   //  DataHashService,
 
