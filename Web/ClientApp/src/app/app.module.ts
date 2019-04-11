@@ -14,10 +14,14 @@ import { RegistrComponent } from './registr/registr.component';
 import { VoditregistrComponent } from './voditregistr/voditregistr.component';
 import { AvtoregistrComponent } from './avtoregistr/avtoregistr.component';
 import { DriverComponent } from './driver/driver.component';
-import * as $ from 'jquery';
+import $ from "jquery";
 import { OperatorComponent } from './operator/operator.component';
 import { UserService } from '../app/Servise/user.service'
-import { DataHashService } from '../app/Servise/data-hash.service'
+import { DataHashService } from '../app/Servise/data-hash.service';
+import { MapComponent } from './map/map.component';
+import { YamapngModule } from 'projects/yamapng/src/public_api';
+import { YaCoreModule } from 'projects/yamapng/src/lib/core.module';
+
  
 
 const Routs: Routes = [
@@ -27,7 +31,8 @@ const Routs: Routes = [
   {path: 'voditregistr', component:VoditregistrComponent}, //регистрация водителя
   {path: 'avtoregistr', component:AvtoregistrComponent}, // регистрация авто
   {path: 'driver', component:DriverComponent},   //главная страница драйвера
-  {path: 'operator', component:OperatorComponent} // главная страница оператора
+  {path: 'operator', component:OperatorComponent}, // главная страница оператора
+  {path:'map', component:MapComponent}
 
 
 
@@ -42,9 +47,8 @@ const Routs: Routes = [
     VoditregistrComponent,
     AvtoregistrComponent,
     DriverComponent,
-    UserService,
-    DataHashService,
     OperatorComponent,
+    MapComponent,
     
   ],
   imports: [
@@ -53,14 +57,18 @@ const Routs: Routes = [
     FormsModule,
     RouterModule.forRoot(Routs),
     HttpClientModule,
-    UserService,
-    DataHashService
+    BrowserModule,
+    YamapngModule,
+    YaCoreModule.forRoot({
+      apiKey: ''}),
+   
 
   ],
   providers: [
     CookieService,
-    UserService,
-    DataHashService,
+    
+   // UserService,
+  //  DataHashService,
 
 
   ],
