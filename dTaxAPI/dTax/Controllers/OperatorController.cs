@@ -141,7 +141,7 @@ namespace dTax.Controllers
                   {
                       DriverId = _.Id,
                       FIO = DBWorkflow.UserRepository.GetUserFioById(_.UserId),
-                      CreateDate = _.Created
+                      CreateDate = _.CreatedDate
 
                   };
                   return driverlist;

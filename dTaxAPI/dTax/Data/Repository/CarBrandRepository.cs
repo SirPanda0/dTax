@@ -25,7 +25,7 @@ namespace dTax.Data.Repository
             return await GetQuery().Where(_ => _.IsDeleted != true).Select(_=>
                 new CarBrandView()
                 {
-                    CarBrandId = _.CarBrandId,
+                    CarBrandId = _.Id,
                     Name = _.Name
                 })
                 .ToListAsync();

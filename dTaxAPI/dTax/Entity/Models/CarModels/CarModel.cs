@@ -1,5 +1,6 @@
 ﻿using dTax.Entity.Models.Base;
 using dTax.Entity.Models.Cabs;
+using dTax.Entity.Models.CarBrands;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations.Schema;
@@ -13,7 +14,9 @@ namespace dTax.Entity.Models.CarModels
     {
         public ICollection<Cab> Cabs { get; set; }
 
-        public Guid CarModelId { get; set; }
+        public Guid CarBrandId { get; set; }
+        public CarBrand CarBrand { get; set; }
+
         public string Name { get; set; }
 
     }

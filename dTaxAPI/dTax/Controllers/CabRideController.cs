@@ -30,7 +30,6 @@ namespace dTax.Controllers
         //TODO 
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
-        [Authorize]
         [Route("GetRideList")]
         [HttpGet]
         public IActionResult RideList(int page, int size = 20)
@@ -43,7 +42,6 @@ namespace dTax.Controllers
 
         [PolicyAuthorize(AuthorizePolicy.User)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
-        [Authorize]
         [Route("GetRideStatus")]
         [HttpPost]
         public async Task<IActionResult> GetRideStatus(Guid id)
@@ -53,10 +51,20 @@ namespace dTax.Controllers
 
         }
 
+        [PolicyAuthorize(AuthorizePolicy.User)]
+        [PolicyAuthorize(AuthorizePolicy.FullAccess)]
+        [Route("GetRidePrice")]
+        [HttpPost]
+        public IActionResult GetRidePrice(int distance)
+        {
+            decimal Price = CalculateBookPrice(distance);
+            return Ok(Price);
+
+        }
+
 
         [PolicyAuthorize(AuthorizePolicy.User)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
-        [Authorize]
         [Route("AddOrder")]
         [HttpPost]
         public IActionResult AddRide([FromBody] Booking booking)
@@ -198,7 +206,6 @@ namespace dTax.Controllers
 
         [PolicyAuthorize(AuthorizePolicy.User)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
-        [Authorize]
         [Route("CancelOrder")]
         [HttpPost]
         public IActionResult CancelRide(Guid id)

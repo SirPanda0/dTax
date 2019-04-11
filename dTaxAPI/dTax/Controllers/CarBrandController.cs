@@ -19,7 +19,7 @@ namespace dTax.Controllers
             carBrandRepository = injectedcarBrandRepository;
         }
 
-        [PolicyAuthorize(AuthorizePolicy.Driver)]
+        //[PolicyAuthorize(AuthorizePolicy.Driver)]
         [HttpGet]
         [Route("Get")]
         public IActionResult Get()
