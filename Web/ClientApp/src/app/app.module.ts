@@ -26,13 +26,13 @@ import { YaCoreModule } from 'projects/yamapng/src/lib/core.module';
 
 const Routs: Routes = [
   {path: '', component: LoginComponent}, // авторизация
-  {path: 'home', component: HomeComponent}, //главная страница пользователя
+  {path: 'home', component: HomeComponent}, //главная страница пользователя (тут должна быть карта )
   {path: 'registr', component:RegistrComponent},//Регистрация
   {path: 'voditregistr', component:VoditregistrComponent}, //регистрация водителя
   {path: 'avtoregistr', component:AvtoregistrComponent}, // регистрация авто
   {path: 'driver', component:DriverComponent},   //главная страница драйвера
   {path: 'operator', component:OperatorComponent}, // главная страница оператора
-  {path:'map', component:MapComponent}
+  {path:'map', component:MapComponent}       //просто добавленная карта
 
 
 
