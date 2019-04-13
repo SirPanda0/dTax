@@ -16,12 +16,12 @@ namespace dTax.Controllers
     [Route("api/[controller]")]
     public class CustomerController : Controller
     {
-        private DbPostrgreContext db;
+        //private readonly DbPostrgreContext db;
 
-        public CustomerController(DbPostrgreContext context)
-        {
-            db = context;
-        }
+        //public CustomerController(DbPostrgreContext context)
+        //{
+        //    db = context;
+        //}
 
         
         

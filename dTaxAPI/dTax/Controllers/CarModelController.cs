@@ -1,4 +1,5 @@
-﻿using dTax.Data.Interfaces;
+﻿using dTax.Auth;
+using dTax.Data.Interfaces;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -16,7 +17,7 @@ namespace dTax.Controllers
             carModelRepository = injectedcarModelRepository;
         }
 
-        //[PolicyAuthorize(AuthorizePolicy.Driver)]
+        [PolicyAuthorize(AuthorizePolicy.Driver)]
         [HttpGet]
         [Route("GetModelsByBrand")]
         public IActionResult Get(Guid brandId)

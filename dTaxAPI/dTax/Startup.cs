@@ -94,7 +94,8 @@ namespace dTax
            {
 
                options.Cookie.Name = "dTaxCookie";
-
+               options.ExpireTimeSpan =TimeSpan.FromDays(2);
+               options.SlidingExpiration = false;
                options.Events = new CookieAuthenticationEvents
                {
                    OnRedirectToLogin = context =>
