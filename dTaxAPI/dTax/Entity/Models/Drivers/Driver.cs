@@ -12,8 +12,6 @@ namespace dTax.Entity.Models.Drivers
 {
     public class Driver : BaseEntity
     {
-        
-        
 
         public Guid UserId { get; set; }
         public User User { get; set; }
@@ -33,10 +31,10 @@ namespace dTax.Entity.Models.Drivers
         [NotMapped]
         public virtual ICollection<FilesToDriver> FileLink { get; set; }
 
-        public bool Working { get; set; } = false;
+        public bool IsWorking { get; set; } = false;
 
         //Проверены ли документы водителя и его авто
-        public bool Сonfirmed { get; set; } = false;
+        public bool IsСonfirmed { get; set; } = false;
 
         //TODO
         //public float? geo_lat { get; set; }

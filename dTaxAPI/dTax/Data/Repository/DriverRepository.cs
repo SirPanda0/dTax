@@ -53,7 +53,7 @@ namespace dTax.Data.Repository
 
         private async Task<IEnumerable<Driver>> GetListDriversAsync()
         {
-            return await GetQuery().Where(_ => _.IsDeleted != true && _.Сonfirmed != false).ToListAsync();
+            return await GetQuery().Where(_ => _.IsDeleted != true && _.IsСonfirmed != false).ToListAsync();
         }
 
         public IEnumerable<Driver> GetUnconfirmedDrivers()
@@ -63,7 +63,7 @@ namespace dTax.Data.Repository
 
         private async Task<IEnumerable<Driver>> GetUnconfirmedDriversAsync()
         {
-            return await GetQuery().Where(_ => _.IsDeleted != true && _.Сonfirmed != true).ToListAsync();
+            return await GetQuery().Where(_ => _.IsDeleted != true && _.IsСonfirmed != true).ToListAsync();
         }
 
 
@@ -80,7 +80,7 @@ namespace dTax.Data.Repository
         public Driver IsConfirmed(Guid DriverId)
         {
             Driver driver = GetDriverById(DriverId);
-            driver.Сonfirmed = true;
+            driver.IsСonfirmed = true;
             Update(driver);
             Commit();
             return driver;

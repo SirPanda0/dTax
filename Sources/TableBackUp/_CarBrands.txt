@@ -40,6 +40,3 @@
 |9b09e22f-8012-40b6-b523-7076cc7857a4|2019-04-11 00:18:12|false|[NULL]|BMW|
 |9f5607c7-1906-46ce-8a89-736a8bbbcdd0|2019-04-11 00:18:12|false|[NULL]|Bentley|
 |693b760e-d87a-4dae-84ae-adc16473f1d7|2019-04-11 00:18:12|false|[NULL]|Audi|
-|eba3b317-cb70-4cac-a03e-ef194d86bb1d|2019-04-11 00:18:12|false|[NULL]|Aston Martin|
-|13cf1661-2d9a-4944-bd43-e72f1375dc69|2019-04-11 00:18:12|false|[NULL]|Alfa Romeo|
-|c3ac8c65-9e55-425d-aac1-3a6ca0ad5ddb|2019-04-11 00:18:12|false|[NULL]|Chrysler|
