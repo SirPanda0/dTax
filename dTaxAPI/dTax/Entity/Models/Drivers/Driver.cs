@@ -12,8 +12,6 @@ namespace dTax.Entity.Models.Drivers
 {
     public class Driver : BaseEntity
     {
-        
-        
 
         public Guid UserId { get; set; }
         public User User { get; set; }
