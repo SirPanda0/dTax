@@ -187,7 +187,8 @@ namespace dTax.Controllers
                     FirstName = user.FirstName,
                     MiddleName = user.MiddleName,
                     LastName = user.LastName,
-                    RoleId = user.Role.Id
+                    RoleId = user.RoleId,
+                    IsFullReg = IsFull
                 };
 
                 if (IsFull)
