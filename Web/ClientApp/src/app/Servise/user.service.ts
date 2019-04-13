@@ -14,7 +14,7 @@ export class UserService {
     private http: HttpService
   ) {}
 
-  public SetIdentity(model: UserModel) {
+  public SetIdentity(model) {
     this.cookie.setCookie(USERCOOKIEKEY, this.dataSeq.EncodeJSON(model), 10);
   }
 
@@ -22,7 +22,7 @@ export class UserService {
     this.cookie.setCookie(USERCOOKIEKEY, this.dataSeq.EncodeJSON(model), 10);
   }
 
-  public GetCurrentUser(): UserModel {
+  public GetCurrentUser() {
 
     return this.dataSeq.DecodeJSON(this.cookie.getCookie(USERCOOKIEKEY));
   }
