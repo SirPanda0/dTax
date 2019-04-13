@@ -59,6 +59,28 @@ namespace dTax.Services
 
             //string html = File.ReadAllText("~/HtmlResources/Auth.html");
 
+            await SendEmail(emailMessage);
+        }
+
+        public async Task RegEmailAsync(string email)
+        {
+            var emailMessage = new MimeMessage();
+
+            emailMessage.From.Add(new MailboxAddress("dTax-info", "dTax-mailing@yandex.ru"));
+            emailMessage.To.Add(new MailboxAddress("", email));
+            emailMessage.Subject = "Оповещение о регистрации";
+
+            var user = DBWorkflow.UserRepository.FindUserEmail(email);
+
+            emailMessage.Body = new TextPart(MimeKit.Text.TextFormat.Html)
+            {
+                Text = "<p>Здравствуйте, " + "<strong>" + user.FirstName + "</strong>" +
+                @"<br><p>Используйте эту почту для авторизации на сайте<br>
+                    <p>Вы зарегистрированы по этой почте, если вы этого не делали, то свяжитесь с администрацией сайта<br>
+                                                <p><sub>Письмо сгенерировано автоматически и не требует ответа.<sub><br>"
+            };
+
+            //string html = File.ReadAllText("~/HtmlResources/Auth.html");
 
             await SendEmail(emailMessage);
         }

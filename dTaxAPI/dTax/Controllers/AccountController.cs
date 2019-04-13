@@ -4,7 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
- 
+
 using Microsoft.AspNetCore.Authorization;
 using dTax.ApiModel;
 using System.Security.Claims;
@@ -25,6 +25,7 @@ using dTax.Entity.Models.Users;
 using dTax.Entity.Models.Shifts;
 using dTax.Entity.Models.Customers;
 using System.Net.Mail;
+using dTax.Common.Enums;
 
 namespace dTax.Controllers
 {
@@ -46,8 +47,10 @@ namespace dTax.Controllers
             {
                 if (!ModelState.IsValid)
                 {
-                    return BadRequest();
+                    return BadRequest("Некорректные логин и(или) пароль");
                 }
+
+
 
                 string PasswordHash = GetHash(loginModel.Password);
                 User user = DBWorkflow.UserRepository.FindUserLogin(loginModel.Email, PasswordHash);
@@ -58,17 +61,7 @@ namespace dTax.Controllers
                     ClaimsIdentity identity = GetIdentity(user);
                     await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 
-                    //TODO Обновление времени логина в смене для водителя
-                    //if (user.FullReg != false)
-                    //{
-                    //    Driver driver = await db.Drivers.FirstOrDefaultAsync(d => d.UserId == user.Id);
-                    //    //Cab cab = await db.Cabs.FirstOrDefaultAsync(c =>c.DriverId == driver.Id);
-                    //    Shift shift = await db.Shifts.FirstOrDefaultAsync(s => s.DriverId == driver.Id);
-                    //    shift.LoginTime = DateTime.Now;
-                    //    db.Shifts.Update(shift);
-                    //    await db.SaveChangesAsync();
-                    //}
-                    if (user.IsFullReg != false && user.RoleId == 3)
+                    if (user.IsFullReg != false && user.RoleId == (int)AuthenticationRole.Driver)
                     {
                         var driver = DBWorkflow.DriverRepository.GetDriverByUserId(user.Id);
                         var cab = DBWorkflow.CabRepository.GetCabByDriverId(driver.Id);
@@ -91,8 +84,7 @@ namespace dTax.Controllers
                         DBWorkflow.ShiftRepository.Commit();
                     }
 
-
-                    var response = new LoginResponseModel
+                    var response = new UserView
                     {
                         Id = user.Id,
                         Email = user.Email,
@@ -106,12 +98,11 @@ namespace dTax.Controllers
                     //string remoteIpAddress = HttpContext.Connection.RemoteIpAddress.MapToIPv4().ToString();
                     //if (Request.Headers.ContainsKey("X-Forwarded-For"))
                     //    remoteIpAddress = Request.Headers["X-Forwarded-For"];
-
                     //string ipAddress = HttpContext.Connection.RemoteIpAddress.ToString();
 
                     //При тестировании комментировать
-                    //var emailService = new EmailService(DBWorkflow);
-                    //await emailService.AuthEmailAsync(user.Email);
+                    var emailService = new EmailService(DBWorkflow);
+                    await emailService.AuthEmailAsync(user.Email);
 
                     return Json(response);
                 }
@@ -137,7 +128,7 @@ namespace dTax.Controllers
         {
             try
             {
-                
+
                 if (!ModelState.IsValid)
                 {
                     return BadRequest("Проверьте данные");
@@ -189,14 +180,14 @@ namespace dTax.Controllers
 
 
 
-                LoginResponseModel responseModel = new LoginResponseModel()
+                var response = new UserView
                 {
                     Id = user.Id,
                     Email = user.Email,
                     FirstName = user.FirstName,
                     MiddleName = user.MiddleName,
                     LastName = user.LastName,
-                    RoleId = user.RoleId
+                    RoleId = user.Role.Id
                 };
 
                 if (IsFull)
@@ -214,12 +205,10 @@ namespace dTax.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 
                 //TODO Сервис отправки сообщения при регистрации
-                //var emailService = new EmailService(DBWorkflow);
-                //await emailService.AuthEmailAsync(user.Email);
+                var emailService = new EmailService(DBWorkflow);
+                await emailService.RegEmailAsync(user.Email);
 
-
-
-                return Json(responseModel);
+                return Json(response);
             }
             catch (Exception e)
             {

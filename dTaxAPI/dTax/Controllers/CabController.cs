@@ -62,7 +62,7 @@ namespace dTax.Controllers
                 DBWorkflow.CabRepository.Insert(cab);
                 DBWorkflow.CabRepository.Commit();
 
-                return Ok("Ожидайте проверки оператора!");
+                return Ok("Загрузите фотографии!");
             }
             catch (Exception e)
             {

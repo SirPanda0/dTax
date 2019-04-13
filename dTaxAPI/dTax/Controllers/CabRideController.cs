@@ -1,9 +1,10 @@
 ﻿using dTax.ApiModel;
 using dTax.Auth;
+using dTax.Common.Enums;
 using dTax.Data.Interfaces;
 using dTax.Entity.Models.CabRides;
 using dTax.Entity.Models.CabRideStatuses;
-using dTax.Enums;
+
  
 using dTax.ResponseModels;
 using dTax.ViewModels;

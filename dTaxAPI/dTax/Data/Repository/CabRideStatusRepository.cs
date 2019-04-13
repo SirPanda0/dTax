@@ -1,6 +1,4 @@
-﻿using dTax.Enums;
- using dTax.Data.Interfaces;
- 
+﻿using dTax.Data.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
@@ -8,6 +6,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using dTax.Entity.Models.CabRideStatuses;
 using dTax.Entity;
+using dTax.Common.Enums;
 
 namespace dTax.Data.Repository
 {
