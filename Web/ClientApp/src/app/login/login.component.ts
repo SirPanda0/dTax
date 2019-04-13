@@ -12,17 +12,20 @@ import { UserService } from '../Servise/user.service';
 })
 export class LoginComponent implements OnInit {
 
-  constructor(private route: Router, private http: HttpService, /*private cookieService: CookieService, private user:UserService */) { }
+  constructor(private route: Router, private http: HttpService, private cookieService: CookieService, private user: UserService) { }
 
   ngOnInit() {
   }
   xer(Form: NgForm) {
     console.log(Form.value);
-    this.http.post('account/login', Form.value).subscribe  ((data:any) => {
-    //  this.user.SetIdentity(data);
-      if (data.roleId == 2) {this.route.navigateByUrl('home');}
-     else {this.route.navigateByUrl('driver');}
-    }, err => {      alert('Ошибка');
+    this.http.post('account/login', Form.value).subscribe  ((data: any) => {
+    this.user.SetIdentity(data);
+    if (data.roleId === 2) {
+      this.route.navigateByUrl('home');
+    } else {
+      this.route.navigateByUrl('driver');
+    }
+    }, err => { alert('Ошибка');
     });
   }
 

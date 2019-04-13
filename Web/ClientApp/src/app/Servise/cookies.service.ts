@@ -10,14 +10,14 @@ export class CookieService {
 
 
   public getCookie(name: string): string {
-    let ca: Array<string> = document.cookie.split(';');
-    let caLen: number = ca.length;
-    let cookieName = `${name}=`;
+    const ca: Array<string> = document.cookie.split(';');
+    const caLen: number = ca.length;
+    const cookieName = `${name}=`;
     let c: string;
 
-    for (let i: number = 0; i < caLen; i += 1) {
+    for (let i = 0; i < caLen; i += 1) {
       c = ca[i].replace(/^\s+/g, '');
-      if (c.indexOf(cookieName) == 0) {
+      if (c.indexOf(cookieName) === 0) {
         return c.substring(cookieName.length, c.length);
       }
     }
@@ -33,14 +33,15 @@ export class CookieService {
   public setCookie(name: string, value: string, expireDays: number, path: string = '') {
     const d: Date = new Date();
     d.setTime(d.getTime() + expireDays * 24 * 60 * 60 * 1000);
-    let expires: string = `expires=${d.toUTCString()}`;
-    let cpath: string = path ? `; path=${path}` : '';
+    const expires = `expires=${d.toUTCString()}`;
+    const cpath: string = path ? `; path=${path}` : '';
     document.cookie = `${name}=${value}; ${expires}${cpath}`;
   }
 
   public clearCookies() {
-    document.cookie.split(";").forEach(function(c) {
-      document.cookie = c.replace(/^ +/, "").replace(/=.*/, "=;expires=" + new Date().toUTCString() + ";path=/");
+    // tslint:disable-next-line:only-arrow-functions
+    document.cookie.split(';').forEach(function(c) {
+      document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
     });
   }
 }
