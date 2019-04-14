@@ -17,8 +17,6 @@ namespace dTax.Entity.Models.Cabs
 
     public class Cab : BaseEntity
     {
-
-
         //номера автомобиля
         public string LicensePlate { get; set; }
 
@@ -43,14 +41,14 @@ namespace dTax.Entity.Models.Cabs
 
         //id водителя
         public Guid DriverId { get; set; }
-        [JsonIgnore]
+
         public Driver Driver { get; set; }
 
         //Фото Авто
         //public Guid FileStorageId { get; set; }
         //public FileStorage FileStorage { get; set; }
 
-        public bool Active { get; set; } = false;
+        public bool IsActive { get; set; } = false;
 
         
         public ICollection<FilesToCab> FileLink { get; set; }

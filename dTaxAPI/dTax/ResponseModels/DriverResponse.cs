@@ -21,9 +21,7 @@ namespace dTax.ResponseModels
         public string PassportNumber { get; set; }
         //public ICollection<\> DriverFileStorageId { get; set; }
 
-        //Cab
-        public Cab Cab { get; set; }
-        public CarModel CarModel { get; set; }
+       
         
     }
 }

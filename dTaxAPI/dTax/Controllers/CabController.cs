@@ -21,6 +21,40 @@ namespace dTax.Controllers
             DBWorkflow = dBWorkFlow;
         }
 
+        [PolicyAuthorize(AuthorizePolicy.Operator)]
+        [PolicyAuthorize(AuthorizePolicy.FullAccess)]
+        [Route("DriverCab")]
+        [HttpGet]
+        public ActionResult GetFullCabModel(Guid DriverId)
+        {
+            try
+            {
+               Cab cab = DBWorkflow.CabRepository.GetCabByDriverId(DriverId);
+                if (cab != null)
+                {
+                    CabView cabView = new CabView()
+                    {
+                        Id = cab.Id,
+                        CarBrand = cab.CarBrand.Name,
+                        CarModel = cab.CarModel.Name,
+                        CarColor = cab.CarColor.Name,
+                        CarType = cab.CarType.Name,
+                        DriverId = cab.DriverId,
+                        LicensePlate = cab.LicensePlate,
+                        ManufactureYear = cab.ManufactureYear,
+                        VIN = cab.ManufactureYear.ToString()
+                    };
+                    return Json(cabView);
+                }
+                return Json("У водителя не добавлен автомобиль");
+            }
+            catch (Exception e)
+            {
+                Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
+                return StatusCode(500);
+            }
+        }
+
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [Route("Add")]
         [HttpPost]
@@ -44,7 +78,7 @@ namespace dTax.Controllers
 
                 if (exist)
                 {
-                   return BadRequest("Проверьте данные!");
+                    return BadRequest("Проверьте данные!");
                 }
 
                 Cab cab = new Cab()
@@ -62,7 +96,7 @@ namespace dTax.Controllers
                 DBWorkflow.CabRepository.Insert(cab);
                 DBWorkflow.CabRepository.Commit();
 
-                return Ok("Загрузите фотографии!");
+                return Ok(cab.Id);
             }
             catch (Exception e)
             {
@@ -77,7 +111,7 @@ namespace dTax.Controllers
         public ActionResult AddFile(Guid CabId, Guid FileId)
         {
             DBWorkflow.CabFileRepository.AddLinkCab(CabId, FileId);
-            
+
             return Ok();
         }
 

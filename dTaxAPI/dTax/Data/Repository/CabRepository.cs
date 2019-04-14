@@ -32,7 +32,12 @@ namespace dTax.Data.Repository
 
         private async Task<Cab> GetCabByDriverIdAsync(Guid DriverId)
         {
-            return await GetQuery().FirstOrDefaultAsync(_ => _.DriverId == DriverId);
+            return await GetQuery()
+                .Include(b=>b.CarBrand)
+                .Include(m => m.CarModel)
+                .Include(t => t.CarType)
+                .Include(c => c.CarColor)
+                .FirstOrDefaultAsync(_ => _.DriverId == DriverId);
         }
 
         public bool IsExists(string LicensePlate, string VIN)

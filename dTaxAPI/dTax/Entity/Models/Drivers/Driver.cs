@@ -1,4 +1,5 @@
 ﻿using dTax.Entity.Models.Base;
+using dTax.Entity.Models.Cabs;
 using dTax.Entity.Models.Many;
 using dTax.Entity.Models.Users;
 using System;
@@ -28,8 +29,9 @@ namespace dTax.Entity.Models.Drivers
 
         //Фото документов
         //public long FileStorageId { get; set; }
-        [NotMapped]
-        public virtual ICollection<FilesToDriver> FileLink { get; set; }
+        public ICollection<FilesToDriver> FileLink { get; set; }
+
+        public ICollection<Cab> CabLink { get; set; }
 
         public bool IsWorking { get; set; } = false;
 
