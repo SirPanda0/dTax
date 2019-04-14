@@ -1,3 +1,11 @@
 <p>
   пользователь, карта, заказ, расчет стоимости
 </p>
+<form #myForm="ngForm" (ngSubmit)="test(myForm)"> 
+    <button type="submit"></button>
+    <label for="Dist"></label>
+    <input type="text" name="Dist" id="Dist" >
+</form>
+<p>{{DistanTest}}</p>
+
+<div id="map"></div>
