@@ -52,13 +52,14 @@ namespace dTax.Controllers
 
         }
 
-        [PolicyAuthorize(AuthorizePolicy.User)]
-        [PolicyAuthorize(AuthorizePolicy.FullAccess)]
+        //[PolicyAuthorize(AuthorizePolicy.User)]
+        //[PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [Route("GetRidePrice")]
-        [HttpPost]
-        public IActionResult GetRidePrice(int distance)
+        [HttpGet]
+        public IActionResult GetRidePrice(double distance)
         {
-            decimal Price = CalculateBookPrice(distance);
+            int dis = Convert.ToInt32(distance);
+            decimal Price = CalculateBookPrice(dis / 1000);
             return Ok(Price);
 
         }

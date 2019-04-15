@@ -101,8 +101,8 @@ namespace dTax.Controllers
                     //string ipAddress = HttpContext.Connection.RemoteIpAddress.ToString();
 
                     //При тестировании комментировать
-                    var emailService = new EmailService(DBWorkflow);
-                    await emailService.AuthEmailAsync(user.Email);
+                   // var emailService = new EmailService(DBWorkflow);
+                    //await emailService.AuthEmailAsync(user.Email);
 
                     return Json(response);
                 }
@@ -206,8 +206,8 @@ namespace dTax.Controllers
                 await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 
                 //TODO Сервис отправки сообщения при регистрации
-                var emailService = new EmailService(DBWorkflow);
-                await emailService.RegEmailAsync(user.Email);
+                //var emailService = new EmailService(DBWorkflow);
+                //await emailService.RegEmailAsync(user.Email);
 
                 return Json(response);
             }

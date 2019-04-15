@@ -77,7 +77,7 @@ export class HomeComponent implements OnInit {
 
   test(form: NgForm) {
     const Distan = $('#Dist').val();
-    this.http.post('CabRide/GetRidePrice', {distance: Distan}).subscribe(data => {
+    this.http.get('CabRide/GetRidePrice?distance=' + Distan).subscribe(data => {
       this.DistanTest = data;
     })
   }
