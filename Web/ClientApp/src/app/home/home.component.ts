@@ -22,7 +22,7 @@ export class HomeComponent implements OnInit {
     let Distan;
 
     const myMap = new ymaps.Map('map', { // Выводим в слой с id="map"
-    center: [59.9174, 30.3250], // центрируем карту на Санкт-Петербурге
+    center: [57.767961, 40.926858], // центрируем карту на Кострому
     zoom: 11, // Ставим зум кратный 11
     controls: [] // Никакие кнопки управления пока не добавляем
     });
