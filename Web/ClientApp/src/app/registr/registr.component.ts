@@ -22,7 +22,7 @@ export class RegistrComponent implements OnInit {
     console.log(Form.value);
     this.http.post('account/register', Form.value ).subscribe(data => {
       this.user.SetIdentity(data);
-      if (Form.value['roleId'] === 2) {this.route.navigateByUrl('home');
+      if (Form.value['roleId'] == 2) {this.route.navigateByUrl('home');
     } else  {this.route.navigateByUrl('voditregistr');
   }
 
