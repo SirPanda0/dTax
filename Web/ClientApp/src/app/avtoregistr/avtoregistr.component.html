@@ -1,3 +1,19 @@
-<p>
-  avtoregistr works!
-</p>
+<form #RegForm="ngForm" (ngSubmit)="reg(RegForm)"class='reg-form'novalidate >
+	<div class="login-page">
+		<div class="form">
+	   
+			
+			<input type="text" placeholder="Имя" name="firstname" ngModel />
+			<input type="text" placeholder="Фамилия" name="lastname" ngModel  />
+			<input type="text" placeholder="Отчество" name="middleName" ngModel  />
+			<input type="email" placeholder="Емейл" name="email" ngModel  />
+			<input type="password" placeholder="Пароль" name="password" ngModel  />
+			<input type="text" placeholder="Номер телефона" name="phoneNumber" ngModel  />
+			<input type="radio" value="2" placeholder="RoleId" name="roleId" ngModel  /> Заказчик
+			<input type="radio" value="3" placeholder="RoleId" name="roleId" ngModel  /> Водитель
+			<input type="date" id="date" placeholder="Дата регистрации" name="birthDate" ngModel  />
+			<input type="submit" value='Зарегистрироваться'>
+	
+		</div>
+	  </div>
+	</form>
