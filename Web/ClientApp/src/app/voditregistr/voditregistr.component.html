@@ -1,14 +1,14 @@
 
-	<form #RegForm="ngForm" (ngSubmit)="reg2(Reg2Form)"class='reg-form'novalidate >
+	<form #RegForm="ngForm" (ngSubmit)="regg(RegForm)"class='reg-form'novalidate >
 		<div class="login-page">
 			<div class="form">
 		   
 				
-				<input type="text" placeholder="DrivingLicence:" name="drivingLicence" ngModel />
-				<input type="text" placeholder="ExpiryDate" name="expiryDate" ngModel  />
-				<input type="text" placeholder="RegistrationDate" name="registrationDate" ngModel  />
-				<input type="text" placeholder="PassportSerial" name="passportSerial" ngModel  />
-				<input type="text" placeholder="PassportNumber" name="passportNumber" ngModel  />
+				<input type="text" placeholder="Номер водительских прав:" name="drivingLicence" ngModel />
+				<input type="date" placeholder="Дата окончания прав" name="expiryDate" ngModel  />
+				<input type="date" placeholder="Дата выдачи прав" name="registrationDate" ngModel  />
+				<input type="text" placeholder="Серия паспорта" name="passportSerial" ngModel  />
+				<input type="text" placeholder="Номер паспорта" name="passportNumber" ngModel  />
 				<input type="submit" value='Зарегистрироваться'>
 		
 			</div>

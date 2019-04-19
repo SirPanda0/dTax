@@ -13,7 +13,7 @@ export class HttpService {
   constructor(private http: HttpClient) { }
 
   post(link, value) {
-   return this.http.post(this.api + link, value).pipe(response => response);
+   return this.http.post(this.api + link, value, this.httpOptions ).pipe(response => response);
   }
   get(apig){
     return this.http

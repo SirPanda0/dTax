@@ -38,10 +38,10 @@ export class CookieService {
     document.cookie = `${name}=${value}; ${expires}${cpath}`;
   }
 
-  public clearCookies() {
-    // tslint:disable-next-line:only-arrow-functions
-    document.cookie.split(';').forEach(function(c) {
-      document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
-    });
-  }
+//  public clearCookies() {
+  //   tslint:disable-next-line:only-arrow-functions
+    //document.cookie.split(';').forEach(function(c) {
+     // document.cookie = c.replace(/^ +/, '').replace(/=.*/, '=;expires=' + new Date().toUTCString() + ';path=/');
+    //});
+  //}
 }
