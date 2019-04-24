@@ -18,11 +18,15 @@ import $ from "jquery";
 import { OperatorComponent } from './operator/operator.component';
 import { UserService } from '../app/Servise/user.service'
 import { DataHashService } from '../app/Servise/data-hash.service';
-import { MapComponent } from './map/map.component';
 import { YamapngModule } from 'projects/yamapng/src/public_api';
 import { YaCoreModule } from 'projects/yamapng/src/lib/core.module';
 import { HttpService } from './Servise/http.service';
 import { CookieService } from './Servise/cookies.service';
+import { LkuserComponent } from './lkuser/lkuser.component';
+import { LkdriverComponent } from './lkdriver/lkdriver.component';
+import { InfoComponent } from './info/info.component';
+import { ContactComponent } from './contact/contact.component';
+import { PartnersComponent } from './partners/partners.component';
 
  
 
@@ -35,7 +39,12 @@ const Routs: Routes = [
   {path: 'avtoregistr', component:AvtoregistrComponent}, // регистрация авто
   {path: 'driver', component:DriverComponent},   //главная страница драйвера
   {path: 'operator', component:OperatorComponent}, // главная страница оператора
-  {path: 'map', component:MapComponent}       //просто добавленная карта
+  {path: 'lkuser',component:LkuserComponent}, //личный кабинет пользователя
+  {path:'lkdriver', component:LkdriverComponent},// Личный кабинет водителя
+  {path:'info', component:InfoComponent}, // информация о такси
+  {path:'contacts', component:ContactComponent}, // Контакты кампании
+  {path:'partners', component:PartnersComponent}, // Партнеры
+  
 
 
 
@@ -51,7 +60,14 @@ const Routs: Routes = [
     AvtoregistrComponent,
     DriverComponent,
     OperatorComponent,
-    MapComponent,
+LkdriverComponent,
+    LkuserComponent,
+
+    InfoComponent,
+
+    ContactComponent,
+
+    PartnersComponent,
     
   ],
   imports: [
