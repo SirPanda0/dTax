@@ -1,12 +1,29 @@
-<form  #LogForm="ngForm" (ngSubmit)="Brand(LogForm)" class="login-form" novalidate>
+<form  #LogForm="ngForm" (ngSubmit)="SendAvto(LogForm)" class="login-form" novalidate>
 	<div class="login-page">
 		<div class="form">
-	   <p>Марка авто</p>
-			<select name="CarBrand"   class="modal-select">
-		<option *ngFor="let School of CarBrand" [value]="School.id">{{School.name}}
-					</option>
-			  </select>
-		
+
+		 <p>Марка авто</p>
+			<select name="carBrandId"   class="modal-select" [(ngModel)]="IdBrand" (ngModelChange)="GetModel(IdBrand)">
+		<option *ngFor="let Brand of CarBrand" [value]="Brand.id">{{Brand.name}}</option>
+			 </select>
+
+			 <p>Модель</p>
+			 <select name="carModelId"   class="modal-select" [(ngModel)]="IdModel">
+				<option *ngFor="let Model of ModelAvto" [value]="Model.id">{{Model.name}}</option>
+			</select>
+
+			<p>Тип</p>
+			<select name="carTypeId"   class="modal-select" [(ngModel)]="IdType">
+			 <option *ngFor="let Type of TypeAvto" [value]="Type.id">{{Type.name}}</option>
+		 </select>
+
+		 <p>Цвет</p>
+		 <select name="carColorId"   class="modal-select" [(ngModel)]="IdColor">
+			<option *ngFor="let Color of ColorAvto" [value]="Color.id">{{Color.name}}</option>
+		</select>
+
+			 <p></p>
+			<button type="submit">Зарегистрировать</button>
 		</div>
 	  </div>
 	</form>

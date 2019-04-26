@@ -15,10 +15,9 @@ export class HttpService {
   post(link, value) {
    return this.http.post(this.api + link, value, this.httpOptions ).pipe(response => response);
   }
-  get(apig){
+  get(apig) {
     return this.http
     .get(this.api + apig, this.httpOptions );
-  
 }
 
 }
