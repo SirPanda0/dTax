@@ -28,13 +28,13 @@ export class AvtoregistrComponent implements OnInit {
 
   ngOnInit() {
     this.GetBrand();
-    this.GetType();
-    this.GetColor();
+    
   }
 
   GetBrand() {
       this.http.get('CarBrand/Get').subscribe(data => {
         this.CarBrand = data;
+        this.GetType();
     });
   }
 
@@ -48,6 +48,7 @@ export class AvtoregistrComponent implements OnInit {
   GetType() {
       this.http.get('CarType/Get').subscribe(data => {
         this.TypeAvto = data;
+        this.GetColor();
     });
   }
 
