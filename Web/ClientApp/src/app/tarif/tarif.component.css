@@ -1,0 +1,28 @@
+TABLE {
+    width: 1500px ; /* Ширина таблицы */
+    border-collapse: collapse; /* Убираем двойные линии между ячейками */
+    margin:auto;
+    font-size: 20px;
+    color: #000000;
+    background: #ffffff;
+    
+   }
+   TD, TH {
+    padding: 15px; /* Поля вокруг содержимого таблицы */
+    border: 2.5px solid rgb(0, 0, 0); /* Параметры рамки */
+    font-size: 15px;
+    
+   }
+   TH {
+    background: #eb0202; /* Цвет фона */
+    
+   }
+   H3, h2 {
+      text-align: center;
+      color: #ffffff;
+   }
+.letter {
+    color: #000000;
+    position: relative;
+    font-size: 20px;
+}

@@ -27,6 +27,7 @@ import { LkdriverComponent } from './lkdriver/lkdriver.component';
 import { InfoComponent } from './info/info.component';
 import { ContactComponent } from './contact/contact.component';
 import { PartnersComponent } from './partners/partners.component';
+import { TarifComponent } from './tarif/tarif.component';
 
  
 
@@ -44,6 +45,7 @@ const Routs: Routes = [
   {path:'info', component:InfoComponent}, // информация о такси
   {path:'contacts', component:ContactComponent}, // Контакты кампании
   {path:'partners', component:PartnersComponent}, // Партнеры
+  {path: 'tarif', component:TarifComponent}, // Тарифы
   
 
 
@@ -68,6 +70,8 @@ LkdriverComponent,
     ContactComponent,
 
     PartnersComponent,
+
+    TarifComponent,
     
   ],
   imports: [
