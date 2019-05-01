@@ -71,7 +71,7 @@ namespace dTax.Controllers
                 driverRepository.Insert(driver);
                 driverRepository.Commit();
 
-                return Ok(driver.Id);
+                return Ok();
             }
             catch (Exception e)
             {
@@ -83,9 +83,16 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [Route("FileToDriver")]
         [HttpPost]
-        public ActionResult AddFile(Guid DriverId, Guid FileId)
+        public ActionResult AddFile(Guid FileId)
         {
-           driverFileRepository.AddLinkDriver(DriverId, FileId);
+            Guid DriverId = driverRepository.GetDriverByUserId(GetUserIdByContext()).Id;
+
+            if (driverFileRepository.Exist(FileId) != false)
+            {
+                return BadRequest();
+            }
+
+            driverFileRepository.AddLinkDriver(DriverId, FileId);
            return Ok();
         }
 

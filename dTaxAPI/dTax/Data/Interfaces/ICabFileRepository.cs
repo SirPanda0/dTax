@@ -9,5 +9,6 @@ namespace dTax.Data.Interfaces
     public interface ICabFileRepository : IBaseRepository<FilesToCab>
     {
         void AddLinkCab(Guid CabId, Guid FileId);
+        bool Exist(Guid FileId);
     }
 }

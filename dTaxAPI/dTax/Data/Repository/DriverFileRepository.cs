@@ -1,5 +1,6 @@
 ﻿ using dTax.Data.Interfaces;
 using dTax.Entity;
+using dTax.Entity.Models.Drivers;
 using dTax.Entity.Models.Many;
 using System;
 using System.Collections.Generic;
@@ -12,6 +13,15 @@ namespace dTax.Data.Repository
     {
         public DriverFileRepository(DbPostrgreContext context) : base(context)
         {
+        }
+
+        public bool Exist(Guid FileId)
+        {
+            var exist = GetQuery().FirstOrDefault(_ => _.FileId == FileId);
+            if (exist != null)
+                return true;
+            else
+                return false;
         }
 
         public void AddLinkDriver(Guid DriverId, Guid FileId)

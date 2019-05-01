@@ -7,7 +7,7 @@ namespace dTax.ApiModel
 {
     public class CabRegistration
     {
-        public Guid DriverId { get; set; }
+        //public Guid DriverId { get; set; }
 
         public string LicensePlate { get; set; }
         public int ManufactureYear { get; set; }

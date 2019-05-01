@@ -78,9 +78,9 @@ namespace dTax.Controllers
                     return BadRequest("Проверьте данные!");
                 }
 
-                Guid id = DBWorkflow.CustomerRepository.GetCustomerByUserId(GetUserIdByContext());
+                Guid CustomerId = DBWorkflow.CustomerRepository.GetCustomerByUserId(GetUserIdByContext());
 
-                bool ActiveBookExist = DBWorkflow.CabRideRepository.ActiveBookExist(id);
+                bool ActiveBookExist = DBWorkflow.CabRideRepository.ActiveBookExist(CustomerId);
                 if (ActiveBookExist)
                 {
                     return BadRequest("У вас есть незаконченные поездки!");
@@ -116,7 +116,7 @@ namespace dTax.Controllers
 
                 CabRide ride = new CabRide()
                 {
-                    CustomerId = id,
+                    CustomerId = CustomerId,
                     AddressStartPoint = booking.AddressStartPoint,
                     AddressEndPoint = booking.AddressEndPoint,
                     StartPointGPS = booking.StartPointGPS,

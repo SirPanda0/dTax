@@ -15,6 +15,15 @@ namespace dTax.Data.Repository
         {
         }
 
+        public bool Exist(Guid FileId)
+        {
+           var exist = GetQuery().FirstOrDefault(_=>_.FileId == FileId);
+            if (exist != null)
+                return true;
+            else
+                return false;
+        }
+
         public void AddLinkCab(Guid CabId, Guid FileId)
         {
             Insert(new FilesToCab

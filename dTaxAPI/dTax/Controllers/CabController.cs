@@ -81,13 +81,15 @@ namespace dTax.Controllers
                     return BadRequest("Проверьте данные!");
                 }
 
+                Guid DriverId = DBWorkflow.DriverRepository.GetDriverByUserId(GetUserIdByContext()).Id;
+
                 Cab cab = new Cab()
                 {
                     LicensePlate = registerModel.LicensePlate,
                     VIN = registerModel.VIN,
                     CarModelId = registerModel.CarModelId,
                     ManufactureYear = registerModel.ManufactureYear,
-                    DriverId = registerModel.DriverId,
+                    DriverId = DriverId,
                     CarBrandId = registerModel.CarBrandId,
                     CarTypeId = registerModel.CarTypeId,
                     CarColorId = registerModel.CarColorId
@@ -108,8 +110,18 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [Route("FileToCab")]
         [HttpPost]
-        public ActionResult AddFile(Guid CabId, Guid FileId)
+        public ActionResult AddFile(Guid FileId)
         {
+
+            Guid DriverId = DBWorkflow.DriverRepository.GetDriverByUserId(GetUserIdByContext()).Id;
+
+            Guid CabId = DBWorkflow.CabRepository.GetCabByDriverId(DriverId).Id;
+
+            if (DBWorkflow.CabFileRepository.Exist(FileId) != false)
+            {
+                return BadRequest();
+            }
+
             DBWorkflow.CabFileRepository.AddLinkCab(CabId, FileId);
 
             return Ok();
