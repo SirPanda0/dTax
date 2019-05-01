@@ -59,7 +59,7 @@ namespace dTax.Controllers
         public IActionResult GetRidePrice(double distance)
         {
             int dis = Convert.ToInt32(distance);
-            decimal Price = CalculateBookPrice(dis / 1000);
+            PriceResponse Price = CalculateBookPrice(dis );
             return Ok(Price);
 
         }
@@ -86,7 +86,33 @@ namespace dTax.Controllers
                     return BadRequest("У вас есть незаконченные поездки!");
                 }
 
-                decimal Price = CalculateBookPrice(booking.Distance);
+                PriceResponse PriceResponse = CalculateBookPrice(booking.Distance);
+
+                var Price = PriceResponse.Standart;
+
+                switch (booking.TariffType)
+                {
+                    case (int)TariffTypeEnum.Standart:
+                        {
+                            Price = PriceResponse.Standart;
+                            break;
+                        }
+                    case (int)TariffTypeEnum.Comfort:
+                        {
+                            Price = PriceResponse.Comfort;
+                            break;
+                        }
+                    case (int)TariffTypeEnum.Emergency:
+                        {
+                            Price = PriceResponse.Emergency;
+                            break;
+                        }
+                    case (int)TariffTypeEnum.Minivan:
+                        {
+                            Price = PriceResponse.Minivan;
+                            break;
+                        }
+                };
 
                 CabRide ride = new CabRide()
                 {

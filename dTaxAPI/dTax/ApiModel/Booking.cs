@@ -14,6 +14,8 @@ namespace dTax.ApiModel
         public string AddressEndPoint { get; set; }//Место конца поездки
         public float? EndPointGPS { get; set; }//
 
+        public int TariffType { get; set; } // Тариф
+
         public int PaymentTypeId { get; set; }//Тип оплаты
 
         public string BookDetails { get; set; }// доп информация о заказе

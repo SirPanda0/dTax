@@ -1,4 +1,5 @@
 ﻿using dTax.Common;
+using dTax.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 using System;
 using System.Collections.Generic;
@@ -20,17 +21,36 @@ namespace dTax.Controllers
             }
         }
 
-        protected decimal CalculateBookPrice(int dist)
+        protected PriceResponse CalculateBookPrice(int dist)
         {
             if (dist != 0)
-            { 
-            if (DateTime.Now.Hour < 17 && DateTime.Now.Hour > 8)
-                return (dist * 9) + 50;
-            else
-            if (DateTime.Now.Hour > 17)
-                return (dist * 11) + 50;
+            {
+                if (DateTime.Now.Hour <= 17 && DateTime.Now.Hour >= 8)
+                    return new PriceResponse
+                    {
+                        Standart = (dist * 12) + 60,
+                        Comfort = (dist * 12) + 90,
+                        Emergency = (dist * 15) + 90,
+                        Minivan = (dist * 18) + 60
+                    };
+                else
+                if (DateTime.Now.Hour > 17)
+                    return new PriceResponse
+                    {
+                        Standart = (dist * 13) + 70,
+                        Comfort = (dist * 13) + 100,
+                        Emergency = (dist * 16) + 100,
+                        Minivan = (dist * 19) + 70
+                    };
             }
-            return 50;
+                return new PriceResponse
+                {
+                    Standart = 60,
+                    Comfort = 90,
+                    Emergency = 90,
+                    Minivan = 60
+                };
+           
         }
 
 

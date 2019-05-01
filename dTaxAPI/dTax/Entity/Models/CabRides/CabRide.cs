@@ -21,6 +21,7 @@ namespace dTax.Entity.Models.CabRides
 
         public bool IsCanceled { get; set; } = false;//Отменена ли поездки
 
+        public int TariffType { get; set; }
         public int PaymentTypeId { get; set; }//Тип оплаты
         public PaymentType PamentType { get; set; }
         public decimal Price { get; set; }//Цена за поездку
