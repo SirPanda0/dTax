@@ -37,6 +37,7 @@ namespace dTax.Data.Repository
                 .Include(m => m.CarModel)
                 .Include(t => t.CarType)
                 .Include(c => c.CarColor)
+                .Include(f=>f.FileLink)
                 .FirstOrDefaultAsync(_ => _.DriverId == DriverId);
         }
 

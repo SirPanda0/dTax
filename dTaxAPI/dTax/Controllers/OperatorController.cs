@@ -30,7 +30,7 @@ namespace dTax.Controllers
         {
             try
             {
-                var list = GetStatementModelList(DBWorkflow.DriverRepository.GetListDrivers());
+                var list = GetDriversModelList(DBWorkflow.DriverRepository.GetListDrivers());
                 return Json(GetPagingCollections(list, page, size));
 
             }
@@ -50,7 +50,7 @@ namespace dTax.Controllers
         {
             try
             {
-                var list = GetStatementModelList(DBWorkflow.DriverRepository.GetUnconfirmedDrivers());
+                var list = GetUnconfirmedDriversModelList(DBWorkflow.DriverRepository.GetUnconfirmedDrivers());
                 return Json(GetPagingCollections(list, page, size));
 
             }
@@ -74,6 +74,9 @@ namespace dTax.Controllers
 
                 var cab = DBWorkflow.CabRepository.GetCabByDriverId(DriverId);
 
+                var cabFiles = cab.FileLink.Where(_ => _.IsDeleted != true).Select(f => f.FileId).ToArray();
+                var driverFiles = driver.FileLink.Where(_ => _.IsDeleted != true).Select(f => f.FileId).ToArray();
+
                 DriverResponse driverResponse = new DriverResponse()
                 {
                     Id = DriverId,
@@ -83,6 +86,8 @@ namespace dTax.Controllers
                     RegistrationDate = driver.RegistrationDate,
                     PassportSerial = driver.PassportSerial,
                     PassportNumber = driver.PassportNumber,
+                    DriverFilesIds = driverFiles,
+                    CabFilesIds = cabFiles
                     // TODO DriverFileStorageId = driver.FileLink,
                     //Cab = cab,
                     //TODO
@@ -133,9 +138,9 @@ namespace dTax.Controllers
         }
 
         #region Private Region
-        private IEnumerable<DriverViewModel> GetStatementModelList(IEnumerable<Driver> drivers)
+        private IEnumerable<DriverViewModel> GetDriversModelList(IEnumerable<Driver> drivers)
         {
-            return drivers.Where(_ => DBWorkflow.CabRepository.GetCabByDriverId(_.Id) != null).Select(_ =>
+            return drivers.Where(_ => DBWorkflow.CabRepository.GetCabByDriverId(_.Id) != null && _.IsСonfirmed != false).Select(_ =>
 
               {
                   var driverlist = new DriverViewModel()
@@ -147,6 +152,22 @@ namespace dTax.Controllers
                   };
                   return driverlist;
               }).ToList();
+        }
+
+        private IEnumerable<DriverViewModel> GetUnconfirmedDriversModelList(IEnumerable<Driver> drivers)
+        {
+            return drivers.Where(_ => DBWorkflow.CabRepository.GetCabByDriverId(_.Id) != null && _.IsСonfirmed != true).Select(_ =>
+
+            {
+                var driverlist = new DriverViewModel()
+                {
+                    DriverId = _.Id,
+                    FIO = DBWorkflow.UserRepository.GetUserFioById(_.UserId),
+                    CreateDate = _.CreatedDate
+
+                };
+                return driverlist;
+            }).ToList();
         }
         #endregion
 

@@ -19,6 +19,10 @@ namespace dTax.ResponseModels
         public DateTime RegistrationDate { get; set; }
         public string PassportSerial { get; set; }
         public string PassportNumber { get; set; }
+
+        public Guid[] DriverFilesIds { get; set; }
+        public Guid[] CabFilesIds { get; set; }
+
         //public ICollection<\> DriverFileStorageId { get; set; }
 
        

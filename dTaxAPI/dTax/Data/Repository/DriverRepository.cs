@@ -22,7 +22,9 @@ namespace dTax.Data.Repository
 
         private async Task<Driver> GetDriverByIdAsync(Guid id)
         {
-            return await this.GetQuery().FirstOrDefaultAsync(_ => _.IsDeleted == false && _.Id == id);
+            return await this.GetQuery()
+                .Include(f=>f.FileLink)
+                .FirstOrDefaultAsync(_ => _.IsDeleted == false && _.Id == id);
         }
 
         public Driver GetDriverByUserId(Guid Id)
@@ -58,7 +60,9 @@ namespace dTax.Data.Repository
 
         public IEnumerable<Driver> GetUnconfirmedDrivers()
         {
-            return GetUnconfirmedDriversAsync().Result;
+            var result = GetUnconfirmedDriversAsync().Result;
+
+            return result;
         }
 
         private async Task<IEnumerable<Driver>> GetUnconfirmedDriversAsync()
