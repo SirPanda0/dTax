@@ -59,7 +59,8 @@ namespace dTax.Data.Repository
 
         private async Task<User> GetUserByIdAsync(Guid id)
         {
-            return await this.GetQuery().FirstOrDefaultAsync(_ => _.IsDeleted == false && _.Id == id);
+            return await this.GetQuery()
+                .FirstOrDefaultAsync(_ => _.IsDeleted == false && _.Id == id);
         }
 
 

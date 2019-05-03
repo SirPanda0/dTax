@@ -47,7 +47,7 @@ namespace dTax.Controllers
                     return BadRequest("Проверьте данные!");
                 }
 
-                
+
 
                 Guid id = GetUserIdByContext();
 
@@ -81,6 +81,84 @@ namespace dTax.Controllers
         }
 
         [PolicyAuthorize(AuthorizePolicy.Driver)]
+        [Route("Get")]
+        [HttpPost]
+        public ActionResult Get(Guid id)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Проверьте данные!");
+                }
+
+                Driver driver = driverRepository.GetDriverById(id);
+
+                DriverView driverView = new DriverView()
+                {
+                    Id = driver.Id,
+                    Name = driver.User.FirstName,
+                    DrivingLicence = driver.DrivingLicence,
+                    ExpiryDate = driver.ExpiryDate,
+                    PassportNumber = driver.PassportNumber,
+                    PassportSerial = driver.PassportSerial,
+                    RegistrationDate = driver.RegistrationDate
+                };
+
+                return Json(driverView);
+
+            }
+            catch (Exception ex)
+            {
+                Log.Error("\nMessageError: {0} \n StackTrace: {1}", ex.Message, ex.StackTrace);
+                return StatusCode(500);
+            }
+        }
+
+        [PolicyAuthorize(AuthorizePolicy.Driver)]
+        [Route("Update")]
+        [HttpPut]
+        public ActionResult Update([FromBody]DriverView view)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Проверьте данные!");
+                }
+
+                bool exist = driverRepository.IsExists(view.Id, view.DrivingLicence,
+                   view.PassportSerial, view.PassportNumber);
+
+                if (exist)
+                {
+                    return BadRequest("Проверьте данные!");
+                }
+
+                var driver = driverRepository.GetDriverById(view.Id);
+
+                driver.DrivingLicence = view.DrivingLicence;
+                driver.ExpiryDate = view.ExpiryDate;
+                driver.PassportNumber = view.PassportNumber;
+                driver.PassportSerial = view.PassportSerial;
+                driver.RegistrationDate = view.RegistrationDate;
+
+                driver.IsСonfirmed = false;
+                driver.User.IsFullReg = false;
+
+                driverRepository.Update(driver);
+                driverRepository.Commit();
+
+                return Ok("Ожидайте проверки оператором!");
+            }
+            catch (Exception ex)
+            {
+                Log.Error("\nMessageError: {0} \n StackTrace: {1}", ex.Message, ex.StackTrace);
+                return StatusCode(500);
+            }
+        }
+
+        [PolicyAuthorize(AuthorizePolicy.Driver)]
         [Route("FileToDriver")]
         [HttpPost]
         public ActionResult AddFile(Guid FileId)
@@ -93,11 +171,11 @@ namespace dTax.Controllers
             }
 
             driverFileRepository.AddLinkDriver(DriverId, FileId);
-           return Ok();
+            return Ok();
         }
 
 
 
-        
+
     }
 }

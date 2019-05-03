@@ -24,6 +24,7 @@ namespace dTax.Data.Repository
         {
             return await this.GetQuery()
                 .Include(f=>f.FileLink)
+                .Include(u=>u.User)
                 .FirstOrDefaultAsync(_ => _.IsDeleted == false && _.Id == id);
         }
 
@@ -74,8 +75,8 @@ namespace dTax.Data.Repository
         public bool IsExists(Guid userid, long DrivingLicence, string PassportSerial, string PassportNumber)
         {
             var user = GetQuery()
-                .FirstOrDefault(_ => _.DrivingLicence == DrivingLicence
-                || _.PassportSerial == PassportSerial || _.PassportNumber == PassportNumber);
+                .FirstOrDefault(_ => _.DrivingLicence == DrivingLicence && _.Id != userid
+                || _.PassportSerial == PassportSerial && _.Id != userid || _.PassportNumber == PassportNumber && _.Id != userid);
             if (user == null)
                 return false;
             return true;

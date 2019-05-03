@@ -59,7 +59,7 @@ namespace dTax.Controllers
                     FileStorage fileStorage = new FileStorage()
                     {
                         FileContentId = filecontent.Id,
-                        FileName = uploadedFile.FileName
+                        FileName = uploadedFile.FileName + DateTime.UtcNow.Date
 
                         //Drivers =uploadedFile.
                     };

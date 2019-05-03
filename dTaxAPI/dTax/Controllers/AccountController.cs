@@ -38,6 +38,66 @@ namespace dTax.Controllers
             DBWorkflow = dBWorkFlow;
         }
 
+        [Route("Get")]
+        [HttpPost]
+        public ActionResult Get(Guid id)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Некорректные логин и(или) пароль");
+                }
+
+                var user = DBWorkflow.UserRepository.GetUserById(id);
+
+                UserViewModel view = new UserViewModel()
+                {
+                    Id = user.Id,
+                    Email = user.Email,
+                    FirstName = user.FirstName,
+                    LastName = user.LastName,
+                    BirthDate = user.BirthDate
+                };
+
+                return Json(view);
+            }
+            catch (Exception e)
+            {
+                Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
+                return StatusCode(500);
+            }
+        }
+
+
+        [Route("Update")]
+        [HttpPut]
+        public ActionResult Update([FromBody] UserModel userModel)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    return BadRequest("Некорректные логин и(или) пароль");
+                }
+
+                var user = DBWorkflow.UserRepository.GetUserById(userModel.Id);
+                
+                user.Email = userModel.Email;
+                user.PhoneNumber = userModel.PhoneNumber;
+
+                DBWorkflow.UserRepository.Update(user);
+                DBWorkflow.UserRepository.Commit();
+
+                return Ok();
+            }
+            catch (Exception e)
+            {
+                Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
+                return StatusCode(500);
+            }
+        }
+
 
         [Route("Login")]
         [HttpPost]
@@ -101,7 +161,7 @@ namespace dTax.Controllers
                     //string ipAddress = HttpContext.Connection.RemoteIpAddress.ToString();
 
                     //При тестировании комментировать
-                   // var emailService = new EmailService(DBWorkflow);
+                    // var emailService = new EmailService(DBWorkflow);
                     //await emailService.AuthEmailAsync(user.Email);
 
                     return Json(response);

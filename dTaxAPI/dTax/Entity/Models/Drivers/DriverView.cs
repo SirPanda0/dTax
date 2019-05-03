@@ -7,6 +7,7 @@ namespace dTax.Entity.Models.Drivers
 {
     public class DriverView
     {
+        public Guid Id { get; set; }
         public string Name { get; set; }
         public long DrivingLicence { get; set; } //номер прав
         public DateTime ExpiryDate { get; set; } //дата окончания действия прав
