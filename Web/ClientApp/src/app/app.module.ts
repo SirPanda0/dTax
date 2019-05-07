@@ -28,6 +28,7 @@ import { InfoComponent } from './info/info.component';
 import { ContactComponent } from './contact/contact.component';
 import { PartnersComponent } from './partners/partners.component';
 import { TarifComponent } from './tarif/tarif.component';
+import { VacancyComponent } from './vacancy/vacancy.component';
 
  
 
@@ -72,6 +73,8 @@ LkdriverComponent,
     PartnersComponent,
 
     TarifComponent,
+
+    VacancyComponent,
     
   ],
   imports: [
