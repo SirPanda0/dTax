@@ -74,8 +74,8 @@ namespace dTax.Controllers
 
                 var cab = DBWorkflow.CabRepository.GetCabByDriverId(DriverId);
 
-                var cabFiles = cab.FileLink.Where(_ => _.IsDeleted != true).Select(f => f.FileId).ToArray();
-                var driverFiles = driver.FileLink.Where(_ => _.IsDeleted != true).Select(f => f.FileId).ToArray();
+                var cabFiles = (cab != null) ? cab.FileLink.Where(_ => _.IsDeleted != true).Select(f => f.FileId).ToArray() : null;
+                var driverFiles = (driver != null) ? driver.FileLink.Where(_ => _.IsDeleted != true).Select(f => f.FileId).ToArray(): null;
 
                 DriverResponse driverResponse = new DriverResponse()
                 {
@@ -87,7 +87,13 @@ namespace dTax.Controllers
                     PassportSerial = driver.PassportSerial,
                     PassportNumber = driver.PassportNumber,
                     DriverFilesIds = driverFiles,
-                    CabFilesIds = cabFiles
+                    CabFilesIds = cabFiles,
+                    LicensePlate = cab.LicensePlate,
+                    VIN = cab.VIN,
+                    CarBrand = (cab is null) ? null : cab.CarBrand.Name,
+                    CarModel = (cab is null) ? null : cab.CarModel.Name,
+                    CarType = (cab is null) ? null : cab.CarType.Name,
+                    CarColor = (cab is null) ? null : cab.CarColor.Name,
                     // TODO DriverFileStorageId = driver.FileLink,
                     //Cab = cab,
                     //TODO
@@ -136,6 +142,40 @@ namespace dTax.Controllers
                 return StatusCode(500);
             }
         }
+
+        [PolicyAuthorize(AuthorizePolicy.Operator)]
+        [PolicyAuthorize(AuthorizePolicy.FullAccess)]
+        [HttpPost]
+        [Route("UnconfirmDriver")]
+        public IActionResult UnconfirmDriver(Guid DriverId)
+        {
+            try
+            {
+                var driver = DBWorkflow.DriverRepository.IsUnConfirmed(DriverId);
+                DBWorkflow.UserRepository.IsHalfReg(driver.UserId);
+
+                var shift = DBWorkflow.ShiftRepository.GetShiftByDriverId(driver.Id);
+                var cab = DBWorkflow.CabRepository.GetCabByDriverId(driver.Id);
+
+                //if (shift == null)
+                //{
+                //    DBWorkflow.ShiftRepository.Insert(new Shift
+                //    {
+                //        DriverId = driver.Id,
+                //        CabId = cab.Id,
+                //        LoginTime = DateTime.Now
+                //    });
+                //}
+
+                return Ok("Водитель неподтвержденный!");
+            }
+            catch (Exception e)
+            {
+                Log.Error("\nErrorMassage: \n{0}\nStackTrace: \n{1}", e.Message, e.StackTrace);
+                return StatusCode(500);
+            }
+        }
+
 
         #region Private Region
         private IEnumerable<DriverViewModel> GetDriversModelList(IEnumerable<Driver> drivers)

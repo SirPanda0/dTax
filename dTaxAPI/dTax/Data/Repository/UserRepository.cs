@@ -39,6 +39,14 @@ namespace dTax.Data.Repository
             Commit();
         }
 
+        public void IsHalfReg(Guid UserId)
+        {
+            User user = GetUserByIdAsync(UserId).Result;
+            user.IsFullReg = false;
+            Update(user);
+            Commit();
+        }
+
 
         public User FindUserEmail(string Email)
         {

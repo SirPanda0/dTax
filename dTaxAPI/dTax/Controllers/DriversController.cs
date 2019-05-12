@@ -47,8 +47,6 @@ namespace dTax.Controllers
                     return BadRequest("Проверьте данные!");
                 }
 
-
-
                 Guid id = GetUserIdByContext();
 
                 bool exist = driverRepository.IsExists(id, registerModel.DrivingLicence,
@@ -83,7 +81,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [Route("Get")]
         [HttpPost]
-        public ActionResult Get(Guid id)
+        public ActionResult Get()
         {
             try
             {
@@ -92,7 +90,7 @@ namespace dTax.Controllers
                     return BadRequest("Проверьте данные!");
                 }
 
-                Driver driver = driverRepository.GetDriverById(id);
+                Driver driver = driverRepository.GetDriverByUserId(GetUserIdByContext());
 
                 DriverView driverView = new DriverView()
                 {

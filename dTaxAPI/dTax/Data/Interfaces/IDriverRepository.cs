@@ -15,8 +15,10 @@ namespace dTax.Data.Interfaces
         bool IsExists(Guid userid, long DrivingLicence, string PassportSerial, string PassportNumber);
         IEnumerable<Driver> GetUnconfirmedDrivers();
         Driver IsConfirmed(Guid DriverId);
+        Driver IsUnConfirmed(Guid DriverId);
         IEnumerable<Driver> GetListDrivers();
         Driver GetDriverByUserId(Guid Id);
+
 
     }
 }

@@ -15,5 +15,6 @@ namespace dTax.Data.Interfaces
         User GetUserById(Guid Id);
         string GetUserFioById(Guid Id);
         void IsFullReg(Guid UserId);
+        void IsHalfReg(Guid UserId);
     }
 }

@@ -35,7 +35,10 @@ namespace dTax.Data.Repository
 
         private async Task<Driver> GetDriverByUserIdAsync(Guid id)
         {
-            return await this.GetQuery().FirstOrDefaultAsync(_ => _.IsDeleted == false && _.UserId == id);
+            return await this.GetQuery()
+                .Include(f => f.FileLink)
+                .Include(u => u.User)
+                .FirstOrDefaultAsync(_ => _.IsDeleted == false && _.UserId == id);
         }
 
 
@@ -91,6 +94,14 @@ namespace dTax.Data.Repository
             return driver;
         }
 
+        public Driver IsUnConfirmed(Guid DriverId)
+        {
+            Driver driver = GetDriverById(DriverId);
+            driver.IsСonfirmed = false;
+            Update(driver);
+            Commit();
+            return driver;
+        }
 
     }
 }

@@ -19,6 +19,13 @@ namespace dTax.ResponseModels
         public DateTime RegistrationDate { get; set; }
         public string PassportSerial { get; set; }
         public string PassportNumber { get; set; }
+        //Авто
+        public string LicensePlate { get; set; }
+        public string VIN { get; set; }
+        public string CarBrand { get; set; }
+        public string CarModel { get; set; }
+        public string CarColor { get; set; }
+        public string CarType { get; set; }
 
         public Guid[] DriverFilesIds { get; set; }
         public Guid[] CabFilesIds { get; set; }

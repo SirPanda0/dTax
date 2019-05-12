@@ -38,9 +38,10 @@ namespace dTax.Controllers
             DBWorkflow = dBWorkFlow;
         }
 
+        [Authorize]
         [Route("Get")]
         [HttpPost]
-        public ActionResult Get(Guid id)
+        public ActionResult Get()
         {
             try
             {
@@ -49,7 +50,7 @@ namespace dTax.Controllers
                     return BadRequest("Некорректные логин и(или) пароль");
                 }
 
-                var user = DBWorkflow.UserRepository.GetUserById(id);
+                var user = DBWorkflow.UserRepository.GetUserById(GetUserIdByContext());
 
                 UserViewModel view = new UserViewModel()
                 {
@@ -69,7 +70,7 @@ namespace dTax.Controllers
             }
         }
 
-
+        [Authorize]
         [Route("Update")]
         [HttpPut]
         public ActionResult Update([FromBody] UserModel userModel)
@@ -81,7 +82,7 @@ namespace dTax.Controllers
                     return BadRequest("Некорректные логин и(или) пароль");
                 }
 
-                var user = DBWorkflow.UserRepository.GetUserById(userModel.Id);
+                var user = DBWorkflow.UserRepository.GetUserById(GetUserIdByContext());
                 
                 user.Email = userModel.Email;
                 user.PhoneNumber = userModel.PhoneNumber;
