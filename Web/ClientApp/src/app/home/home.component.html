@@ -1,10 +1,21 @@
 <p>
   пользователь, карта, заказ, расчет стоимости
 </p>
-<form #myForm="ngForm" (ngSubmit)="test(myForm)"> 
-    <button type="submit"></button>
-    <label for="Dist"></label>
-    <input type="text" name="Dist" id="Dist" >
+<button (click)="GetDistanse()">Расчитать стоимость</button><br>
+<form *ngIf="Distanse != null" #myForm="ngForm" (ngSubmit)="AddOrder(myForm)"> 
+    <label for="Dist"> Стоимость</label><br>
+    <input type="text" name="Dist" id="Dist" disabled>
+    <div >
+      <label >Машина: </label>
+      <select name="Type" [(ngModel)]="TypeCar"> 
+        <option [value]="Cars.comfort">Комфорт:{{Cars.comfort}} руб</option>
+        <option [value]="Cars.emergency">Экстренный:{{Cars.emergency}} руб</option>
+        <option [value]="Cars.minivan">Минивэн:{{Cars.minivan}} руб</option>
+        <option [value]="Cars.standart">Стандарт:{{Cars.standart}} руб</option>
+      </select>
+    </div>
+    <button type="submit">Заказать</button>
+
 </form>
 <p>{{DistanTest}}</p>
 

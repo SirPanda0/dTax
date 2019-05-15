@@ -12,7 +12,10 @@ declare var ymaps: any;
 export class HomeComponent implements OnInit {
 
 
-  DistanTest;
+  Distanse;
+  Cars;
+
+  TypeCar;
   constructor(private http: HttpService) { }
 
   ngOnInit() {
@@ -75,10 +78,17 @@ export class HomeComponent implements OnInit {
   });
 }
 
-  test(form: NgForm) {
+  GetDistanse() {
     const Distan = $('#Dist').val();
-    this.http.get('CabRide/GetRidePrice?distance=' + Distan).subscribe(data => {
-      this.DistanTest = data;
-    })
+    this.http.get('CabRide/GetRidePrice?distance=' + 15).subscribe(data => {
+      this.Cars = data;
+      this.TypeCar = this.Cars.comfort;
+      this.Distanse = 15;
+    });
+  }
+  AddOrder(Form: NgForm) {
+    this.http.post('CabRide/AddOrder', '').subscribe(data => {
+
+    });
   }
 }
