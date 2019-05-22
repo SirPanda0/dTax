@@ -63,7 +63,7 @@ export class AvtoregistrComponent implements OnInit {
     // tslint:disable-next-line:no-string-literal
     Form.value['DriverId'] = driver.id;
     this.http.post('Cab/Add', Form.value).subscribe(data => {
-
+      this.route.navigateByUrl('driver');
     });
   }
 
