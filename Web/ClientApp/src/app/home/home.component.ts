@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { HttpService } from '../Servise/http.service';
 import * as $ from 'jquery';
 import { NgForm} from '@angular/forms';
+import { UserService } from '../Servise/user.service';
 declare var ymaps: any;
 
 @Component({
@@ -10,19 +11,22 @@ declare var ymaps: any;
   styleUrls: ['./home.component.css']
 })
 export class HomeComponent implements OnInit {
-
+  User;
 
   Distanse;
   Cars;
 
   TypeCar;
-  constructor(private http: HttpService) { }
+  constructor(private http: HttpService, private user: UserService) { }
 
   ngOnInit() {
+    this.User = this.user.GetCurrentUser();
+    console.log(this.User)
     ymaps.ready(this.init);
   }
   init() {
     let Distan;
+    let Points;
 
     const myMap = new ymaps.Map('map', { // Выводим в слой с id="map"
     center: [57.767961, 40.926858], // центрируем карту на Кострому
@@ -69,6 +73,8 @@ export class HomeComponent implements OnInit {
           const activeRoute = route.getActiveRoute();
           if (activeRoute) {
             length = route.getActiveRoute().properties.get("distance");
+            Points = route.getPaths();
+            alert(Points)
             Distan = length;
             $('#Dist').val(Distan.value);
             console.log(Distan);

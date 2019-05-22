@@ -1,8 +1,12 @@
+<p>ФИО: {{User.firstName}} {{User.middleName}} {{User.lastName}}</p>
+<p>Почта: User.email</p>
+
 <p>
   пользователь, карта, заказ, расчет стоимости
 </p>
 <button (click)="GetDistanse()">Расчитать стоимость</button><br>
 <form *ngIf="Distanse != null" #myForm="ngForm" (ngSubmit)="AddOrder(myForm)"> 
+    <input type="hidden" id="StartP" name="Start">
     <label for="Dist"> Стоимость</label><br>
     <input type="text" name="Dist" id="Dist" disabled>
     <div >

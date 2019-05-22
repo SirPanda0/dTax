@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { UserService } from '../Servise/user.service';
 
 @Component({
   selector: 'app-driver',
@@ -7,9 +8,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DriverComponent implements OnInit {
 
-  constructor() { }
+  Driver;
+  constructor(private user: UserService) { }
 
   ngOnInit() {
+    this.Driver = this.user.GetCurrentUser();
   }
 
 }
