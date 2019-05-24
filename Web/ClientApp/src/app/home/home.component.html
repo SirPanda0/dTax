@@ -5,17 +5,24 @@
   пользователь, карта, заказ, расчет стоимости
 </p>
 <button (click)="GetDistanse()">Расчитать стоимость</button><br>
+<input type="hidden" id="StartP1" name="Start1">
+<input type="hidden" id="StartP2" name="Start2">
+
+<input type="hidden" id="EndP1" name="End1">
+<input type="hidden" id="EndP2" name="End2">
+<input type="hidden" id="Dist">
 <form *ngIf="Distanse != null" #myForm="ngForm" (ngSubmit)="AddOrder(myForm)"> 
-    <input type="hidden" id="StartP" name="Start">
-    <label for="Dist"> Стоимость</label><br>
-    <input type="text" name="Dist" id="Dist" disabled>
+
+
+    <!-- <label for="Dist"> Стоимость</label><br>
+    <input type="text" name="Dist" id="Dist" disabled> -->
     <div >
-      <label >Машина: </label>
+      <label >Тариф: </label>
       <select name="Type" [(ngModel)]="TypeCar"> 
-        <option [value]="Cars.comfort">Комфорт:{{Cars.comfort}} руб</option>
-        <option [value]="Cars.emergency">Экстренный:{{Cars.emergency}} руб</option>
-        <option [value]="Cars.minivan">Минивэн:{{Cars.minivan}} руб</option>
-        <option [value]="Cars.standart">Стандарт:{{Cars.standart}} руб</option>
+        <option [value]="1">Комфорт:{{Cars.comfort}} руб</option>
+        <option [value]="2">Экстренный:{{Cars.emergency}} руб</option>
+        <option [value]="3">Минивэн:{{Cars.minivan}} руб</option>
+        <option [value]="4">Стандарт:{{Cars.standart}} руб</option>
       </select>
     </div>
     <button type="submit">Заказать</button>

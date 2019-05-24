@@ -73,11 +73,15 @@ export class HomeComponent implements OnInit {
           const activeRoute = route.getActiveRoute();
           if (activeRoute) {
             length = route.getActiveRoute().properties.get("distance");
-            Points = route.getPaths();
-            alert(Points)
+            Points = route.getActiveRoute().properties.get("boundedBy");
+            
+            $('#StartP1').val(Points[0]);
+            $('#StartP2').val(Points[0][1]);
+            $('#EndP1').val(Points[1]);
+            $('#EndP2').val(Points[1][1]);
+            // console.log(route.getActiveRoute());
             Distan = length;
             $('#Dist').val(Distan.value);
-            console.log(Distan);
             activeRoute.balloon.open();
           }
       });
@@ -86,15 +90,18 @@ export class HomeComponent implements OnInit {
 
   GetDistanse() {
     const Distan = $('#Dist').val();
-    this.http.get('CabRide/GetRidePrice?distance=' + 15).subscribe(data => {
+    this.http.get('CabRide/GetRidePrice?distance=' + Distan).subscribe(data => {
       this.Cars = data;
       this.TypeCar = this.Cars.comfort;
-      this.Distanse = 15;
+      this.Distanse = Distan;
     });
   }
   AddOrder(Form: NgForm) {
-    this.http.post('CabRide/AddOrder', '').subscribe(data => {
-
+    const body = {AddressStartPoint: $('#StartP1').val(), AddressEndPoint: $('#EndP1').val(), 
+    TariffType: Form.value.Type, Distance: this.Distanse};
+    console.log(body)
+    this.http.post('CabRide/AddOrder', body).subscribe(data => {
+      alert('Заказ успешен');
     });
   }
 }
