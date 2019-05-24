@@ -21,7 +21,7 @@ namespace dTax.Controllers
             }
         }
 
-        protected PriceResponse CalculateBookPrice(int dist)
+        protected PriceResponse CalculateBookPrice(decimal dist)
         {
             if (dist != 0)
             {

@@ -86,7 +86,7 @@ namespace dTax.Controllers
                     return BadRequest("У вас есть незаконченные поездки!");
                 }
 
-                PriceResponse PriceResponse = CalculateBookPrice(booking.Distance);
+                PriceResponse PriceResponse = CalculateBookPrice(Convert.ToDecimal(booking.Distance));
 
                 var Price = PriceResponse.Standart;
 
