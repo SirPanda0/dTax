@@ -152,7 +152,8 @@ namespace dTax.Controllers
                         FirstName = user.FirstName,
                         MiddleName = user.MiddleName,
                         LastName = user.LastName,
-                        RoleId = user.Role.Id
+                        RoleId = user.Role.Id,
+                        PhoneNumber = user.PhoneNumber
                     };
 
                     //TODO определение IP пользователя для рассылки на Email при входе

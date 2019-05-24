@@ -15,5 +15,6 @@ namespace dTax.Entity.Models.Users
         public string Email { get; set; }
         public int RoleId { get; set; }
         public bool IsFullReg { get; set; }
+        public string PhoneNumber { get; set; }
     }
 }
