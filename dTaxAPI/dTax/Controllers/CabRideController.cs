@@ -49,7 +49,6 @@ namespace dTax.Controllers
         {
             var ride = await GetStatus(id);
             return Ok(ride.StatusId);
-
         }
 
         [PolicyAuthorize(AuthorizePolicy.User)]
@@ -125,7 +124,8 @@ namespace dTax.Controllers
                     EndPointGPS = booking.EndPointGPS,
                     PaymentTypeId = booking.PaymentTypeId,
                     BookDetails = booking.BookDetails,
-                    Price = Price
+                    Price = Price,
+                    TariffType = booking.TariffType
                 };
                 DBWorkflow.CabRideRepository.Insert(ride);
 
