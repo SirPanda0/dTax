@@ -31,12 +31,14 @@ export class OperatorComponent implements OnInit {
     })
   }
   Privaz(id) {
-    this.http.post('Operator/ConfirmDriver', {DriverId: id}).subscribe(data => {
+    this.http.get('Operator/ConfirmDriver?DriverId=' + id).subscribe(data => {
+      this.UnConfirm = null;
       this.GetDriverConfirm();
     });
   }
   Otvaz(id) {
-    this.http.post('Operator/UnconfirmDriver', {DriverId: id}).subscribe(data => {
+    this.http.get('Operator/UnconfirmDriver?DriverId=' + id).subscribe(data => {
+      this.Confirm = null;
       this.GetDriverConfirm();
     });
   }
