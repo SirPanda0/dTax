@@ -10,9 +10,9 @@ namespace dTax.ApiModel
         //public Guid UserId { get; set; } //id клиента
 
         public string AddressStartPoint { get; set; }//Место начала поездки
-        public float? StartPointGPS { get; set; }//
+        public string StartPointGPS { get; set; }//
         public string AddressEndPoint { get; set; }//Место конца поездки
-        public float? EndPointGPS { get; set; }//
+        public string EndPointGPS { get; set; }//
 
         public int TariffType { get; set; } // Тариф
 

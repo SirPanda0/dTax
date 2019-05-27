@@ -59,7 +59,7 @@ namespace dTax.Controllers
         public IActionResult GetRidePrice(double distance)
         {
             int dis = Convert.ToInt32(distance);
-            PriceResponse Price = CalculateBookPrice(dis);
+            PriceResponse Price = CalculateBookPrice(dis/1000);
             return Ok(Price);
 
         }
@@ -86,7 +86,9 @@ namespace dTax.Controllers
                     return BadRequest("У вас есть незаконченные поездки!");
                 }
 
-                PriceResponse PriceResponse = CalculateBookPrice(Convert.ToDecimal(booking.Distance));
+                int dis = Convert.ToInt32(booking.Distance);
+
+                PriceResponse PriceResponse = CalculateBookPrice(dis/1000);
 
                 var Price = PriceResponse.Standart;
 

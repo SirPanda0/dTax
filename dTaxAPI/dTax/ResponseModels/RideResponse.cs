@@ -11,9 +11,9 @@ namespace dTax.ResponseModels
         public Guid Id { get; set; }
 
         public string AddressStartPoint { get; set; }//Место начала поездки
-        public float? StartPointGPS { get; set; }//
+        public string StartPointGPS { get; set; }//
         public string AddressEndPoint { get; set; }//Место конца поездки
-        public float? EndPointGPS { get; set; }//
+        public string EndPointGPS { get; set; }//
 
         public int PaymentTypeId { get; set; }//Тип оплаты
 
