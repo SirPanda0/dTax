@@ -5,7 +5,7 @@ using dTax.Data.Interfaces;
 using dTax.Entity.Models.CabRides;
 using dTax.Entity.Models.CabRideStatuses;
 
- 
+
 using dTax.ResponseModels;
 using dTax.ViewModels;
 using Microsoft.AspNetCore.Authorization;
@@ -41,10 +41,33 @@ namespace dTax.Controllers
 
         }
 
+        [PolicyAuthorize(AuthorizePolicy.Driver)]
+        [PolicyAuthorize(AuthorizePolicy.FullAccess)]
+        [Route("ActiveOrder")]
+        [HttpPost]
+        public ActionResult ActiveOrder(int page, int size = 20)
+        {
+            try
+            {
+                var driver = DBWorkflow.DriverRepository.GetDriverByUserId(GetUserIdByContext());
+
+                var shift = DBWorkflow.ShiftRepository.GetShiftByDriverId(driver.Id);
+
+                var list = DBWorkflow.CabRideRepository.GetCabRideList();
+                return Json(GetPagingCollections(GetRideDriverModelList(list, shift.Id), page, size));
+
+            }
+            catch (Exception e)
+            {
+                Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
+                return StatusCode(500);
+            }
+        }
+
         [PolicyAuthorize(AuthorizePolicy.User)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [Route("GetRideStatus")]
-        [HttpPost]
+        [HttpGet]
         public async Task<IActionResult> GetRideStatus(Guid id)
         {
             var ride = await GetStatus(id);
@@ -58,7 +81,7 @@ namespace dTax.Controllers
         public IActionResult GetRidePrice(double distance)
         {
             int dis = Convert.ToInt32(distance);
-            PriceResponse Price = CalculateBookPrice(dis/1000);
+            PriceResponse Price = CalculateBookPrice(dis / 1000);
             return Ok(Price);
 
         }
@@ -87,7 +110,7 @@ namespace dTax.Controllers
 
                 int dis = Convert.ToInt32(booking.Distance);
 
-                PriceResponse PriceResponse = CalculateBookPrice(dis/1000);
+                PriceResponse PriceResponse = CalculateBookPrice(dis / 1000);
 
                 var Price = PriceResponse.Standart;
 
@@ -237,7 +260,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.User)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [Route("CancelOrder")]
-        [HttpPost]
+        [HttpGet]
         public IActionResult CancelRide(Guid id)
         {
             try
@@ -264,6 +287,9 @@ namespace dTax.Controllers
             }
         }
 
+        
+
+
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [Route("TakeOrder")]
@@ -279,7 +305,7 @@ namespace dTax.Controllers
                 //RideId не статуса а поездки
                 var ride = DBWorkflow.CabRideStatusRepository.GetCabRideStatusByRideId(id);
 
-                var check = DBWorkflow.CabRideStatusRepository.GetCabRideList().Where(_=>_.ShiftId == shift.Id).Count();
+                var check = DBWorkflow.CabRideStatusRepository.GetCabRideList().Where(_ => _.ShiftId == shift.Id).Count();
 
                 if (check != 0)
                 {
@@ -391,6 +417,24 @@ namespace dTax.Controllers
                 };
                 return ridelist;
             }).ToList();
+        }
+
+        private IEnumerable<CabRideViewModel> GetRideDriverModelList(IEnumerable<CabRide> rides, Guid id)
+        {
+
+            return rides.Where(_ => DBWorkflow.CabRideStatusRepository.GetCabRideStatusByRideId(_.Id).StatusId == (int)RideStatusEnum.Assigned && DBWorkflow.CabRideStatusRepository.GetCabRideStatusByRideId(_.Id).ShiftId == id)
+                .Select(_ =>
+
+                {
+                    var ridelist = new CabRideViewModel()
+                    {
+                        Id = _.Id,
+                        AddressStartPoint = _.AddressStartPoint,
+                        AddressEndPoint = _.AddressEndPoint,
+                        Price = _.Price
+                    };
+                    return ridelist;
+                }).ToList();
         }
 
         private async Task<CabRideStatus> GetStatus(Guid id)
