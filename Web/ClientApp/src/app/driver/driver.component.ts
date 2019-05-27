@@ -11,6 +11,7 @@ export class DriverComponent implements OnInit {
 
   Driver;
   Orders;
+  MyOrders;
   constructor(private user: UserService, private http: HttpService) { }
 
   ngOnInit() {
@@ -23,5 +24,8 @@ export class DriverComponent implements OnInit {
       this.Orders = data;
       console.log(data);
     });
+  }
+  TakeOrder(id) {
+
   }
 }

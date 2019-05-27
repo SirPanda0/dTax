@@ -1,7 +1,34 @@
 <p>ФИО: {{Driver.firstName}} {{Driver.middleName}} {{Driver.lastName}}</p>
 <p>Почта: Driver.email</p>
-<p></p>
 
-<select>
-    
-</select>
+<p>Все заказы</p>
+<table>
+  <tr>
+    <th>Начальная точка</th>
+    <th>Конечная точка</th>
+    <th>Цена</th>
+    <th>Принять</th>
+  </tr>
+  <tr *ngFor="let Order of Orders">
+    <td>{{Order.createDate}}</td>
+    <td>{{Order.fio}}</td>
+    <td>{{Order.fio}}</td>
+    <td><button (click)="TakeOrder(Order.driverId)">Подтвердить</button></td>
+  </tr>
+</table>
+
+<p>Свои заказы</p>
+<table>
+  <tr>
+    <th>Начальная точка</th>
+    <th>Конечная точка</th>
+    <th>Цена</th>
+    <th>Действие</th>
+  </tr>
+  <tr *ngFor="let Order of MyOrders">
+    <td>{{Order.createDate}}</td>
+    <td>{{Order.fio}}</td>
+    <td>{{Order.fio}}</td>
+    <!-- <td><button (click)="Otvaz(Vod.driverId)">Отозвать</button></td> -->
+  </tr>
+</table>
