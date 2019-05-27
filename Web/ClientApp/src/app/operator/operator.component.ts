@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../Servise/http.service';
 
 @Component({
   selector: 'app-operator',
@@ -7,9 +8,36 @@ import { Component, OnInit } from '@angular/core';
 })
 export class OperatorComponent implements OnInit {
 
-  constructor() { }
+  Confirm;
+  UnConfirm;
+  constructor(private http: HttpService) { }
 
   ngOnInit() {
+    this.GetDriverConfirm();
+    
   }
 
+  GetDriverConfirm() {
+    this.http.get('Operator/GetList?page=0').subscribe( (data: any) => {
+      this.Confirm = data.collection;
+      this.GetUnconfirmedList();
+    })
+  }
+
+  GetUnconfirmedList() {
+    this.http.get('Operator/GetUnconfirmedList?page=1').subscribe( (data: any) => {
+      this.UnConfirm = data.collection;
+      console.log(this.UnConfirm);
+    })
+  }
+  Privaz(id) {
+    this.http.post('Operator/ConfirmDriver', {DriverId: id}).subscribe(data => {
+      this.GetDriverConfirm();
+    });
+  }
+  Otvaz(id) {
+    this.http.post('Operator/UnconfirmDriver', {DriverId: id}).subscribe(data => {
+      this.GetDriverConfirm();
+    });
+  }
 }

@@ -17,6 +17,8 @@ export class HomeComponent implements OnInit {
   Cars;
 
   TypeCar;
+  TypePayment;
+
   constructor(private http: HttpService, private user: UserService) { }
 
   ngOnInit() {
@@ -74,12 +76,9 @@ export class HomeComponent implements OnInit {
           if (activeRoute) {
             length = route.getActiveRoute().properties.get("distance");
             Points = route.getActiveRoute().properties.get("boundedBy");
-            
-            $('#StartP1').val(Points[0]);
-            $('#StartP2').val(Points[0][1]);
-            $('#EndP1').val(Points[1]);
-            $('#EndP2').val(Points[1][1]);
-            // console.log(route.getActiveRoute());
+            // console.log(route.getActiveRoute().model.multiRoute.properties._data.rawProperties.RouterMetaData.Waypoints);
+            $('#StartP1').val(route.getActiveRoute().model.multiRoute.properties._data.rawProperties.RouterMetaData.Waypoints[0].address);
+            $('#EndP1').val(route.getActiveRoute().model.multiRoute.properties._data.rawProperties.RouterMetaData.Waypoints[1].address);
             Distan = length;
             $('#Dist').val(Distan.value);
             activeRoute.balloon.open();
@@ -98,8 +97,8 @@ export class HomeComponent implements OnInit {
   }
   AddOrder(Form: NgForm) {
     const body = {AddressStartPoint: $('#StartP1').val(), AddressEndPoint: $('#EndP1').val(), 
-    TariffType: Form.value.Type, Distance: this.Distanse};
-    console.log(body)
+    TariffType: Form.value.Type, Distance: this.Distanse, PaymentTypeId: this.TypePayment};
+    console.log(body);
     this.http.post('CabRide/AddOrder', body).subscribe(data => {
       alert('Заказ успешен');
     });

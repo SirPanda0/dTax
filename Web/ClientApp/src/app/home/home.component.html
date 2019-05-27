@@ -25,6 +25,16 @@
         <option [value]="4">Стандарт:{{Cars.standart}} руб</option>
       </select>
     </div>
+
+    <div >
+      <label >Тип оплаты: </label>
+      <select name="TypePayment" [(ngModel)]="TypePayment"> 
+        <option [value]="1">Наличные</option>
+        <option [value]="2">Карта</option>
+
+      </select>
+    </div>
+
     <button type="submit">Заказать</button>
 
 </form>

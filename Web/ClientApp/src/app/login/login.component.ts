@@ -24,9 +24,14 @@ export class LoginComponent implements OnInit {
     this.user.SetIdentity(data);
     if (data.roleId == 2) {
       this.route.navigateByUrl('home');
-    } else {
+    }
+    if (data.roleId == 1) {
+      this.route.navigateByUrl('operator');
+    }
+    if (data.roleId == 3) {
       this.route.navigateByUrl('driver');
     }
+
     }, err => { alert('Ошибка');
     });
   }
