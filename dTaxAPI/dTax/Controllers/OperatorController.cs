@@ -112,7 +112,7 @@ namespace dTax.Controllers
 
         [PolicyAuthorize(AuthorizePolicy.Operator)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
-        [HttpPost]
+        [HttpGet]
         [Route("ConfirmDriver")]
         public IActionResult ConfirmDriver(Guid DriverId)
         {
@@ -134,7 +134,7 @@ namespace dTax.Controllers
                     });
                 }
 
-                return Ok("Водитель подтвержден!");
+                return Json("Водитель подтвержден!");
             }
             catch (Exception e)
             {
@@ -145,7 +145,7 @@ namespace dTax.Controllers
 
         [PolicyAuthorize(AuthorizePolicy.Operator)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
-        [HttpPost]
+        [HttpGet]
         [Route("UnconfirmDriver")]
         public IActionResult UnconfirmDriver(Guid DriverId)
         {
@@ -167,7 +167,7 @@ namespace dTax.Controllers
                 //    });
                 //}
 
-                return Ok("Водитель неподтвержденный!");
+                return Json("Водитель неподтвержденный!");
             }
             catch (Exception e)
             {
