@@ -20,7 +20,7 @@ namespace dTax.ApiModel
 
         public string BookDetails { get; set; }// доп информация о заказе
 
-        public string Distance { get; set; }// дистанция от объекта к объекту
+        public double Distance { get; set; }// дистанция от объекта к объекту
 
     }
 }
