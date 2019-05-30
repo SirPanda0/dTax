@@ -10,8 +10,8 @@ import { HttpService } from '../Servise/http.service';
 export class DriverComponent implements OnInit {
 
   Driver;
-  Orders;
-  MyOrders;
+  Orders: any;
+  MyOrders: any;
   constructor(private user: UserService, private http: HttpService) { }
 
   ngOnInit() {
@@ -20,12 +20,15 @@ export class DriverComponent implements OnInit {
   }
 
   GetOrder() {
-    this.http.get('CabRide/GetRideList?page=0').subscribe( data => {
-      this.Orders = data;
-      console.log(data);
+    this.http.get('CabRide/GetRideList?page=0').subscribe( (data: any) => {
+      this.Orders = data.collection;
+
     });
   }
   TakeOrder(id) {
-
+    this.http.post('CabRide/TakeOrder', id).subscribe(data => {
+      this.GetOrder();
+      alert('Заказ принят');
+    });
   }
 }

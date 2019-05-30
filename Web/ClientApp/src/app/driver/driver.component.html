@@ -10,10 +10,10 @@
     <th>Принять</th>
   </tr>
   <tr *ngFor="let Order of Orders">
-    <td>{{Order.createDate}}</td>
-    <td>{{Order.fio}}</td>
-    <td>{{Order.fio}}</td>
-    <td><button (click)="TakeOrder(Order.driverId)">Подтвердить</button></td>
+    <td>{{Order.addressStartPoint}}</td>
+    <td>{{Order.addressEndPoint}}</td>
+    <td>{{Order.price}}</td>
+    <td><button (click)="TakeOrder(Order.id)">Подтвердить</button></td>
   </tr>
 </table>
 

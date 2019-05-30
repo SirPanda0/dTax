@@ -40,3 +40,17 @@
 <p>{{DistanTest}}</p>
 
 <div id="map"></div>
+
+<p>Ваш заказ</p>
+<table>
+  <tr>
+    <th>Дата регистрации</th>
+    <th>Фио</th>
+    <th>Действие</th>
+  </tr>
+  <tr *ngFor="let Vod of UnConfirm">
+    <td>{{Vod.createDate}}</td>
+    <td>{{Vod.fio}}</td>
+    <td><button (click)="Privaz(Vod.driverId)">Подтвердить</button></td>
+  </tr>
+</table>
