@@ -23,8 +23,8 @@ export class HomeComponent implements OnInit {
 
   ngOnInit() {
     this.User = this.user.GetCurrentUser();
-    console.log(this.User)
     ymaps.ready(this.init);
+    this.GetOrder();
   }
   init() {
     let Distan;
@@ -101,6 +101,12 @@ export class HomeComponent implements OnInit {
     console.log(body);
     this.http.post('CabRide/AddOrder', body).subscribe(data => {
       alert('Заказ успешен');
+    });
+  }
+
+  GetOrder() {
+    this.http.get('CabRide/GetRideStatus').subscribe(data => {
+      console.log(data);
     });
   }
 }

@@ -34,6 +34,7 @@ import { AccessOperatorGuard } from './Guards/AccessOperator';
 import { AccessUserGuard } from './Guards/AccessUser';
 import { AccessVodGuard } from './Guards/AccessVod';
 import { CanActivate } from '@angular/router/src/utils/preactivation';
+import { HeadComponent } from './head/head.component';
 
 const Routs: Routes = [
   {path: '', component: LoginComponent}, // авторизация
@@ -78,6 +79,8 @@ LkdriverComponent,
     TarifComponent,
 
     VacancyComponent,
+
+    HeadComponent,
     
   ],
   imports: [

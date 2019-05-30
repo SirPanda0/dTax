@@ -68,8 +68,9 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [Route("GetRideStatus")]
         [HttpGet]
-        public async Task<IActionResult> GetRideStatus(Guid id)
+        public async Task<IActionResult> GetRideStatus()
         {
+            var id = DBWorkflow.CustomerRepository.GetCustomerByUserId(GetUserIdByContext());
             var ride = await GetStatus(id);
             return Ok(ride.StatusId);
         }
