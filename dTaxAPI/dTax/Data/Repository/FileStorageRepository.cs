@@ -26,7 +26,9 @@ namespace dTax.Data.Repository
 
         private async Task<FileStorage> GetByIdAsync(Guid fileId)
         {
-            return await GetQuery().FirstOrDefaultAsync(_ => _.Id == fileId);
+            return await GetQuery()
+                .Include(c=>c.FileContent)
+                .FirstOrDefaultAsync(_ => _.Id == fileId);
         }
 
         public IEnumerable<FileStorage> GetFilesByIds(IEnumerable<Guid> fileIds)
