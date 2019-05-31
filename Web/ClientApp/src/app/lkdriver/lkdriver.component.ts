@@ -1,4 +1,6 @@
 import { Component, OnInit } from '@angular/core';
+import { HttpService } from '../Servise/http.service';
+import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-lkdriver',
@@ -7,9 +9,24 @@ import { Component, OnInit } from '@angular/core';
 })
 export class LkdriverComponent implements OnInit {
 
-  constructor() { }
+  PhotoCar: any;
+  constructor(private http: HttpService) { }
 
   ngOnInit() {
+  }
+
+  ChangePhotoCar(event) {
+    this.PhotoCar = event;
+  }
+
+  LoadPhotoCar() {
+    this.http.makeFileRequest('FileStorage/Upload', this.PhotoCar).then( data => {
+      this.http.get('Cab/FileToCab?FileId=' + data).subscribe( data1 => {
+        alert('Фото добавлено');
+      }, error1 => {
+        alert('Добавить неудалось');
+      });
+    });
   }
 
 }

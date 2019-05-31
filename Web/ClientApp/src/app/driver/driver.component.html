@@ -26,9 +26,9 @@
     <th>Действие</th>
   </tr>
   <tr *ngFor="let Order of MyOrders">
-    <td>{{Order.createDate}}</td>
-    <td>{{Order.fio}}</td>
-    <td>{{Order.fio}}</td>
+    <td>{{Order.addressStartPoint}}</td>
+    <td>{{Order.addressEndPoint}}</td>
+    <td>{{Order.price}}</td>
     <!-- <td><button (click)="Otvaz(Vod.driverId)">Отозвать</button></td> -->
   </tr>
 </table>

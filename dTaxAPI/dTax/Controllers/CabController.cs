@@ -109,7 +109,7 @@ namespace dTax.Controllers
 
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [Route("FileToCab")]
-        [HttpPost]
+        [HttpGet]
         public ActionResult AddFile(Guid FileId)
         {
 

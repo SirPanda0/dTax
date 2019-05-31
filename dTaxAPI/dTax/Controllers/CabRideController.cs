@@ -44,7 +44,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [Route("ActiveOrder")]
-        [HttpPost]
+        [HttpGet]
         public ActionResult ActiveOrder(int page, int size = 20)
         {
             try
@@ -294,7 +294,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [Route("TakeOrder")]
-        [HttpPost]
+        [HttpGet]
         public ActionResult TakeOrder(Guid id)
         {
             try

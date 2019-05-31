@@ -22,13 +22,23 @@ export class DriverComponent implements OnInit {
   GetOrder() {
     this.http.get('CabRide/GetRideList?page=0').subscribe( (data: any) => {
       this.Orders = data.collection;
+      this.GetActiveOrder();
 
     });
   }
   TakeOrder(id) {
-    this.http.post('CabRide/TakeOrder', id).subscribe(data => {
+    this.http.get('CabRide/TakeOrder?id=' + id).subscribe(data => {
       this.GetOrder();
       alert('Заказ принят');
+    }, erroe => {
+      alert('Уже есть активный заказ');
+    });
+  }
+
+  GetActiveOrder() {
+    this.http.get('CabRide/ActiveOrder?page=0').subscribe((data: any) => {
+     this.MyOrders = data.collection;
+      console.log(data);
     });
   }
 }

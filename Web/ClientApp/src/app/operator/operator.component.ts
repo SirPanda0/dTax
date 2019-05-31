@@ -10,11 +10,13 @@ export class OperatorComponent implements OnInit {
 
   Confirm;
   UnConfirm;
+
+  Vod: any;
+  IsOpenInfoVod = false;
   constructor(private http: HttpService) { }
 
   ngOnInit() {
     this.GetDriverConfirm();
-    
   }
 
   GetDriverConfirm() {
@@ -27,8 +29,7 @@ export class OperatorComponent implements OnInit {
   GetUnconfirmedList() {
     this.http.get('Operator/GetUnconfirmedList?page=1').subscribe( (data: any) => {
       this.UnConfirm = data.collection;
-      console.log(this.UnConfirm);
-    })
+    });
   }
   Privaz(id) {
     this.http.get('Operator/ConfirmDriver?DriverId=' + id).subscribe(data => {
@@ -41,5 +42,21 @@ export class OperatorComponent implements OnInit {
       this.Confirm = null;
       this.GetDriverConfirm();
     });
+  }
+
+  OpenInvoVod(id) {
+    this.http.get('Operator/GetInfo?DriverId=' + id).subscribe( data => {
+      this.IsOpenInfoVod = true;
+      this.Vod = data;
+      console.log(data);
+    });
+  }
+
+  CloseInfo() {
+    this.IsOpenInfoVod = false;
+  }
+  
+  DeleteVod(id) {
+
   }
 }

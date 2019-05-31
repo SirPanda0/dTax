@@ -1,3 +1,23 @@
+<div *ngIf="IsOpenInfoVod == true" class="Zaslon"></div>
+
+<div *ngIf="IsOpenInfoVod == true" class="ModalInfo">
+  <button (click)="CloseInfo()">Закрыть</button>
+  <h2>Информация о водителе</h2>
+  <p>Машина: {{Vod.carBrand}}</p>
+  <p>Цвет машины: {{Vod.carColor}}</p>
+  <p>Модель машины: {{Vod.carModel}}</p>
+  <p>Тип машины: {{Vod.carType}}</p>
+
+  <p>Лицензия: {{Vod.drivingLicence}}</p>
+  <p>Срок действия: {{Vod.expiryDate}}</p>
+  <p>Номерной знак: {{Vod.licensePlate}}</p>
+  <p>Имя: {{Vod.name}}</p>
+  <p>Номер паспорта: {{Vod.passportNumber}}</p>
+  <p>Серия паспорта: {{Vod.passportSerial}}</p>
+  <p>Дата регистрации: {{Vod.registrationDate}}</p>
+  <p>ВИН: {{Vod.vin}}</p>
+</div>
+
 <p>Список не подтвержденных водителей</p>
 <table>
   <tr>
@@ -8,7 +28,12 @@
   <tr *ngFor="let Vod of UnConfirm">
     <td>{{Vod.createDate}}</td>
     <td>{{Vod.fio}}</td>
-    <td><button (click)="Privaz(Vod.driverId)">Подтвердить</button></td>
+    <td>
+      <button (click)="Privaz(Vod.driverId)">Подтвердить</button>
+      <button style="margin-left: 1px" (click)="OpenInvoVod(Vod.driverId)">Просмотр</button>
+      <button style="margin-left: 1px" (click)="DeleteVod(Vod.driverId)">Удалить</button>
+      
+    </td>
   </tr>
 </table>
 
@@ -22,6 +47,13 @@
   <tr *ngFor="let Vod of Confirm">
     <td>{{Vod.createDate}}</td>
     <td>{{Vod.fio}}</td>
-    <td><button (click)="Otvaz(Vod.driverId)">Отозвать</button></td>
+    <td>
+      <button (click)="Otvaz(Vod.driverId)">Отозвать</button>
+      <button style="margin-left: 1px" (click)="OpenInvoVod(Vod.driverId)">Просмотр</button>
+      <button style="margin-left: 1px" (click)="DeleteVod(Vod.driverId)">Удалить</button>
+    </td>
   </tr>
 </table>
+
+
+
