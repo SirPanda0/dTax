@@ -3,11 +3,14 @@ using dTax.Auth;
 using dTax.Data.Interfaces;
 using dTax.Entity.Models.Cabs;
 using dTax.Entity.Models.CarModels;
+using Microsoft.AspNetCore.Authentication;
+using Microsoft.AspNetCore.Authentication.Cookies;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace dTax.Controllers
@@ -64,7 +67,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [Route("Update")]
         [HttpPut]
-        public ActionResult Update([FromBody] CabRegistrationModel updateModel)
+        public async Task<IActionResult> Update([FromBody] CabRegistrationModel updateModel)
         {
             try
             {
@@ -90,8 +93,13 @@ namespace dTax.Controllers
                     DBWorkflow.CabRepository.Insert(cab);
                     DBWorkflow.CabRepository.Commit();
 
+                    var user = DBWorkflow.UserRepository.GetUserById(GetUserIdByContext());
+
                     var driver = DBWorkflow.DriverRepository.IsUnConfirmed(DriverId);
                     DBWorkflow.UserRepository.IsHalfReg(driver.UserId);
+
+                    ClaimsIdentity identity = GetIdentity(user);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
                 }
                 return BadRequest("У водителя не добавлен автомобиль");
 
@@ -106,7 +114,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [Route("Delete")]
         [HttpDelete]
-        public ActionResult Delete()
+        public async Task<IActionResult> Delete()
         {
             try
             {
@@ -119,8 +127,15 @@ namespace dTax.Controllers
                     DBWorkflow.CabRepository.Update(cab);
                     DBWorkflow.CabRepository.Commit();
 
+
+
                     var driver = DBWorkflow.DriverRepository.IsUnConfirmed(DriverId);
                     DBWorkflow.UserRepository.IsHalfReg(driver.UserId);
+
+                    var user = DBWorkflow.UserRepository.GetUserById(GetUserIdByContext());
+
+                    ClaimsIdentity identity = GetIdentity(user);
+                    await HttpContext.SignInAsync(CookieAuthenticationDefaults.AuthenticationScheme, new ClaimsPrincipal(identity));
 
                     return StatusCode(200);
                 }

@@ -55,7 +55,8 @@ namespace dTax.Controllers
                     MiddleName = user.MiddleName,
                     LastName = user.LastName,
                     RoleId = user.RoleId,
-                    PhoneNumber = user.PhoneNumber
+                    PhoneNumber = user.PhoneNumber,
+                    IsFullReg = user.IsFullReg
                 };
 
                 return Json(response);
@@ -186,7 +187,8 @@ namespace dTax.Controllers
                         MiddleName = user.MiddleName,
                         LastName = user.LastName,
                         RoleId = user.RoleId,
-                        PhoneNumber = user.PhoneNumber
+                        PhoneNumber = user.PhoneNumber,
+                        IsFullReg = user.IsFullReg
                     };
 
                     //TODO определение IP пользователя для рассылки на Email при входе
@@ -332,33 +334,7 @@ namespace dTax.Controllers
         }
 
         #region Приватный регион
-        private ClaimsIdentity GetIdentity(UserEntity user)
-        {
-            try
-            {
-                var claims = new List<Claim>
-                {
-                        new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
-                        new Claim(ClaimsIdentity.DefaultRoleClaimType, user.RoleId.ToString()),
-                        new Claim(ClaimTypes.Surname, user.LastName),
-                        //new Claim(CustomClaimType.RoleName, user.Role.Name),
-                        new Claim(CustomClaimType.UserName, user.FirstName),
-                        new Claim(CustomClaimType.UserId, user.Id.ToString()),
-                        new Claim(CustomClaimType.FullAccess , user.IsFullReg.ToString())
-                };
-
-                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "dTaxCookie", ClaimsIdentity.DefaultNameClaimType,
-                    ClaimsIdentity.DefaultRoleClaimType);
-
-                return claimsIdentity;
-            }
-            catch (Exception e)
-            {
-                Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
-                return null;
-            }
-
-        }
+       
 
 
 

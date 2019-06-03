@@ -157,6 +157,7 @@ namespace dTax.Controllers
                 var shift = DBWorkflow.ShiftRepository.GetShiftByDriverId(driver.Id);
                 var cab = DBWorkflow.CabRepository.GetCabByDriverId(driver.Id);
 
+
                 //if (shift == null)
                 //{
                 //    DBWorkflow.ShiftRepository.Insert(new Shift

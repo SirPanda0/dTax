@@ -1,10 +1,12 @@
 ﻿using dTax.Common;
+using dTax.Entity.Models.Users;
 using dTax.ResponseModels;
 using Microsoft.AspNetCore.Mvc;
 using Serilog;
 using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Security.Claims;
 using System.Security.Cryptography;
 using System.Text;
 using System.Threading.Tasks;
@@ -108,5 +110,36 @@ namespace dTax.Controllers
                 return null;
             }
         }
+
+        
+
+        protected ClaimsIdentity GetIdentity(UserEntity user)
+        {
+            try
+            {
+                var claims = new List<Claim>
+                {
+                        new Claim(ClaimsIdentity.DefaultNameClaimType, user.Email),
+                        new Claim(ClaimsIdentity.DefaultRoleClaimType, user.RoleId.ToString()),
+                        new Claim(ClaimTypes.Surname, user.LastName),
+                        //new Claim(CustomClaimType.RoleName, user.Role.Name),
+                        new Claim(CustomClaimType.UserName, user.FirstName),
+                        new Claim(CustomClaimType.UserId, user.Id.ToString()),
+                        new Claim(CustomClaimType.FullAccess , user.IsFullReg.ToString())
+                };
+
+                ClaimsIdentity claimsIdentity = new ClaimsIdentity(claims, "dTaxCookie", ClaimsIdentity.DefaultNameClaimType,
+                    ClaimsIdentity.DefaultRoleClaimType);
+
+                return claimsIdentity;
+            }
+            catch (Exception e)
+            {
+                Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
+                return null;
+            }
+
+        }
+
     }
 }
