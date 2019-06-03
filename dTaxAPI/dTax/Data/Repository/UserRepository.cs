@@ -20,7 +20,7 @@ namespace dTax.Data.Repository
             return GetQuery()
                  .Include(_ => _.Role)
                  .FirstOrDefault<UserEntity>(
-                _ => _.Email == Email && _.Password == password);
+                _ => _.Email == Email && _.Password == password && _.IsDeleted != true);
         }
 
         public bool IsUserExists(string Email)
@@ -68,7 +68,7 @@ namespace dTax.Data.Repository
         private async Task<UserEntity> GetUserByIdAsync(Guid id)
         {
             return await this.GetQuery()
-                .FirstOrDefaultAsync(_ => _.IsDeleted == false && _.Id == id);
+                .FirstOrDefaultAsync(_ => _.IsDeleted != true && _.Id == id);
         }
 
 

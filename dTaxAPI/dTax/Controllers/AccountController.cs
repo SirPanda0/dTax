@@ -4,7 +4,6 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
-
 using Microsoft.AspNetCore.Authorization;
 using dTax.ApiModel;
 using System.Security.Claims;
@@ -40,7 +39,7 @@ namespace dTax.Controllers
 
         [Authorize]
         [Route("Get")]
-        [HttpPost]
+        [HttpGet]
         public ActionResult Get()
         {
             try
@@ -52,16 +51,18 @@ namespace dTax.Controllers
 
                 var user = DBWorkflow.UserRepository.GetUserById(GetUserIdByContext());
 
-                UserViewModel view = new UserViewModel()
+                var response = new UserView
                 {
                     Id = user.Id,
                     Email = user.Email,
                     FirstName = user.FirstName,
+                    MiddleName = user.MiddleName,
                     LastName = user.LastName,
-                    BirthDate = user.BirthDate
+                    RoleId = user.Role.Id,
+                    PhoneNumber = user.PhoneNumber
                 };
 
-                return Json(view);
+                return Json(response);
             }
             catch (Exception e)
             {
@@ -84,15 +85,54 @@ namespace dTax.Controllers
 
                 var user = DBWorkflow.UserRepository.GetUserById(GetUserIdByContext());
                 
+                if (userModel.NewPassword != null && userModel.OldPassword != null)
+                {
+                    string OldPasswordHash = GetHash(userModel.OldPassword);
+                    string NewPasswordHash = GetHash(userModel.NewPassword);
+
+                    if (OldPasswordHash == user.Password)
+                    {
+                        user.Password = NewPasswordHash;
+                    }
+                    else
+                    {
+                        return BadRequest("Проверьте пароль!");
+                    }
+
+                }
+
                 user.Email = userModel.Email;
                 user.PhoneNumber = userModel.PhoneNumber;
 
                 DBWorkflow.UserRepository.Update(user);
                 DBWorkflow.UserRepository.Commit();
 
-                return Ok();
+                return StatusCode(200);
             }
             catch (Exception e)
+            {
+                Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
+                return StatusCode(500);
+            }
+        }
+
+        [Authorize]
+        [Route("Delete")]
+        [HttpDelete]
+        public async Task<IActionResult> Delete()
+        {
+            try
+            {
+                var user = DBWorkflow.UserRepository.GetUserById(GetUserIdByContext());
+
+                user.IsDeleted = true;
+                DBWorkflow.UserRepository.Update(user);
+                DBWorkflow.UserRepository.Commit();
+
+                await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
+                return StatusCode(200);
+            }
+            catch(Exception e)
             {
                 Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
                 return StatusCode(500);
@@ -111,11 +151,8 @@ namespace dTax.Controllers
                     return BadRequest("Некорректные логин и(или) пароль");
                 }
 
-
-
                 string PasswordHash = GetHash(loginModel.Password);
                 UserEntity user = DBWorkflow.UserRepository.FindUserLogin(loginModel.Email, PasswordHash);
-
 
                 if (user != null)
                 {
@@ -190,7 +227,6 @@ namespace dTax.Controllers
         {
             try
             {
-
                 if (!ModelState.IsValid)
                 {
                     return BadRequest("Проверьте данные");
@@ -249,8 +285,8 @@ namespace dTax.Controllers
                     FirstName = user.FirstName,
                     MiddleName = user.MiddleName,
                     LastName = user.LastName,
-                    RoleId = user.RoleId,
-                    IsFullReg = IsFull
+                    RoleId = user.Role.Id,
+                    PhoneNumber = user.PhoneNumber
                 };
 
                 if (IsFull)
@@ -290,7 +326,7 @@ namespace dTax.Controllers
             {
                 await HttpContext.SignOutAsync(CookieAuthenticationDefaults.AuthenticationScheme);
 
-                return Json("");
+                return StatusCode(200);
             }
             catch (Exception e)
             {
@@ -299,52 +335,7 @@ namespace dTax.Controllers
             }
         }
 
-        //TODO
-        //[Authorize]
-        //[Route("Edit")]
-        //[HttpPut]
-        //public async Task<IActionResult> Edit([FromBody] UserModel userModel)
-        //{
-        //    if (!ModelState.IsValid)
-        //    {
-        //        return BadRequest();
-        //    }
-
-        //    User UserEdit = new User
-        //    {
-        //        Email = userModel.Email,
-        //        BirthDate = userModel.BirthDate,
-        //        FirstName = userModel.FirstName,
-        //        LastName = userModel.LastName,
-        //        Password = userModel.Password
-        //    };
-
-        //    db.Users.Update(UserEdit);
-        //    await db.SaveChangesAsync();
-        //    return Ok(UserEdit);
-
-        //}
-
-        ///TODO
-        //[Authorize]
-        //[Route("GetUserInfo")]
-        //[HttpGet]
-        //public async Task<IActionResult> GetUser([FromQuery] int Id)
-        //{
-        //    User user = await db.Users.FirstOrDefaultAsync(i => i.Id == Id);
-
-        //    UserViewModel userViewModel = new UserViewModel
-        //    {
-        //        Email = user.Email,
-        //        BirthDate = user.BirthDate,
-        //        FirstName = user.FirstName,
-        //        LastName = user.LastName
-        //    };
-
-        //    return Json(userViewModel);
-
-
-        //}
+        
 
 
 
