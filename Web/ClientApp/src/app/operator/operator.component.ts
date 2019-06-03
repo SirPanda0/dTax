@@ -7,6 +7,7 @@ import { HttpService } from '../Servise/http.service';
   styleUrls: ['./operator.component.css']
 })
 export class OperatorComponent implements OnInit {
+  photoApi = 'http://localhost:5000/api/FileStorage/Download?id=';
 
   Confirm;
   UnConfirm;
