@@ -22,7 +22,7 @@ namespace dTax.Data.Repository
 
         private async Task<CabEntity> GetCabByIdAsync(Guid id)
         {
-            return await GetQuery().FirstOrDefaultAsync(_ => _.Id == id);
+            return await GetQuery().FirstOrDefaultAsync(_ => _.Id == id && _.IsDeleted != true);
         }
 
         public CabEntity GetCabByDriverId(Guid DriverId)
@@ -38,13 +38,13 @@ namespace dTax.Data.Repository
                 .Include(t => t.CarType)
                 .Include(c => c.CarColor)
                 .Include(f=>f.FileLink)
-                .FirstOrDefaultAsync(_ => _.DriverId == DriverId);
+                .FirstOrDefaultAsync(_ => _.DriverId == DriverId && _.IsDeleted != true);
         }
 
         public bool IsExists(string LicensePlate, string VIN)
         {
             var cab = GetQuery()
-                .FirstOrDefault(_ => _.LicensePlate == LicensePlate || _.VIN == VIN);
+                .FirstOrDefault(_ => _.LicensePlate == LicensePlate && _.IsDeleted != true || _.VIN == VIN && _.IsDeleted != true);
             if (cab == null)
                 return false;
             return true;
