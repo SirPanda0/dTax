@@ -2,16 +2,22 @@
 	<div class="login-page">
 		<div class="form">
 	   
-			
-			<input type="text" placeholder="Имя" name="firstname" ngModel />
-			<input type="text" placeholder="Фамилия" name="lastname" ngModel  />
-			<input type="text" placeholder="Отчество" name="middleName" ngModel  />
-			<input type="email" placeholder="Емейл" name="email" ngModel  />
-			<input type="password" placeholder="Пароль" name="password" ngModel  />
-			<input type="text" placeholder="Номер телефона" name="phoneNumber" ngModel  />
+	
+			<input type="text" title="Имя" required placeholder="Имя" name="firstname" ngModel />
+		
+			<input type="text" title="Фамилия" required placeholder="Фамилия" name="lastname" ngModel  />
+		
+			<input type="text" title="Отчество"required placeholder="Отчество" name="middleName" ngModel  />
+		
+			<input type="email" title="Емейл" required placeholder="Емейл" name="email" ngModel  />
+	
+			<input type="password" title="Пароль" required placeholder="Пароль" name="password" ngModel  />
+	
+			<input type="number" pattern="\d [0-9]"  max="11"  title="Номер телефона" required placeholder="Номер телефона" name="phoneNumber" ngModel  />
 			<input type="radio" value="2" placeholder="RoleId" name="roleId" ngModel  /> Заказчик
 			<input type="radio" value="3" placeholder="RoleId" name="roleId" ngModel  /> Водитель
-			<input type="date" id="date" placeholder="Дата регистрации" name="birthDate" ngModel  />
+			<p>Дата регистрации</p>
+			<input type="date" title="Дата регистрации" id="date" placeholder="Дата регистрации" name="birthDate" ngModel  />
 			<input type="submit" value='Зарегистрироваться'>
 	
 		</div>

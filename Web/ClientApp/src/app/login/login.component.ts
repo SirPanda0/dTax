@@ -18,7 +18,7 @@ export class LoginComponent implements OnInit {
 
   ngOnInit() {
   }
-  xer(Form: NgForm) {
+  log(Form: NgForm) {
     console.log(Form.value);
     this.http.post('account/login', Form.value).subscribe  ((data: any) => {
     this.user.SetIdentity(data);

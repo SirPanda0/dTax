@@ -1,15 +1,9 @@
 <div class="login-page">
   <div class="form">
-    <form  class="register-form">
-      <input type="text" placeholder="name" name="email"/>
-      <input type="password" placeholder="password"/>
-      <input type="text" placeholder="email address"/>
-      <input type="submit" value="Create">
-      <p class="message">Already registered? <a href="#">Sign In</a></p>
-    </form>
-    <form  #LogForm="ngForm" (ngSubmit)="xer(LogForm)" class="login-form" novalidate>
-      <input type="text" placeholder="Логин" name="email" ngModel />
-      <input type="password" placeholder="Пароль" name="password" ngModel  />
+    
+    <form  #LogForm="ngForm" (ngSubmit)="log(LogForm)" class="login-form" novalidate>
+      <input type="text" title="Логин" placeholder="Логин" name="email" ngModel />
+      <input type="password" title="Пароль" placeholder="Пароль" name="password" ngModel  />
       <input type="submit" value="Войти">
       <p class="message">Не зарегистрированы? <a href="registr">Создать аккаунт</a></p>
     </form>

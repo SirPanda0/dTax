@@ -22,14 +22,13 @@
 			<option *ngFor="let Color of ColorAvto" [value]="Color.id">{{Color.name}}</option>
 		</select>
 
-		<p>ВИН</p>
-		<input type="text" name="VIN" ngModel>
+		<input type="text" placeholder="VIN автомобиля" name="VIN" ngModel>
 
-		<p>Лицензия</p>
-		<input type="text" name="LicensePlate" ngModel>
+		
+		<input type="text" placeholder="Лицензия" name="LicensePlate" ngModel>
 
-			 <p></p>
-			<button type="submit">Зарегистрировать</button>
+			
+			<button type="submit">Зарегистрироваться</button>
 		</div>
 	  </div>
 	</form>
