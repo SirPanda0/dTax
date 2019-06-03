@@ -44,11 +44,7 @@ namespace dTax.Controllers
         {
             try
             {
-                if (!ModelState.IsValid)
-                {
-                    return BadRequest("Некорректные логин и(или) пароль");
-                }
-
+               
                 var user = DBWorkflow.UserRepository.GetUserById(GetUserIdByContext());
 
                 var response = new UserView
@@ -58,7 +54,7 @@ namespace dTax.Controllers
                     FirstName = user.FirstName,
                     MiddleName = user.MiddleName,
                     LastName = user.LastName,
-                    RoleId = user.Role.Id,
+                    RoleId = user.RoleId,
                     PhoneNumber = user.PhoneNumber
                 };
 
@@ -189,7 +185,7 @@ namespace dTax.Controllers
                         FirstName = user.FirstName,
                         MiddleName = user.MiddleName,
                         LastName = user.LastName,
-                        RoleId = user.Role.Id,
+                        RoleId = user.RoleId,
                         PhoneNumber = user.PhoneNumber
                     };
 
@@ -285,7 +281,7 @@ namespace dTax.Controllers
                     FirstName = user.FirstName,
                     MiddleName = user.MiddleName,
                     LastName = user.LastName,
-                    RoleId = user.Role.Id,
+                    RoleId = user.RoleId,
                     PhoneNumber = user.PhoneNumber
                 };
 
@@ -334,10 +330,6 @@ namespace dTax.Controllers
                 return StatusCode(500);
             }
         }
-
-        
-
-
 
         #region Приватный регион
         private ClaimsIdentity GetIdentity(UserEntity user)
