@@ -8,11 +8,10 @@ using System.Threading.Tasks;
 
 namespace dTax.Entity.Models.FileContents
 {
-    public class FileContent
+    public class FileContentEntity : BaseEntity
     {
-        [Key]
-        public Guid Id { get; set; }
-        public ICollection<FileStorage> FileStorage { get; set; }
+
+        public ICollection<FileStorageEntity> FileStorage { get; set; }
         public byte[] ContentData { get; set; }
     }
 }

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace dTax.Entity.Models.Customers
 {
-    public class Customer : BaseEntity
+    public class CustomerEntity : BaseEntity
     {
         
 
         public Guid UserId { get; set; }
-        public User User { get; set; }
+        public UserEntity User { get; set; }
 
         //Фото (аватарка)
         //public Guid? FileStorageId { get; set; }

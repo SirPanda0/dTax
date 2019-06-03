@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Interfaces
 {
-    public interface ICustomerRepository: IBaseRepository<Customer>
+    public interface ICustomerRepository: IBaseRepository<CustomerEntity>
     {
         Guid GetCustomerByUserId(Guid Id);
     }

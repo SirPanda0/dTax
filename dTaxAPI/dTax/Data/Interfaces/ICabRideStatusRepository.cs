@@ -7,11 +7,11 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Interfaces
 {
-    public interface ICabRideStatusRepository : IBaseRepository<CabRideStatus>
+    public interface ICabRideStatusRepository : IBaseRepository<CabRideStatusEntity>
     {
-        CabRideStatus GetCarModelById(Guid Id);
-        CabRideStatus GetCabRideStatusByRideId(Guid Id);
-        void UpdateEntity(CabRideStatus entity);
-        IEnumerable<CabRideStatus> GetCabRideList();
+        CabRideStatusEntity GetCarModelById(Guid Id);
+        CabRideStatusEntity GetCabRideStatusByRideId(Guid Id);
+        void UpdateEntity(CabRideStatusEntity entity);
+        IEnumerable<CabRideStatusEntity> GetCabRideList();
     }
 }

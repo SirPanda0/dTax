@@ -1,4 +1,5 @@
-﻿using dTax.Entity.Models.CabRides;
+﻿using dTax.Entity.Models.Base;
+using dTax.Entity.Models.CabRides;
 using dTax.Entity.Models.Shifts;
 using dTax.Entity.Models.Statuses;
 using System;
@@ -8,14 +9,14 @@ using System.Threading.Tasks;
 
 namespace dTax.Entity.Models.CabRideStatuses
 {
-    public class CabRideStatus
+    public class CabRideStatusEntity : BaseEntity
     {
-        public Guid Id { get; set; }
+        //public Guid Id { get; set; }
         public Guid CabRideId { get; set; } //поездка
-        public CabRide CabRide { get; set; }
+        public CabRideEntity CabRide { get; set; }
 
         public int StatusId { get; set; } //id статуса
-        public Status Status { get; set; }
+        public StatusEntity Status { get; set; }
 
         public DateTime StatusTime { get; set; }//время когда была создана запись о поездке
 
@@ -23,7 +24,7 @@ namespace dTax.Entity.Models.CabRideStatuses
         public DateTime? RideEndTime { get; set; }//закончилась поездка=>свободен
 
         public Guid? ShiftId { get; set; } // id смены
-        public Shift Shift { get; set; }
+        public ShiftEntity Shift { get; set; }
         
 
     }

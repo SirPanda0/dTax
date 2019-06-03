@@ -1,4 +1,5 @@
-﻿using dTax.Entity.Models.Cabs;
+﻿using dTax.Entity.Models.Base;
+using dTax.Entity.Models.Cabs;
 using dTax.Entity.Models.Drivers;
 using System;
 using System.Collections.Generic;
@@ -7,17 +8,14 @@ using System.Threading.Tasks;
 
 namespace dTax.Entity.Models.Shifts
 {
-    public class Shift
+    public class ShiftEntity : BaseEntity
     {
 
-        public Guid Id { get; set; }
-
-
         public Guid DriverId { get; set; } //id водителя
-        public Driver Driver { get; set; }
+        public DriverEntity Driver { get; set; }
 
         public Guid CabId { get; set; } // id автомобиля
-        public Cab Cab { get; set; }
+        public CabEntity Cab { get; set; }
 
         public DateTime LoginTime { get; set; } //время входа
         //public DateTime LogoutTime { get; set; } //время выхода

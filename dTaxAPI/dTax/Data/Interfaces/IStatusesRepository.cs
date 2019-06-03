@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Interfaces
 {
-    public interface IStatusesRepository : IBaseRepository<Status>
+    public interface IStatusesRepository : IBaseRepository<StatusEntity>
     {
     }
 }

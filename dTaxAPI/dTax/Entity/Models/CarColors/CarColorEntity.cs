@@ -6,11 +6,11 @@ using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace dTax.Entity.Models.CarTypes
+namespace dTax.Entity.Models.CarColors
 {
-    public class CarType : BaseEntity
+    public class CarColorEntity :BaseEntity
     {
-        public ICollection<Cab> Cabs { get; set; }
+        public ICollection<CabEntity> Cabs { get; set; }
 
         public string Name { get; set; }
     }

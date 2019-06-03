@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace dTax.ResponseModels
 {
-    public class PriceResponse
+    public class PriceView
     {
         public decimal Standart { get; set; }
         public decimal Comfort { get; set; }

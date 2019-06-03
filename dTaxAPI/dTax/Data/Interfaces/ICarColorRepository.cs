@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Interfaces
 {
-    public interface ICarColorRepository : IBaseRepository<CarColor>
+    public interface ICarColorRepository : IBaseRepository<CarColorEntity>
     {
         IEnumerable<CarColorView> GetListColors();
     }

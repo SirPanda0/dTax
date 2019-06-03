@@ -21,12 +21,12 @@ namespace dTax.Controllers
             }
         }
 
-        protected PriceResponse CalculateBookPrice(int dist)
+        protected PriceView CalculateBookPrice(int dist)
         {
             if (dist != 0)
             {
                 if (DateTime.Now.Hour <= 17 && DateTime.Now.Hour >= 8)
-                    return new PriceResponse
+                    return new PriceView
                     {
                         Standart = (dist * 12) + 60,
                         Comfort = (dist * 12) + 90,
@@ -35,7 +35,7 @@ namespace dTax.Controllers
                     };
                 else
                 if (DateTime.Now.Hour > 17)
-                    return new PriceResponse
+                    return new PriceView
                     {
                         Standart = (dist * 13) + 70,
                         Comfort = (dist * 13) + 100,
@@ -43,7 +43,7 @@ namespace dTax.Controllers
                         Minivan = (dist * 19) + 70
                     };
             }
-                return new PriceResponse
+                return new PriceView
                 {
                     Standart = 60,
                     Comfort = 90,

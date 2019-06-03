@@ -7,8 +7,8 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Interfaces
 {
-    public interface IShiftRepository : IBaseRepository<Shift>
+    public interface IShiftRepository : IBaseRepository<ShiftEntity>
     {
-        Shift GetShiftByDriverId(Guid Id);
+        ShiftEntity GetShiftByDriverId(Guid Id);
     }
 }

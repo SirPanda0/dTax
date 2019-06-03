@@ -10,12 +10,12 @@ using System.Threading.Tasks;
 namespace dTax.Entity.Models.CarModels
 {
 
-    public class CarModel : BaseEntity
+    public class CarModelEntity : BaseEntity
     {
-        public ICollection<Cab> Cabs { get; set; }
+        public ICollection<CabEntity> Cabs { get; set; }
 
         public Guid CarBrandId { get; set; }
-        public CarBrand CarBrand { get; set; }
+        public CarBrandEntity CarBrand { get; set; }
 
         public string Name { get; set; }
 

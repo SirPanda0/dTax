@@ -1,13 +1,13 @@
-﻿using System;
+﻿using dTax.Entity.Models.Base;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
 namespace dTax.Entity.Models.PaymentTypes
 {
-    public class PaymentType
+    public class PaymentTypeEntity : BaseEntity
     {
-        public int Id { get; set; }
         public string TypeName { get; set; }
     }
 }

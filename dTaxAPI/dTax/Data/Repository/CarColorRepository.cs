@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Repository
 {
-    public class CarColorRepository : BaseRepository<CarColor>, ICarColorRepository
+    public class CarColorRepository : BaseRepository<CarColorEntity>, ICarColorRepository
     {
         public CarColorRepository(DbPostrgreContext context) : base(context)
         {

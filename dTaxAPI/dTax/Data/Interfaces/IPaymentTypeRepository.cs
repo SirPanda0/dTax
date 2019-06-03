@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Interfaces
 {
-    public interface IPaymentTypeRepository : IBaseRepository<PaymentType>
+    public interface IPaymentTypeRepository : IBaseRepository<PaymentTypeEntity>
     {
     }
 }

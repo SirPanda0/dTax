@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Repository
 {
-    public class FileContentRepository : BaseRepository<FileContent>, IFileContentRepository
+    public class FileContentRepository : BaseRepository<FileContentEntity>, IFileContentRepository
     {
         public FileContentRepository(DbPostrgreContext context) : base(context)
         {

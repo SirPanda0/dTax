@@ -9,18 +9,18 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Repository
 {
-    public class DriverRepository : BaseRepository<Driver>, IDriverRepository
+    public class DriverRepository : BaseRepository<DriverEntity>, IDriverRepository
     {
         public DriverRepository(DbPostrgreContext context) : base(context)
         {
         }
 
-        public Driver GetDriverById(Guid Id)
+        public DriverEntity GetDriverById(Guid Id)
         {
             return GetDriverByIdAsync(Id).Result;
         }
 
-        private async Task<Driver> GetDriverByIdAsync(Guid id)
+        private async Task<DriverEntity> GetDriverByIdAsync(Guid id)
         {
             return await this.GetQuery()
                 .Include(f=>f.FileLink)
@@ -28,12 +28,12 @@ namespace dTax.Data.Repository
                 .FirstOrDefaultAsync(_ => _.IsDeleted == false && _.Id == id);
         }
 
-        public Driver GetDriverByUserId(Guid Id)
+        public DriverEntity GetDriverByUserId(Guid Id)
         {
             return GetDriverByUserIdAsync(Id).Result;
         }
 
-        private async Task<Driver> GetDriverByUserIdAsync(Guid id)
+        private async Task<DriverEntity> GetDriverByUserIdAsync(Guid id)
         {
             return await this.GetQuery()
                 .Include(f => f.FileLink)
@@ -42,34 +42,34 @@ namespace dTax.Data.Repository
         }
 
 
-        public Driver GetDriverByFileId(Guid fileId)
+        public DriverEntity GetDriverByFileId(Guid fileId)
         {
             return GetDriverByFileIdAsync(fileId).Result;
         }
 
-        private async Task<Driver> GetDriverByFileIdAsync(Guid fileId)
+        private async Task<DriverEntity> GetDriverByFileIdAsync(Guid fileId)
         {
             return await GetQuery().FirstOrDefaultAsync(_ => _.FileLink.FirstOrDefault().FileId == fileId);
         }
 
-        public IEnumerable<Driver> GetListDrivers()
+        public IEnumerable<DriverEntity> GetListDrivers()
         {
             return GetListDriversAsync().Result;
         }
 
-        private async Task<IEnumerable<Driver>> GetListDriversAsync()
+        private async Task<IEnumerable<DriverEntity>> GetListDriversAsync()
         {
             return await GetQuery().Where(_ => _.IsDeleted != true && _.IsСonfirmed != false).ToListAsync();
         }
 
-        public IEnumerable<Driver> GetUnconfirmedDrivers()
+        public IEnumerable<DriverEntity> GetUnconfirmedDrivers()
         {
             var result = GetUnconfirmedDriversAsync().Result;
 
             return result;
         }
 
-        private async Task<IEnumerable<Driver>> GetUnconfirmedDriversAsync()
+        private async Task<IEnumerable<DriverEntity>> GetUnconfirmedDriversAsync()
         {
             return await GetQuery().Where(_ => _.IsDeleted != true && _.IsСonfirmed != true).ToListAsync();
         }
@@ -85,18 +85,18 @@ namespace dTax.Data.Repository
             return true;
         }
 
-        public Driver IsConfirmed(Guid DriverId)
+        public DriverEntity IsConfirmed(Guid DriverId)
         {
-            Driver driver = GetDriverById(DriverId);
+            DriverEntity driver = GetDriverById(DriverId);
             driver.IsСonfirmed = true;
             Update(driver);
             Commit();
             return driver;
         }
 
-        public Driver IsUnConfirmed(Guid DriverId)
+        public DriverEntity IsUnConfirmed(Guid DriverId)
         {
-            Driver driver = GetDriverById(DriverId);
+            DriverEntity driver = GetDriverById(DriverId);
             driver.IsСonfirmed = false;
             Update(driver);
             Commit();

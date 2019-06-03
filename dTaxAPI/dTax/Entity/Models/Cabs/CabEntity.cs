@@ -15,7 +15,7 @@ using dTax.Entity.Models.Many;
 namespace dTax.Entity.Models.Cabs
 {
 
-    public class Cab : BaseEntity
+    public class CabEntity : BaseEntity
     {
         //номера автомобиля
         public string LicensePlate { get; set; }
@@ -25,16 +25,16 @@ namespace dTax.Entity.Models.Cabs
 
         //id модели авто
         public Guid CarBrandId { get; set; }
-        public CarBrand CarBrand { get; set; }
+        public CarBrandEntity CarBrand { get; set; }
 
         public Guid CarModelId { get; set; }
-        public CarModel CarModel { get; set; }
+        public CarModelEntity CarModel { get; set; }
 
         public Guid CarColorId { get; set; }
-        public CarColor CarColor { get; set; }
+        public CarColorEntity CarColor { get; set; }
 
         public Guid CarTypeId { get; set; }
-        public CarType CarType { get; set; }
+        public CarTypeEntity CarType { get; set; }
 
         //год выпуска
         public int ManufactureYear { get; set; }
@@ -42,7 +42,7 @@ namespace dTax.Entity.Models.Cabs
         //id водителя
         public Guid DriverId { get; set; }
 
-        public Driver Driver { get; set; }
+        public DriverEntity Driver { get; set; }
 
         //Фото Авто
         //public Guid FileStorageId { get; set; }
@@ -51,7 +51,7 @@ namespace dTax.Entity.Models.Cabs
         public bool IsActive { get; set; } = false;
 
         
-        public ICollection<FilesToCab> FileLink { get; set; }
+        public ICollection<CabFileEntity> FileLink { get; set; }
 
         //Проверен ли автомобиль оператором
         //public bool Сonfirmed { get; set; }

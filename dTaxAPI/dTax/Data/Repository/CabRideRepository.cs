@@ -9,28 +9,28 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Repository
 { 
-    public class CabRideRepository : BaseRepository<CabRide>, ICabRideRepository
+    public class CabRideRepository : BaseRepository<CabRideEntity>, ICabRideRepository
     {
         public CabRideRepository(DbPostrgreContext context) : base(context)
         {
         }
 
-        public CabRide GetCabRideById(Guid Id)
+        public CabRideEntity GetCabRideById(Guid Id)
         {
             return GetCabRideByIdAsync(Id).Result;
         }
 
-        private async Task<CabRide> GetCabRideByIdAsync(Guid id)
+        private async Task<CabRideEntity> GetCabRideByIdAsync(Guid id)
         {
             return await GetQuery().FirstOrDefaultAsync(_ => _.Id == id);
         }
 
-        public IEnumerable<CabRide> GetCabRideList()
+        public IEnumerable<CabRideEntity> GetCabRideList()
         {
             return GetCabRideListAsync().Result;
         }
 
-        private async Task<IEnumerable<CabRide>> GetCabRideListAsync()
+        private async Task<IEnumerable<CabRideEntity>> GetCabRideListAsync()
         {
             return await GetQuery().Where(_ => _.IsCanceled != true).ToListAsync();
         }
@@ -44,7 +44,7 @@ namespace dTax.Data.Repository
             return true;
         }
 
-        public void UpdateEntity(CabRide entity)
+        public void UpdateEntity(CabRideEntity entity)
         {
             Update(entity);
             Commit();

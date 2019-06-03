@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Interfaces
 {
-    public interface ICarModelRepository : IBaseRepository<CarModel>
+    public interface ICarModelRepository : IBaseRepository<CarModelEntity>
     {
         IEnumerable<CarModelView> GetListModelsByBrandId(Guid brandid);
     }

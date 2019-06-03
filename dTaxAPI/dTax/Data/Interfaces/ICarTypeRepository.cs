@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Interfaces
 {
-    public interface ICarTypeRepository : IBaseRepository<CarType>
+    public interface ICarTypeRepository : IBaseRepository<CarTypeEntity>
     {
         IEnumerable<CarTypeView> GetListTypes();
     }

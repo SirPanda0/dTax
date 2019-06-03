@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace dTax.ApiModel
 {
-    public class Booking
+    public class BookingModel
     {
         //public Guid UserId { get; set; } //id клиента
 

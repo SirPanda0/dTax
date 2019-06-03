@@ -7,10 +7,10 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Interfaces
 {
-    public interface ICabRepository : IBaseRepository<Cab>
+    public interface ICabRepository : IBaseRepository<CabEntity>
     {
         bool IsExists(string LicensePlate, string VIN);
-        Cab GetCabById(Guid Id);
-        Cab GetCabByDriverId(Guid DriverId);
+        CabEntity GetCabById(Guid Id);
+        CabEntity GetCabByDriverId(Guid DriverId);
     }
 }

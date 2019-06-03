@@ -29,7 +29,7 @@ namespace dTax.Controllers
         {
             try
             {
-               Cab cab = DBWorkflow.CabRepository.GetCabByDriverId(DriverId);
+               CabEntity cab = DBWorkflow.CabRepository.GetCabByDriverId(DriverId);
                 if (cab != null)
                 {
                     CabView cabView = new CabView()
@@ -58,7 +58,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [Route("Add")]
         [HttpPost]
-        public ActionResult AddCab([FromBody] CabRegistration registerModel)
+        public ActionResult AddCab([FromBody] CabRegistrationModel registerModel)
         {
             try
             {
@@ -83,7 +83,7 @@ namespace dTax.Controllers
 
                 Guid DriverId = DBWorkflow.DriverRepository.GetDriverByUserId(GetUserIdByContext()).Id;
 
-                Cab cab = new Cab()
+                CabEntity cab = new CabEntity()
                 {
                     LicensePlate = registerModel.LicensePlate,
                     VIN = registerModel.VIN,

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Interfaces
 {
-    public interface IFileStorageRepository : IBaseRepository<FileStorage>
+    public interface IFileStorageRepository : IBaseRepository<FileStorageEntity>
     {
-        FileStorage GetById(Guid fileId);
-        IEnumerable<FileStorage> GetFilesByIds(IEnumerable<Guid> fileIds);
-        void UpdateEntity(FileStorage entity);
-        Guid InsertFileStorage(FileStorage entity);
+        FileStorageEntity GetById(Guid fileId);
+        IEnumerable<FileStorageEntity> GetFilesByIds(IEnumerable<Guid> fileIds);
+        void UpdateEntity(FileStorageEntity entity);
+        Guid InsertFileStorage(FileStorageEntity entity);
         bool IsExists(Guid fileid);
     }
 }

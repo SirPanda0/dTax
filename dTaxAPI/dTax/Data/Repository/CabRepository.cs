@@ -9,28 +9,28 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Repository
 {
-    public class CabRepository : BaseRepository<Cab>, ICabRepository
+    public class CabRepository : BaseRepository<CabEntity>, ICabRepository
     {
         public CabRepository(DbPostrgreContext context) : base(context)
         {
         }
 
-        public Cab GetCabById(Guid Id)
+        public CabEntity GetCabById(Guid Id)
         {
             return GetCabByIdAsync(Id).Result;
         }
 
-        private async Task<Cab> GetCabByIdAsync(Guid id)
+        private async Task<CabEntity> GetCabByIdAsync(Guid id)
         {
             return await GetQuery().FirstOrDefaultAsync(_ => _.Id == id);
         }
 
-        public Cab GetCabByDriverId(Guid DriverId)
+        public CabEntity GetCabByDriverId(Guid DriverId)
         {
             return GetCabByDriverIdAsync(DriverId).Result;
         }
 
-        private async Task<Cab> GetCabByDriverIdAsync(Guid DriverId)
+        private async Task<CabEntity> GetCabByDriverIdAsync(Guid DriverId)
         {
             return await GetQuery()
                 .Include(b=>b.CarBrand)

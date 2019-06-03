@@ -10,48 +10,48 @@ using dTax.Common.Enums;
 
 namespace dTax.Data.Repository
 {
-    public class CabRideStatusRepository : BaseRepository<CabRideStatus>, ICabRideStatusRepository
+    public class CabRideStatusRepository : BaseRepository<CabRideStatusEntity>, ICabRideStatusRepository
     {
         public CabRideStatusRepository(DbPostrgreContext context) : base(context)
         {
         }
 
-        public CabRideStatus GetCabRideStatusByRideId(Guid Id)
+        public CabRideStatusEntity GetCabRideStatusByRideId(Guid Id)
         {
             return GetCabRideStatusByRideIdAsync(Id).Result;
         }
 
-        private async Task<CabRideStatus> GetCabRideStatusByRideIdAsync(Guid id)
+        private async Task<CabRideStatusEntity> GetCabRideStatusByRideIdAsync(Guid id)
         {
             return await GetQuery()
                 .Include(ride => ride.CabRide)
                 .FirstOrDefaultAsync(_ => _.CabRideId == id);
         }
 
-        public CabRideStatus GetCarModelById(Guid Id)
+        public CabRideStatusEntity GetCarModelById(Guid Id)
         {
             return GetCabRideByIdAsync(Id).Result;
         }
 
-        private async Task<CabRideStatus> GetCabRideByIdAsync(Guid id)
+        private async Task<CabRideStatusEntity> GetCabRideByIdAsync(Guid id)
         {
             return await GetQuery()
                 .Include(ride => ride.CabRide)
                 .FirstOrDefaultAsync(_ => _.Id == id);
         }
 
-        public void UpdateEntity(CabRideStatus entity)
+        public void UpdateEntity(CabRideStatusEntity entity)
         {
             Update(entity);
             Commit();
         }
 
-        public IEnumerable<CabRideStatus> GetCabRideList()
+        public IEnumerable<CabRideStatusEntity> GetCabRideList()
         {
             return GetCabRideListAsync().Result;
         }
 
-        private async Task<IEnumerable<CabRideStatus>> GetCabRideListAsync()
+        private async Task<IEnumerable<CabRideStatusEntity>> GetCabRideListAsync()
         {
             return await GetQuery()
                 .Where(_ => _.StatusId != (int)RideStatusEnum.Canceled && _.StatusId != (int)RideStatusEnum.Ended && _.StatusId != (int)RideStatusEnum.New)

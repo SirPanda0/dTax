@@ -49,14 +49,14 @@ namespace dTax.Controllers
                         fileData = memoryStream.ToArray();
                     }
 
-                    FileContent filecontent = new FileContent()
+                    FileContentEntity filecontent = new FileContentEntity()
                     {
                         ContentData = fileData
                     };
                     fileContentRepository.Insert(filecontent);
                     fileContentRepository.Commit();
 
-                    FileStorage fileStorage = new FileStorage()
+                    FileStorageEntity fileStorage = new FileStorageEntity()
                     {
                         FileContentId = filecontent.Id,
                         FileName = uploadedFile.FileName + DateTime.UtcNow.Date

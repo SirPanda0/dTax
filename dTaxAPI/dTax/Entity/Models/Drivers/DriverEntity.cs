@@ -11,11 +11,11 @@ using System.Threading.Tasks;
 
 namespace dTax.Entity.Models.Drivers
 {
-    public class Driver : BaseEntity
+    public class DriverEntity : BaseEntity
     {
 
         public Guid UserId { get; set; }
-        public User User { get; set; }
+        public UserEntity User { get; set; }
 
         //Водительское удостоверение
         public long DrivingLicence { get; set; } //номер прав
@@ -29,9 +29,9 @@ namespace dTax.Entity.Models.Drivers
 
         //Фото документов
         //public long FileStorageId { get; set; }
-        public ICollection<FilesToDriver> FileLink { get; set; }
+        public ICollection<DriverFileEntity> FileLink { get; set; }
 
-        public ICollection<Cab> CabLink { get; set; }
+        public ICollection<CabEntity> CabLink { get; set; }
 
         public bool IsWorking { get; set; } = false;
 

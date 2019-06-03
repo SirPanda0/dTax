@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Interfaces
 {
-    public interface ICabFileRepository : IBaseRepository<FilesToCab>
+    public interface ICabFileRepository : IBaseRepository<CabFileEntity>
     {
         void AddLinkCab(Guid CabId, Guid FileId);
         bool Exist(Guid FileId);

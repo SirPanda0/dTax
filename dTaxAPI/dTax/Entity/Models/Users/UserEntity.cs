@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Entity.Models.Users
 {
-    public class User : BaseEntity
+    public class UserEntity  : BaseEntity
     {
         public string Email { get; set; }
         public string Password { get; set; }
@@ -28,7 +28,7 @@ namespace dTax.Entity.Models.Users
         
         public int RoleId { get; set; }
         [JsonIgnore]
-        public Role Role { get; set; }
+        public RoleEntity Role { get; set; }
 
     }
 }

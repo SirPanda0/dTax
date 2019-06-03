@@ -82,7 +82,7 @@ namespace dTax.Controllers
         public IActionResult GetRidePrice(double distance)
         {
             int dis = Convert.ToInt32(distance);
-            PriceResponse Price = CalculateBookPrice(dis / 1000);
+            PriceView Price = CalculateBookPrice(dis / 1000);
             return Ok(Price);
 
         }
@@ -92,7 +92,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [Route("AddOrder")]
         [HttpPost]
-        public IActionResult AddRide([FromBody] Booking booking)
+        public IActionResult AddRide([FromBody] BookingModel booking)
         {
             try
             {
@@ -111,7 +111,7 @@ namespace dTax.Controllers
 
                 int dis = Convert.ToInt32(booking.Distance);
 
-                PriceResponse PriceResponse = CalculateBookPrice(dis / 1000);
+                PriceView PriceResponse = CalculateBookPrice(dis / 1000);
 
                 var Price = PriceResponse.Standart;
 
@@ -139,7 +139,7 @@ namespace dTax.Controllers
                         }
                 };
 
-                CabRide ride = new CabRide()
+                CabRideEntity ride = new CabRideEntity()
                 {
                     CustomerId = CustomerId,
                     AddressStartPoint = booking.AddressStartPoint,
@@ -154,7 +154,7 @@ namespace dTax.Controllers
                 DBWorkflow.CabRideRepository.Insert(ride);
 
 
-                CabRideStatus rideStatus = new CabRideStatus()
+                CabRideStatusEntity rideStatus = new CabRideStatusEntity()
                 {
                     CabRideId = ride.Id,
                     StatusId = (int)RideStatusEnum.New,
@@ -267,11 +267,11 @@ namespace dTax.Controllers
             try
             {
 
-                CabRide ride = DBWorkflow.CabRideRepository.GetCabRideById(id);
+                CabRideEntity ride = DBWorkflow.CabRideRepository.GetCabRideById(id);
 
                 ride.IsCanceled = true;
 
-                CabRideStatus rideStatus = DBWorkflow.CabRideStatusRepository.GetCabRideStatusByRideId(id);
+                CabRideStatusEntity rideStatus = DBWorkflow.CabRideStatusRepository.GetCabRideStatusByRideId(id);
 
                 rideStatus.StatusId = (int)RideStatusEnum.Canceled;
                 rideStatus.StatusTime = DateTime.Now;
@@ -403,7 +403,7 @@ namespace dTax.Controllers
         }
 
         #region Private Region
-        private IEnumerable<CabRideViewModel> GetRideModelList(IEnumerable<CabRide> rides)
+        private IEnumerable<CabRideViewModel> GetRideModelList(IEnumerable<CabRideEntity> rides)
         {
             return rides.Where(_ => DBWorkflow.CabRideStatusRepository.GetCabRideStatusByRideId(_.Id).StatusId == (int)RideStatusEnum.New)
                 .Select(_ =>
@@ -420,7 +420,7 @@ namespace dTax.Controllers
             }).ToList();
         }
 
-        private IEnumerable<CabRideViewModel> GetRideDriverModelList(IEnumerable<CabRide> rides, Guid id)
+        private IEnumerable<CabRideViewModel> GetRideDriverModelList(IEnumerable<CabRideEntity> rides, Guid id)
         {
 
             return rides.Where(_ => DBWorkflow.CabRideStatusRepository.GetCabRideStatusByRideId(_.Id).StatusId == (int)RideStatusEnum.Assigned && DBWorkflow.CabRideStatusRepository.GetCabRideStatusByRideId(_.Id).ShiftId == id)
@@ -438,7 +438,7 @@ namespace dTax.Controllers
                 }).ToList();
         }
 
-        private async Task<CabRideStatus> GetStatus(Guid id)
+        private async Task<CabRideStatusEntity> GetStatus(Guid id)
         {
             return await DBWorkflow.CabRideStatusRepository.GetQuery().FirstOrDefaultAsync(_ => _.CabRideId == id);
         }

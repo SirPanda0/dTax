@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Repository
 {
-    public class StatusesRepository: BaseRepository<Status>, IStatusesRepository
+    public class StatusesRepository: BaseRepository<StatusEntity>, IStatusesRepository
     {
         public StatusesRepository(DbPostrgreContext context) : base(context)
         {

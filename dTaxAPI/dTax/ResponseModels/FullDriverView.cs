@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace dTax.ResponseModels
 {
-    public class DriverResponse
+    public class FullDriverView
     {
         public Guid Id { get; set; }
 

@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Repository
 {
-    public class CustomerRepository : BaseRepository<Customer>, ICustomerRepository
+    public class CustomerRepository : BaseRepository<CustomerEntity>, ICustomerRepository
     {
         DbPostrgreContext CommonDbContext;
 

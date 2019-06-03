@@ -114,7 +114,7 @@ namespace dTax.Controllers
 
 
                 string PasswordHash = GetHash(loginModel.Password);
-                User user = DBWorkflow.UserRepository.FindUserLogin(loginModel.Email, PasswordHash);
+                UserEntity user = DBWorkflow.UserRepository.FindUserLogin(loginModel.Email, PasswordHash);
 
 
                 if (user != null)
@@ -130,7 +130,7 @@ namespace dTax.Controllers
 
                         if (shift == null)
                         {
-                            DBWorkflow.ShiftRepository.Insert(new Shift
+                            DBWorkflow.ShiftRepository.Insert(new ShiftEntity
                             {
                                 DriverId = driver.Id,
                                 CabId = cab.Id,
@@ -224,7 +224,7 @@ namespace dTax.Controllers
 
                 string PasswordHash = GetHash(registerModel.Password);
 
-                User user = new User()
+                UserEntity user = new UserEntity()
                 {
                     Email = registerModel.Email,
                     Password = PasswordHash,
@@ -255,7 +255,7 @@ namespace dTax.Controllers
 
                 if (IsFull)
                 {
-                    Customer customer = new Customer
+                    CustomerEntity customer = new CustomerEntity
                     {
                         UserId = user.Id
                     };
@@ -349,7 +349,7 @@ namespace dTax.Controllers
 
 
         #region Приватный регион
-        private ClaimsIdentity GetIdentity(User user)
+        private ClaimsIdentity GetIdentity(UserEntity user)
         {
             try
             {

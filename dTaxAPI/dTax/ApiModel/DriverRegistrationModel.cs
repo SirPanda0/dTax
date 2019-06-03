@@ -5,7 +5,7 @@ using System.Threading.Tasks;
 
 namespace dTax.ApiModel
 {
-    public class DriverRegistration
+    public class DriverRegistrationModel
     {
         //public Guid UserId { get; set; }
 

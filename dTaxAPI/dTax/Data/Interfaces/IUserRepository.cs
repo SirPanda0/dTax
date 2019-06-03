@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Interfaces
 {
-    public interface IUserRepository: IBaseRepository<User>
+    public interface IUserRepository: IBaseRepository<UserEntity>
     {
-        User FindUserLogin(string Email, string Password);
+        UserEntity FindUserLogin(string Email, string Password);
         bool IsUserExists(string Email);
-        User FindUserEmail(string Email);
-        User GetUserById(Guid Id);
+        UserEntity FindUserEmail(string Email);
+        UserEntity GetUserById(Guid Id);
         string GetUserFioById(Guid Id);
         void IsFullReg(Guid UserId);
         void IsHalfReg(Guid UserId);

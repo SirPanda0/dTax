@@ -8,7 +8,7 @@ using dTax.Entity.Models.FileContents;
 
 namespace dTax.Data.Interfaces
 {
-    public interface IFileContentRepository : IBaseRepository<FileContent>
+    public interface IFileContentRepository : IBaseRepository<FileContentEntity>
     {
     }
 }

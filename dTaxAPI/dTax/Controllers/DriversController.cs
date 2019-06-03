@@ -38,7 +38,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [Route("Register")]
         [HttpPost]
-        public ActionResult DriverReg([FromBody] DriverRegistration registerModel)
+        public ActionResult DriverReg([FromBody] DriverRegistrationModel registerModel)
         {
             try
             {
@@ -57,7 +57,7 @@ namespace dTax.Controllers
                     return BadRequest("Проверьте данные!");
                 }
 
-                Driver driver = new Driver()
+                DriverEntity driver = new DriverEntity()
                 {
                     UserId = id,
                     DrivingLicence = registerModel.DrivingLicence,
@@ -90,7 +90,7 @@ namespace dTax.Controllers
                     return BadRequest("Проверьте данные!");
                 }
 
-                Driver driver = driverRepository.GetDriverByUserId(GetUserIdByContext());
+                DriverEntity driver = driverRepository.GetDriverByUserId(GetUserIdByContext());
 
                 DriverView driverView = new DriverView()
                 {

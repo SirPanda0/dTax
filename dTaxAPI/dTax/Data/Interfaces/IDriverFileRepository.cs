@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Interfaces
 {
-    public interface IDriverFileRepository : IBaseRepository<FilesToDriver>
+    public interface IDriverFileRepository : IBaseRepository<DriverFileEntity>
     {
         void AddLinkDriver(Guid DriverId, Guid FileId);
         bool Exist(Guid FileId);

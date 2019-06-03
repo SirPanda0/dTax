@@ -9,17 +9,17 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Repository
 {
-    public class UserRepository : BaseRepository<User>, IUserRepository
+    public class UserRepository : BaseRepository<UserEntity>, IUserRepository
     {
         public UserRepository(DbPostrgreContext context) : base(context)
         {
         }
 
-        public User FindUserLogin(string Email, string password)
+        public UserEntity FindUserLogin(string Email, string password)
         {
             return GetQuery()
                  .Include(_ => _.Role)
-                 .FirstOrDefault<User>(
+                 .FirstOrDefault<UserEntity>(
                 _ => _.Email == Email && _.Password == password);
         }
 
@@ -33,7 +33,7 @@ namespace dTax.Data.Repository
 
         public void IsFullReg(Guid UserId)
         {
-            User user = GetUserByIdAsync(UserId).Result;
+            UserEntity user = GetUserByIdAsync(UserId).Result;
             user.IsFullReg = true;
             Update(user);
             Commit();
@@ -41,19 +41,19 @@ namespace dTax.Data.Repository
 
         public void IsHalfReg(Guid UserId)
         {
-            User user = GetUserByIdAsync(UserId).Result;
+            UserEntity user = GetUserByIdAsync(UserId).Result;
             user.IsFullReg = false;
             Update(user);
             Commit();
         }
 
 
-        public User FindUserEmail(string Email)
+        public UserEntity FindUserEmail(string Email)
         {
             return GetQuery().FirstOrDefault(_ => _.Email == Email);
         }
 
-        public User GetUserById(Guid Id)
+        public UserEntity GetUserById(Guid Id)
         {
             return GetUserByIdAsync(Id).Result;
         }
@@ -65,7 +65,7 @@ namespace dTax.Data.Repository
             return String.Format("{0} {1} {2}", user.FirstName, user.MiddleName, user.LastName);
         }
 
-        private async Task<User> GetUserByIdAsync(Guid id)
+        private async Task<UserEntity> GetUserByIdAsync(Guid id)
         {
             return await this.GetQuery()
                 .FirstOrDefaultAsync(_ => _.IsDeleted == false && _.Id == id);

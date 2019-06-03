@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Repository
 {
-    public class PaymentTypeRepository : BaseRepository<PaymentType>, IPaymentTypeRepository
+    public class PaymentTypeRepository : BaseRepository<PaymentTypeEntity>, IPaymentTypeRepository
     {
         public PaymentTypeRepository(DbPostrgreContext context) : base(context)
         {

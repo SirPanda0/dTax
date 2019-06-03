@@ -9,13 +9,13 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Repository
 {
-    public class ShiftRepository : BaseRepository<Shift>, IShiftRepository
+    public class ShiftRepository : BaseRepository<ShiftEntity>, IShiftRepository
     {
         public ShiftRepository(DbPostrgreContext context) : base(context)
         {
         }
 
-        public Shift GetShiftByDriverId (Guid Id)
+        public ShiftEntity GetShiftByDriverId (Guid Id)
         {
             return GetQuery().FirstOrDefault(_ => _.DriverId == Id);
         }

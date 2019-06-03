@@ -77,7 +77,7 @@ namespace dTax.Controllers
                 var cabFiles = (cab != null) ? cab.FileLink.Where(_ => _.IsDeleted != true).Select(f => f.FileId).ToArray() : null;
                 var driverFiles = (driver != null) ? driver.FileLink.Where(_ => _.IsDeleted != true).Select(f => f.FileId).ToArray(): null;
 
-                DriverResponse driverResponse = new DriverResponse()
+                FullDriverView driverResponse = new FullDriverView()
                 {
                     Id = DriverId,
                     Name = DBWorkflow.UserRepository.GetUserFioById(driver.UserId),
@@ -126,7 +126,7 @@ namespace dTax.Controllers
 
                 if (shift == null)
                 {
-                    DBWorkflow.ShiftRepository.Insert(new Shift
+                    DBWorkflow.ShiftRepository.Insert(new ShiftEntity
                     {
                         DriverId = driver.Id,
                         CabId = cab.Id,
@@ -178,7 +178,7 @@ namespace dTax.Controllers
 
 
         #region Private Region
-        private IEnumerable<DriverViewModel> GetDriversModelList(IEnumerable<Driver> drivers)
+        private IEnumerable<DriverViewModel> GetDriversModelList(IEnumerable<DriverEntity> drivers)
         {
             return drivers.Where(_ => DBWorkflow.CabRepository.GetCabByDriverId(_.Id) != null && _.IsСonfirmed != false).Select(_ =>
 
@@ -194,7 +194,7 @@ namespace dTax.Controllers
               }).ToList();
         }
 
-        private IEnumerable<DriverViewModel> GetUnconfirmedDriversModelList(IEnumerable<Driver> drivers)
+        private IEnumerable<DriverViewModel> GetUnconfirmedDriversModelList(IEnumerable<DriverEntity> drivers)
         {
             return drivers.Where(_ => DBWorkflow.CabRepository.GetCabByDriverId(_.Id) != null && _.IsСonfirmed != true).Select(_ =>
 

@@ -7,12 +7,12 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Interfaces
 {
-    public interface ICabRideRepository : IBaseRepository<CabRide>
+    public interface ICabRideRepository : IBaseRepository<CabRideEntity>
     {
-        CabRide GetCabRideById(Guid Id);
-        IEnumerable<CabRide> GetCabRideList();
+        CabRideEntity GetCabRideById(Guid Id);
+        IEnumerable<CabRideEntity> GetCabRideList();
         bool ActiveBookExist(Guid Id);
-        void UpdateEntity(CabRide entity);
+        void UpdateEntity(CabRideEntity entity);
 
     }
 }

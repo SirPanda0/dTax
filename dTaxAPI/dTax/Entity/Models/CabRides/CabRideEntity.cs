@@ -1,4 +1,5 @@
-﻿using dTax.Entity.Models.Customers;
+﻿using dTax.Entity.Models.Base;
+using dTax.Entity.Models.Customers;
 using dTax.Entity.Models.PaymentTypes;
 using System;
 using System.Collections.Generic;
@@ -7,12 +8,12 @@ using System.Threading.Tasks;
 
 namespace dTax.Entity.Models.CabRides
 {
-    public class CabRide
+    public class CabRideEntity : BaseEntity
     {
-        public Guid Id { get; set; }
+        //public Guid Id { get; set; }
 
         public Guid CustomerId { get; set; } //id клиента
-        public Customer Customer { get; set; }
+        public CustomerEntity Customer { get; set; }
 
         public string AddressStartPoint { get; set; }//Место начала поездки
         public string StartPointGPS { get; set; }//
@@ -23,7 +24,7 @@ namespace dTax.Entity.Models.CabRides
 
         public int TariffType { get; set; }
         public int PaymentTypeId { get; set; }//Тип оплаты
-        public PaymentType PamentType { get; set; }
+        public PaymentTypeEntity PamentType { get; set; }
         public decimal Price { get; set; }//Цена за поездку
 
         public string BookDetails { get; set; }// доп информация о заказе

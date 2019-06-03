@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Repository
 {
-    public class CabFileRepository : BaseRepository<FilesToCab>, ICabFileRepository
+    public class CabFileRepository : BaseRepository<CabFileEntity>, ICabFileRepository
     {
         public CabFileRepository(DbPostrgreContext context) : base(context)
         {
@@ -26,7 +26,7 @@ namespace dTax.Data.Repository
 
         public void AddLinkCab(Guid CabId, Guid FileId)
         {
-            Insert(new FilesToCab
+            Insert(new CabFileEntity
             {
                 CabId = CabId,
                 FileId = FileId

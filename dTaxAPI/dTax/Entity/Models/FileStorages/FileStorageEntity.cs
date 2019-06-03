@@ -10,16 +10,16 @@ using System.Threading.Tasks;
 
 namespace dTax.Entity.Models.FileStorages
 {
-    public class FileStorage : BaseEntity
+    public class FileStorageEntity : BaseEntity
     {
 
         public Guid FileContentId { get; set; }
-        public FileContent FileContent { get; set; }
+        public FileContentEntity FileContent { get; set; }
 
         public string FileName { get; set; }
 
-        public ICollection<FilesToDriver> DriversLink { get; set; }
-        public ICollection<FilesToCab> CabLink { get; set; }
+        public ICollection<DriverFileEntity> DriversLink { get; set; }
+        public ICollection<CabFileEntity> CabLink { get; set; }
 
         //Фото документов или машины или фото пользователя
         //public string Type { get; set; }

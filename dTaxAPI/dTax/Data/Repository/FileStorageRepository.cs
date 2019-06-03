@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Repository
 {
-    public class FileStorageRepository : BaseRepository<FileStorage>, IFileStorageRepository
+    public class FileStorageRepository : BaseRepository<FileStorageEntity>, IFileStorageRepository
     {
         DbPostrgreContext CommonDbContext;
 
@@ -19,35 +19,35 @@ namespace dTax.Data.Repository
         }
 
 
-        public FileStorage GetById(Guid fileId)
+        public FileStorageEntity GetById(Guid fileId)
         {
             return GetByIdAsync(fileId).Result;
         }
 
-        private async Task<FileStorage> GetByIdAsync(Guid fileId)
+        private async Task<FileStorageEntity> GetByIdAsync(Guid fileId)
         {
             return await GetQuery()
                 .Include(c=>c.FileContent)
                 .FirstOrDefaultAsync(_ => _.Id == fileId);
         }
 
-        public IEnumerable<FileStorage> GetFilesByIds(IEnumerable<Guid> fileIds)
+        public IEnumerable<FileStorageEntity> GetFilesByIds(IEnumerable<Guid> fileIds)
         {
             return GetFilesByIdsAsync(fileIds).Result;
         }
 
-        private async Task<IEnumerable<FileStorage>> GetFilesByIdsAsync(IEnumerable<Guid> fileIds)
+        private async Task<IEnumerable<FileStorageEntity>> GetFilesByIdsAsync(IEnumerable<Guid> fileIds)
         {
             return await GetQuery().Where(_ => fileIds.Contains(_.Id)).ToListAsync();
         }
 
-        public void UpdateEntity(FileStorage entity)
+        public void UpdateEntity(FileStorageEntity entity)
         {
             this.Update(entity);
             this.Commit();
         }
 
-        public Guid InsertFileStorage(FileStorage entity)
+        public Guid InsertFileStorage(FileStorageEntity entity)
         {
             this.Insert(entity);
             this.Commit();

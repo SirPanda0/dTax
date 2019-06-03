@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Repository
 {
-    public class RoleRepository : BaseRepository<Role>, IRoleRepository
+    public class RoleRepository : BaseRepository<RoleEntity>, IRoleRepository
     {
         DbPostrgreContext CommonDbContext;
 

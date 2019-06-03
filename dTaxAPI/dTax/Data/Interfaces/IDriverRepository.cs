@@ -7,17 +7,17 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Interfaces
 {
-    public interface IDriverRepository : IBaseRepository<Driver>
+    public interface IDriverRepository : IBaseRepository<DriverEntity>
     {
         
-        Driver GetDriverByFileId(Guid fileId);
-        Driver GetDriverById(Guid Id);
+        DriverEntity GetDriverByFileId(Guid fileId);
+        DriverEntity GetDriverById(Guid Id);
         bool IsExists(Guid userid, long DrivingLicence, string PassportSerial, string PassportNumber);
-        IEnumerable<Driver> GetUnconfirmedDrivers();
-        Driver IsConfirmed(Guid DriverId);
-        Driver IsUnConfirmed(Guid DriverId);
-        IEnumerable<Driver> GetListDrivers();
-        Driver GetDriverByUserId(Guid Id);
+        IEnumerable<DriverEntity> GetUnconfirmedDrivers();
+        DriverEntity IsConfirmed(Guid DriverId);
+        DriverEntity IsUnConfirmed(Guid DriverId);
+        IEnumerable<DriverEntity> GetListDrivers();
+        DriverEntity GetDriverByUserId(Guid Id);
 
 
     }

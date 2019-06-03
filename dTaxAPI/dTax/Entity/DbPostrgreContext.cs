@@ -27,33 +27,33 @@ namespace dTax.Entity
 
     public class DbPostrgreContext : DbContext
     {
-        public DbSet<User> Users { get; set; }
-        public DbSet<Role> Roles { get; set; }
+        public DbSet<UserEntity> Users { get; set; }
+        public DbSet<RoleEntity> Roles { get; set; }
 
-        public DbSet<Driver> Drivers { get; set; } //Водители
-        public DbSet<CarModel> CarModels { get; set; } //Модели зарегистрированных автомобилей
-        public DbSet<Cab> Cabs { get; set; } //зарегистрированные автомобили
-        public DbSet<Shift> Shifts { get; set; } //Смена
+        public DbSet<DriverEntity> Drivers { get; set; } //Водители
+        public DbSet<CarModelEntity> CarModels { get; set; } //Модели зарегистрированных автомобилей
+        public DbSet<CabEntity> Cabs { get; set; } //зарегистрированные автомобили
+        public DbSet<ShiftEntity> Shifts { get; set; } //Смена
 
-        public DbSet<CabRide> CabRides { get; set; } //Потенциальные поездки
-        public DbSet<PaymentType> PaymentTypes { get; set; } //Тип оплаты: карта/наличные
-        public DbSet<CabRideStatus> CabRideStatuses { get; set; } //Статус поездки
-        public DbSet<Customer> Customers { get; set; } //Заказчик
-        public DbSet<Status> Statuses { get; set; } // Состояния поездки: новая/назначена/началась/завершилась/отменена
+        public DbSet<CabRideEntity> CabRides { get; set; } //Потенциальные поездки
+        public DbSet<PaymentTypeEntity> PaymentTypes { get; set; } //Тип оплаты: карта/наличные
+        public DbSet<CabRideStatusEntity> CabRideStatuses { get; set; } //Статус поездки
+        public DbSet<CustomerEntity> Customers { get; set; } //Заказчик
+        public DbSet<StatusEntity> Statuses { get; set; } // Состояния поездки: новая/назначена/началась/завершилась/отменена
 
-        public DbSet<FileStorage> FileStorage { get; set; } //Хранилище файлов
+        public DbSet<FileStorageEntity> FileStorage { get; set; } //Хранилище файлов
 
-        public DbSet<FileContent> FileContents { get; set; }
+        public DbSet<FileContentEntity> FileContents { get; set; }
 
-        public DbSet<FilesToDriver> FilesToDrivers { get; set; }
+        public DbSet<DriverFileEntity> FilesToDrivers { get; set; }
 
-        public DbSet<FilesToCab> FilesToCab { get; set; }
+        public DbSet<CabFileEntity> FilesToCab { get; set; }
 
-        public DbSet<CarBrand> CarBrands { get; set; }
+        public DbSet<CarBrandEntity> CarBrands { get; set; }
 
-        public DbSet<CarColor> CarColors { get; set; }
+        public DbSet<CarColorEntity> CarColors { get; set; }
 
-        public DbSet<CarType> CarTypes { get; set; }
+        public DbSet<CarTypeEntity> CarTypes { get; set; }
 
 
         public DbPostrgreContext(DbContextOptions<DbPostrgreContext> options) : base(options)
@@ -66,31 +66,31 @@ namespace dTax.Entity
         private void InitialInitialization()
         {
 
-            List<Role> roles = new List<Role>()
+            List<RoleEntity> roles = new List<RoleEntity>()
             {
-                new Role() { Name = "Operator" },
-                new Role() { Name = "User" },
-                new Role() { Name = "Driver" }
+                new RoleEntity() { Name = "Operator" },
+                new RoleEntity() { Name = "User" },
+                new RoleEntity() { Name = "Driver" }
             };
 
-            List<Status> statuses = new List<Status>()
+            List<StatusEntity> statuses = new List<StatusEntity>()
             {
-                new Status() { StatusName = "Новая поездка"},
-                new Status() { StatusName = "Поездка, назначена водителю"},
-                new Status() { StatusName = "Поездка началась"},
-                new Status() { StatusName = "Поездка завершилась"},
-                new Status() { StatusName = "Поездка отменена"},
+                new StatusEntity() { StatusName = "Новая поездка"},
+                new StatusEntity() { StatusName = "Поездка, назначена водителю"},
+                new StatusEntity() { StatusName = "Поездка началась"},
+                new StatusEntity() { StatusName = "Поездка завершилась"},
+                new StatusEntity() { StatusName = "Поездка отменена"},
             };
 
-            List<PaymentType> payments = new List<PaymentType>()
+            List<PaymentTypeEntity> payments = new List<PaymentTypeEntity>()
             {
-                new PaymentType() { TypeName = "Наличные"},
-                new PaymentType() { TypeName = "Карта"}
+                new PaymentTypeEntity() { TypeName = "Наличные"},
+                new PaymentTypeEntity() { TypeName = "Карта"}
             };
 
-            List<User> user = new List<User>()
+            List<UserEntity> user = new List<UserEntity>()
             {
-                new User()
+                new UserEntity()
                 {
                     Email = "dTax-mailing@yandex.ru",
                     Password = "cb891b06ce3c1981cc00a1966ddfe98228011de9c582823ecdb2ccfe127a20df", //TODO hash этого пароля M9S206
@@ -100,7 +100,7 @@ namespace dTax.Entity
                     LastName = "Админович",
                     IsFullReg = true
                 },
-                new User()
+                new UserEntity()
                 {
                     Email = "hellpanda44@gmail.com",
                     Password = "cb891b06ce3c1981cc00a1966ddfe98228011de9c582823ecdb2ccfe127a20df", //TODO hash этого пароля M9S206

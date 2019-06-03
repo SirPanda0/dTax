@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace dTax.Data.Repository
 {
-    public class DriverFileRepository : BaseRepository<FilesToDriver>, IDriverFileRepository
+    public class DriverFileRepository : BaseRepository<DriverFileEntity>, IDriverFileRepository
     {
         public DriverFileRepository(DbPostrgreContext context) : base(context)
         {
@@ -26,7 +26,7 @@ namespace dTax.Data.Repository
 
         public void AddLinkDriver(Guid DriverId, Guid FileId)
         {
-            Insert(new FilesToDriver
+            Insert(new DriverFileEntity
             {
                 DriverId = DriverId,
                 FileId = FileId
