@@ -10,7 +10,6 @@ import { NgForm } from '@angular/forms';
 export class LkdriverComponent implements OnInit {
 
   PhotoCar: any;
-  PhotoVod: any;
   constructor(private http: HttpService) { }
 
   ngOnInit() {
@@ -18,10 +17,6 @@ export class LkdriverComponent implements OnInit {
 
   ChangePhotoCar(event) {
     this.PhotoCar = event;
-  }
-
-  ChangePhotoVod(event) {
-    this.PhotoVod = event;
   }
 
   LoadPhotoCar() {
@@ -34,13 +29,4 @@ export class LkdriverComponent implements OnInit {
     });
   }
 
-  LoadPhotoVod() {
-    this.http.makeFileRequest('FileStorage/Upload', this.PhotoVod).then( data => {
-      this.http.get('Drivers/FileToDriver?FileId=' + data).subscribe( data1 => {
-        alert('Фото добавлено');
-      }, error1 => {
-        alert('Добавить неудалось');
-      });
-    });
-  }
 }

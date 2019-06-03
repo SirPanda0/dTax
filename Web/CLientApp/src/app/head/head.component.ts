@@ -1,7 +1,4 @@
 import { Component, OnInit } from '@angular/core';
-import { UserService } from '../Servise/user.service';
-import { HttpService } from '../Servise/http.service';
-import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-head',
@@ -10,18 +7,9 @@ import { Router } from '@angular/router';
 })
 export class HeadComponent implements OnInit {
 
-  User;
-  constructor(private user: UserService, private http: HttpService, private route: Router) { }
+  constructor() { }
 
   ngOnInit() {
-    this.User = this.user.GetCurrentUser();
   }
 
-  Exit() {
-    this.http.get('Account/Logout').subscribe( data => {
-      this.user.SetIdentity({});
-      this.User = null;
-      this.route.navigateByUrl('');
-    });
-  }
 }

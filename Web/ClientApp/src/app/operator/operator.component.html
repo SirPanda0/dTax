@@ -1,15 +1,8 @@
-<app-head></app-head>
 <div *ngIf="IsOpenInfoVod == true" class="Zaslon"></div>
 
 <div *ngIf="IsOpenInfoVod == true" class="ModalInfo">
   <button (click)="CloseInfo()">Закрыть</button>
   <h2>Информация о водителе</h2>
-
-  <p>Фото машины</p>
-  <div *ngFor="let Photo of Vod.cabFilesIds">
-    <img src="{{photoApi}}{{Photo}}">
-  </div>
-
   <p>Машина: {{Vod.carBrand}}</p>
   <p>Цвет машины: {{Vod.carColor}}</p>
   <p>Модель машины: {{Vod.carModel}}</p>

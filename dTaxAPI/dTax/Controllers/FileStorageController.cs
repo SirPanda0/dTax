@@ -29,7 +29,7 @@ namespace dTax.Controllers
             fileContentRepository = injectedfileContentRepository;
         }
 
-        //[PolicyAuthorize(AuthorizePolicy.Driver)]
+        [PolicyAuthorize(AuthorizePolicy.Driver)]
         [HttpPost]
         [Route("Upload")]
         public async Task<IActionResult> UploadFile(IFormFile uploadedFile)
