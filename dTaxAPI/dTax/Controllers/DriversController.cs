@@ -158,7 +158,7 @@ namespace dTax.Controllers
 
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [Route("FileToDriver")]
-        [HttpPost]
+        [HttpGet]
         public ActionResult AddFile(Guid FileId)
         {
             Guid DriverId = driverRepository.GetDriverByUserId(GetUserIdByContext()).Id;
