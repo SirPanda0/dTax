@@ -315,9 +315,8 @@ namespace dTax.Controllers
 
         }
 
-
-        [HttpGet]
         [Route("Logout")]
+        [HttpGet]   
         public async Task<IActionResult> Logout()
         {
             try
