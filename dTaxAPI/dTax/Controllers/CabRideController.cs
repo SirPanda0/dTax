@@ -425,13 +425,12 @@ namespace dTax.Controllers
 
                 ride.AddressStartPoint = order.AddressStartPoint;
                 ride.AddressEndPoint = order.AddressEndPoint;
-                ride.StartPointGPS
-                ride.EndPointGPS
-                ride.TariffType
-                ride.PaymentTypeId
+                ride.StartPointGPS = order.StartPointGPS;
+                ride.EndPointGPS = order.EndPointGPS;
+                ride.TariffType = order.TariffType;
+                ride.PaymentTypeId = order.PaymentTypeId;
 
                 DBWorkflow.CabRideRepository.UpdateEntity(ride);
-                DBWorkflow.CabRideStatusRepository.UpdateEntity(rideStatus);
 
                 return Ok("Поездка отменена успешно!");
             }
