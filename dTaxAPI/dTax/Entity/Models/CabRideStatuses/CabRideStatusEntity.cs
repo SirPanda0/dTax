@@ -15,7 +15,7 @@ namespace dTax.Entity.Models.CabRideStatuses
         public Guid CabRideId { get; set; } //поездка
         public CabRideEntity CabRide { get; set; }
 
-        public int StatusId { get; set; } //id статуса
+        public Guid StatusId { get; set; } //id статуса
         public StatusEntity Status { get; set; }
 
         public DateTime StatusTime { get; set; }//время когда была создана запись о поездке

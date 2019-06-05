@@ -11,6 +11,7 @@ namespace dTax.Common.Enums
         Assigned = 2, //Поездка, назначена водителю
         Started = 3, //Поездка началась
         Ended = 4, //Поездка завершилась
-        Canceled = 5 //Поездка отменена
+        Canceled = 5,//Поездка отменена
+        Arrived = 6 //Прибыл
     }
 }

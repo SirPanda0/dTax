@@ -10,6 +10,5 @@ namespace dTax.ResponseModels
         public decimal Standart { get; set; }
         public decimal Comfort { get; set; }
         public decimal Emergency { get; set; }
-        public decimal Minivan { get; set; }
     }
 }

@@ -9,5 +9,6 @@ namespace dTax.Data.Interfaces
 {
     public interface IPaymentTypeRepository : IBaseRepository<PaymentTypeEntity>
     {
+        IEnumerable<PaymentTypeEntity> GetPaymentTypes();
     }
 }

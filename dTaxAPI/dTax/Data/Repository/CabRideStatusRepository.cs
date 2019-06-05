@@ -25,6 +25,7 @@ namespace dTax.Data.Repository
         {
             return await GetQuery()
                 .Include(ride => ride.CabRide)
+                .Include(s=>s.Status)
                 .FirstOrDefaultAsync(_ => _.CabRideId == id);
         }
 
@@ -54,7 +55,7 @@ namespace dTax.Data.Repository
         private async Task<IEnumerable<CabRideStatusEntity>> GetCabRideListAsync()
         {
             return await GetQuery()
-                .Where(_ => _.StatusId != (int)RideStatusEnum.Canceled && _.StatusId != (int)RideStatusEnum.Ended && _.StatusId != (int)RideStatusEnum.New)
+                
                 .ToListAsync();
         }
 

@@ -22,7 +22,11 @@ namespace dTax.Data.Repository
 
         private async Task<CabEntity> GetCabByIdAsync(Guid id)
         {
-            return await GetQuery().FirstOrDefaultAsync(_ => _.Id == id && _.IsDeleted != true);
+            return await GetQuery()
+                .Include(_=>_.CarBrand)
+                .Include(_ => _.CarModel)
+                .Include(_ => _.CarColor)
+                .FirstOrDefaultAsync(_ => _.Id == id && _.IsDeleted != true);
         }
 
         public CabEntity GetCabByDriverId(Guid DriverId)

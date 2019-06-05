@@ -16,7 +16,7 @@ namespace dTax.ApiModel
 
         public int TariffType { get; set; } // Тариф
 
-        public int PaymentTypeId { get; set; }//Тип оплаты
+        public Guid PaymentTypeId { get; set; }//Тип оплаты
 
         public string BookDetails { get; set; }// доп информация о заказе
 

@@ -1,4 +1,4 @@
-﻿ using dTax.Data.Interfaces;
+﻿using dTax.Data.Interfaces;
 using dTax.Entity;
 using dTax.Entity.Models.PaymentTypes;
 using System;
@@ -13,5 +13,11 @@ namespace dTax.Data.Repository
         public PaymentTypeRepository(DbPostrgreContext context) : base(context)
         {
         }
+
+        public IEnumerable<PaymentTypeEntity> GetPaymentTypes()
+        {
+            return GetQuery().Where(_ => _.IsDeleted != true).ToList();
+        }
+
     }
 }

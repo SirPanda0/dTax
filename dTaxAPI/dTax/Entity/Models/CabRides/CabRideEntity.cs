@@ -1,4 +1,5 @@
 ﻿using dTax.Entity.Models.Base;
+using dTax.Entity.Models.CabRideStatuses;
 using dTax.Entity.Models.Customers;
 using dTax.Entity.Models.PaymentTypes;
 using System;
@@ -23,11 +24,13 @@ namespace dTax.Entity.Models.CabRides
         public bool IsCanceled { get; set; } = false;//Отменена ли поездки
 
         public int TariffType { get; set; }
-        public int PaymentTypeId { get; set; }//Тип оплаты
-        public PaymentTypeEntity PamentType { get; set; }
+        public Guid PaymentTypeId { get; set; }//Тип оплаты
+        public PaymentTypeEntity PaymentType { get; set; }
         public decimal Price { get; set; }//Цена за поездку
 
         public string BookDetails { get; set; }// доп информация о заказе
+
+        public ICollection<CabRideStatusEntity> CabRideStatusLink { get; set; }
 
     }
 }

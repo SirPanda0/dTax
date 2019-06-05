@@ -15,7 +15,7 @@ namespace dTax.ResponseModels
         public string AddressEndPoint { get; set; }//Место конца поездки
         public string EndPointGPS { get; set; }//
 
-        public int PaymentTypeId { get; set; }//Тип оплаты
+        public Guid PaymentTypeId { get; set; }//Тип оплаты
 
         public decimal Price { get; set; }//Цена за поездку
 

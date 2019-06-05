@@ -45,7 +45,6 @@ namespace dTax.Controllers
                             Standart = (dist * 12) + 60,
                             Comfort = (dist * 12) + 90,
                             Emergency = (dist * 15) + 90,
-                            Minivan = (dist * 18) + 60
                         };
                     else
                     if (DateTime.Now.Hour > 17)
@@ -54,7 +53,6 @@ namespace dTax.Controllers
                             Standart = (dist * 13) + 70,
                             Comfort = (dist * 13) + 100,
                             Emergency = (dist * 16) + 100,
-                            Minivan = (dist * 19) + 70
                         };
                 }
                 return new PriceView
@@ -62,7 +60,6 @@ namespace dTax.Controllers
                     Standart = 60,
                     Comfort = 90,
                     Emergency = 90,
-                    Minivan = 60
                 };
             }
             catch (Exception e)

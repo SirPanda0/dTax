@@ -9,5 +9,6 @@ namespace dTax.Entity.Models.Statuses
     public class StatusEntity : BaseEntity
     {
         public string StatusName { get; set; }
+        public int StatusNumber { get; set; }
     }
 }

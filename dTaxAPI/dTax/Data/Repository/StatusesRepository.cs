@@ -13,5 +13,9 @@ namespace dTax.Data.Repository
         public StatusesRepository(DbPostrgreContext context) : base(context)
         {
         }
+        public IEnumerable<StatusEntity> GetStatuses()
+        {
+            return GetQuery().Where(_ => _.IsDeleted != true).ToList();
+        }
     }
 }

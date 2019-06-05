@@ -9,5 +9,6 @@ namespace dTax.Data.Interfaces
 {
     public interface IStatusesRepository : IBaseRepository<StatusEntity>
     {
+        IEnumerable<StatusEntity> GetStatuses();
     }
 }

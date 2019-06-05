@@ -75,11 +75,12 @@ namespace dTax.Entity
 
             List<StatusEntity> statuses = new List<StatusEntity>()
             {
-                new StatusEntity() { StatusName = "Новая поездка"},
-                new StatusEntity() { StatusName = "Поездка, назначена водителю"},
-                new StatusEntity() { StatusName = "Поездка началась"},
-                new StatusEntity() { StatusName = "Поездка завершилась"},
-                new StatusEntity() { StatusName = "Поездка отменена"},
+                new StatusEntity() { StatusName = "Новая поездка", StatusNumber = 1},
+                new StatusEntity() { StatusName = "Поездка, назначена водителю", StatusNumber =2},
+                new StatusEntity() { StatusName = "Поездка началась", StatusNumber =3},
+                new StatusEntity() { StatusName = "Поездка завершилась", StatusNumber =4},
+                new StatusEntity() { StatusName = "Поездка отменена", StatusNumber =5},
+                new StatusEntity() { StatusName = "Водитель прибыл", StatusNumber =6}
             };
 
             List<PaymentTypeEntity> payments = new List<PaymentTypeEntity>()
