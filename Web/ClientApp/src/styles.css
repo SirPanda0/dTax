@@ -239,6 +239,7 @@ footer {
 	background: #7e7e7e;
 	color: #dbdbdb;
 	font-size: 12px;
+	z-index:3
 	
 }
 
@@ -250,6 +251,7 @@ footer {
 	height: 100px;
 	color: #ccc;
 	text-align: center; 
+	z-index:3
 }
 
 footer h3 {
@@ -257,10 +259,12 @@ footer h3 {
 	color: #fff;
 	border-bottom: 1px solid #919191;
 	margin: 0 0 10px 0;
+
 }
 
 footer a {
 	color: #dbdbdb;
+	
 }
 
 #twitter time a {
