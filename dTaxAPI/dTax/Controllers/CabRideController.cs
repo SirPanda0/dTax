@@ -71,7 +71,10 @@ namespace dTax.Controllers
                     PaymentType = ride.PaymentType.TypeName,
                     TariffType = tariff,
                     RideStatus = ride.CabRideStatusLink.FirstOrDefault().Status.StatusName,
-                    IsAssigned = false
+                    IsAssigned = false,
+                    PaymentTypeId = ride.PaymentTypeId,
+                    TariffTypeId = ride.TariffType,
+                    RideStatusId =ride.CabRideStatusLink.FirstOrDefault().StatusId
                 };
 
                 var shift = ride.CabRideStatusLink.FirstOrDefault().Shift;
@@ -137,7 +140,10 @@ namespace dTax.Controllers
                     BookDetails = ride.BookDetails,
                     PaymentType = ride.PaymentType.TypeName,
                     TariffType = tariff,
-                    RideStatus = ride.CabRideStatusLink.FirstOrDefault().Status.StatusName
+                    RideStatus = ride.CabRideStatusLink.FirstOrDefault().Status.StatusName,
+                    PaymentTypeId = ride.PaymentTypeId,
+                    TariffTypeId = ride.TariffType,
+                    RideStatusId = ride.CabRideStatusLink.FirstOrDefault().StatusId
                 };
 
                 return Json(fullDriver);
@@ -378,7 +384,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.User)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [Route("CancelOrder")]
-        [HttpGet]
+        [HttpDelete]
         public IActionResult CancelRide(Guid id)
         {
             try
@@ -406,6 +412,35 @@ namespace dTax.Controllers
         }
 
 
+        [PolicyAuthorize(AuthorizePolicy.User)]
+        [PolicyAuthorize(AuthorizePolicy.FullAccess)]
+        [Route("UpdateOrder")]
+        [HttpPut]
+        public IActionResult UpdateRide(OrderUpdateModel order)
+        {
+            try
+            {
+
+                CabRideEntity ride = DBWorkflow.CabRideRepository.GetCabRideById(order.Id);
+
+                ride.AddressStartPoint = order.AddressStartPoint;
+                ride.AddressEndPoint = order.AddressEndPoint;
+                ride.StartPointGPS
+                ride.EndPointGPS
+                ride.TariffType
+                ride.PaymentTypeId
+
+                DBWorkflow.CabRideRepository.UpdateEntity(ride);
+                DBWorkflow.CabRideStatusRepository.UpdateEntity(rideStatus);
+
+                return Ok("Поездка отменена успешно!");
+            }
+            catch (Exception e)
+            {
+                Log.Error("\nMessageError: {0} \n StackTrace: {1}", e.Message, e.StackTrace);
+                return StatusCode(500);
+            }
+        }
 
 
         [PolicyAuthorize(AuthorizePolicy.Driver)]
@@ -449,7 +484,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [Route("StartRide")]
-        [HttpPost]
+        [HttpGet]
         public ActionResult StartRide(Guid id)
         {
             try
@@ -486,7 +521,7 @@ namespace dTax.Controllers
         [PolicyAuthorize(AuthorizePolicy.Driver)]
         [PolicyAuthorize(AuthorizePolicy.FullAccess)]
         [Route("EndRide")]
-        [HttpPost]
+        [HttpGet]
         public ActionResult EndRide(Guid id)
         {
             try

@@ -10,8 +10,13 @@ namespace dTax.ViewModels
         public Guid Id { get; set; }
         public string AddressStartPoint { get; set; }//Место начала поездки
         public string AddressEndPoint { get; set; }//Место конца поездки
+        public int TariffTypeId { get; set; }
         public string TariffType { get; set; }
+
+        public Guid PaymentTypeId { get; set; }
         public string PaymentType { get; set; }
+
+        public Guid RideStatusId { get; set; }
         public string RideStatus { get; set; }
         public decimal Price { get; set; }
 
