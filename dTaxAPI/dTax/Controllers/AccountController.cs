@@ -284,7 +284,8 @@ namespace dTax.Controllers
                     MiddleName = user.MiddleName,
                     LastName = user.LastName,
                     RoleId = user.RoleId,
-                    PhoneNumber = user.PhoneNumber
+                    PhoneNumber = user.PhoneNumber,
+                    IsFullReg = user.IsFullReg
                 };
 
                 if (IsFull)
