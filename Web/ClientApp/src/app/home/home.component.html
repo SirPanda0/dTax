@@ -8,8 +8,27 @@
 <p>Почта: {{User.email}}</p>
 <p>Номер: {{User.PhoneNubmer}}</p>
 
+<div *ngIf="MyOrder != null">
+  <h2>Твой заказ:</h2>
+  <table>
+    <tr>
+      <th>Адрес отправки</th>
+      <th>Адрес назначения</th>
+      <th>Машина</th>
+      <th>Цена</th>
+      <th>Статус</th>
+    </tr>
+    <tr >
+      <td>{{MyOrder.addressStartPoint}}</td>
+      <td>{{MyOrder.addressEndPoint}}</td>
+      <td>{{MyOrder.carBrand}} {{MyOrder.carColor}} {{MyOrder.carModel}}</td>
+      <td>{{MyOrder.price}} руб.</td>
+      <td>{{MyOrder.rideStatus}}</td>
+    </tr>
+  </table>
+</div>
 
-
+<div *ngIf="MyOrder == null">
 <button (click)="GetDistanse()">Расчитать стоимость</button><br>
 <input type="hidden" id="StartP1" name="Start1">
 <input type="hidden" id="StartP2" name="Start2">
@@ -35,9 +54,7 @@
     <div >
       <label >Тип оплаты: </label>
       <select name="TypePayment" [(ngModel)]="TypePayment"> 
-        <option [value]="1">Наличные</option>
-        <option [value]="2">Карта</option>
-
+        <option *ngFor="let Payment of TypePayment" [value]="Payment.id">{{Payment.typeName}}</option>
       </select>
     </div>
 
@@ -47,7 +64,7 @@
 <p>{{DistanTest}}</p>
 
 <div id="map"></div>
-
+</div>
 <!-- <p>Ваш заказ</p>
 <table>
   <tr>

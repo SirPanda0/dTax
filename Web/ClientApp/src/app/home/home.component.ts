@@ -13,6 +13,8 @@ declare var ymaps: any;
 export class HomeComponent implements OnInit {
   User;
 
+  MyOrder: any;
+
   Distanse;
   Cars;
 
@@ -24,7 +26,8 @@ export class HomeComponent implements OnInit {
   ngOnInit() {
     this.User = this.user.GetCurrentUser();
     ymaps.ready(this.init);
-    this.GetOrder();
+    this.GetPayments();
+    setInterval(() => this.GetOrder(), 5000);
   }
   init() {
     let Distan;
@@ -86,6 +89,12 @@ export class HomeComponent implements OnInit {
       });
   });
 }
+  GetPayments() {
+    this.http.get('PaymentType/Get').subscribe(data => {
+      this.TypePayment = data;
+      this.GetOrder();
+    });
+  }
 
   GetDistanse() {
     const Distan = $('#Dist').val();
@@ -105,7 +114,8 @@ export class HomeComponent implements OnInit {
   }
 
   GetOrder() {
-    this.http.get('CabRide/GetRideStatus').subscribe(data => {
+    this.http.get('CabRide/GetActiveCustomerRide').subscribe(data => {
+      this.MyOrder = data;
       console.log(data);
     });
   }
