@@ -20,8 +20,8 @@ export class DriverComponent implements OnInit {
   }
 
   GetOrder() {
-    this.http.get('CabRide/GetRideList?page=0').subscribe( (data: any) => {
-      this.Orders = data.collection;
+    this.http.get('CabRide/GetRideList?page=1').subscribe( (data: any) => {
+      this.Orders = data;
       this.GetActiveOrder();
 
     });
@@ -36,7 +36,7 @@ export class DriverComponent implements OnInit {
   }
 
   GetActiveOrder() {
-    this.http.get('CabRide/ActiveOrder?page=0').subscribe((data: any) => {
+    this.http.get('CabRide/GetActiveCustomerRide').subscribe((data: any) => {
      this.MyOrders = data.collection;
       console.log(data);
     });
