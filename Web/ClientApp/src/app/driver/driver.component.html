@@ -27,10 +27,11 @@
     <th>Цена</th>
     <th>Действие</th>
   </tr>
-  <tr *ngFor="let Order of MyOrders">
-    <td>{{Order.addressStartPoint}}</td>
-    <td>{{Order.addressEndPoint}}</td>
-    <td>{{Order.price}}</td>
-    <!-- <td><button (click)="Otvaz(Vod.driverId)">Отозвать</button></td> -->
+  <tr>
+    <td>{{MyOrders.addressStartPoint}}</td>
+    <td>{{MyOrders.addressEndPoint}}</td>
+    <td>{{MyOrders.price}}</td>
+    <td *ngIf="MyOrders.rideStatus == 'Поездка, назначена водителю'"><button (click)="StartMyOrder(MyOrders.id)">Начать</button></td>
+    <td *ngIf="MyOrders.rideStatus == 'Поездка началась'"><button (click)="StartMyOrder(MyOrders.id)">Завершить</button></td>
   </tr>
 </table>

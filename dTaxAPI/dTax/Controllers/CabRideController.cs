@@ -509,7 +509,7 @@ namespace dTax.Controllers
 
                 DBWorkflow.CabRideStatusRepository.UpdateEntity(ride);
 
-                return Ok("Поездка начата!");
+                return Json("Поездка начата!");
             }
             catch (Exception e)
             {
@@ -545,7 +545,7 @@ namespace dTax.Controllers
 
                 DBWorkflow.CabRideStatusRepository.UpdateEntity(ride);
 
-                return Ok("Поездка завершена!");
+                return Json("Поездка завершена!");
             }
             catch (Exception e)
             {
