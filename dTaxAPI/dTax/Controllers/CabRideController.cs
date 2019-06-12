@@ -106,6 +106,7 @@ namespace dTax.Controllers
         {
             try
             {
+
                 var DriverId = DBWorkflow.DriverRepository.GetDriverByUserId(GetUserIdByContext()).Id;
 
                 var ride = DBWorkflow.CabRideRepository.GetCabRideByDriverId(DriverId);

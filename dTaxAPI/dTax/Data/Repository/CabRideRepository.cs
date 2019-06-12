@@ -33,7 +33,7 @@ namespace dTax.Data.Repository
                  .Include(_ => _.CabRideStatusLink)
                     .ThenInclude(s=>s.Status)
                 .Include(p=>p.PaymentType)
-                .FirstOrDefaultAsync(_ => _.CustomerId == id && _.CabRideStatusLink.FirstOrDefault().Status.StatusNumber == 1 );
+                .FirstOrDefaultAsync(_ => _.CustomerId == id && _.CabRideStatusLink.FirstOrDefault().Status.StatusNumber != 4 && _.CabRideStatusLink.FirstOrDefault().Status.StatusNumber != 1);
         }
 
         public CabRideEntity GetCabRideByDriverId(Guid Id)
@@ -46,8 +46,10 @@ namespace dTax.Data.Repository
             return await GetQuery()
                 .Include(_ => _.CabRideStatusLink)
                     .ThenInclude(_=>_.Shift)
+                .Include(_ => _.CabRideStatusLink)
+                    .ThenInclude(_=>_.Status)
                 .Include(p => p.PaymentType)
-                .FirstOrDefaultAsync(_ => _.CabRideStatusLink.FirstOrDefault().Shift.DriverId == id && _.CabRideStatusLink.FirstOrDefault().Status.StatusNumber == 1);
+                .FirstOrDefaultAsync(_ => _.CabRideStatusLink.FirstOrDefault().Shift.DriverId == id && _.CabRideStatusLink.FirstOrDefault().Status.StatusNumber != 4 && _.CabRideStatusLink.FirstOrDefault().Status.StatusNumber != 1);
         }
 
         private async Task<CabRideEntity> GetCabRideByIdAsync(Guid id)
