@@ -526,6 +526,7 @@ namespace dTax.Controllers
         {
             try
             {
+                var re = DBWorkflow.CabRideRepository.GetCabRideById(id);
                 //RideId не статуса а поездки
                 var ride = DBWorkflow.CabRideStatusRepository.GetCabRideStatusByRideId(id);
 
@@ -538,12 +539,15 @@ namespace dTax.Controllers
                     return BadRequest();
                 }
 
+                re.IsDeleted = true;
+
                 ride.StatusId = GetStatusId((int)RideStatusEnum.Ended);
 
                 ride.RideEndTime = DateTime.Now;
                 ride.StatusTime = DateTime.Now;
 
                 DBWorkflow.CabRideStatusRepository.UpdateEntity(ride);
+                DBWorkflow.CabRideRepository.UpdateEntity(re);
 
                 return Json("Поездка завершена!");
             }

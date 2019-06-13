@@ -50,13 +50,7 @@ namespace dTax
                 c.SwaggerDoc("v1", new Info
                 {
                     Version = "v1",
-                    Title = "Первая версия API dTax-mailing@yandex.ru M9S206",
-
-                    Contact = new Contact
-                    {
-                        Name = "Нажми для миграции",
-                        Url = "/api/values"
-                    }
+                    Title = "Первая версия API ", //dTax-mailing@yandex.ru M9S206
                 });
             });
 
