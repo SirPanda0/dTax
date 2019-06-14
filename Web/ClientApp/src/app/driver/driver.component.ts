@@ -9,9 +9,9 @@ import { HttpService } from '../Servise/http.service';
 })
 export class DriverComponent implements OnInit {
 
-  Driver;
+  Driver: any;
   Orders: any;
-  MyOrders: any;
+  MyOrders: any = {};
   constructor(private user: UserService, private http: HttpService) { }
 
   ngOnInit() {
