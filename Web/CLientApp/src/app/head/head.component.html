@@ -1,7 +1,7 @@
 <header>
 
   <div class="header-left">
-    <a><img src="" width="410" height="150"  alt="logo"></a>
+  
     
   </div>
 
@@ -22,7 +22,7 @@
       <h1>dTax</h1>
     </div>
   </div>
-  <div *ngIf="User.roleId === 3" class="header-right"><button><a routerLink="/lkdriver">Личный кабинет</a></button></div>
+  <div *ngIf="User.roleId === 3" class="header-right" ><button><a routerLink="/lkdriver">Личный кабинет</a></button></div>
   <div *ngIf="User.roleId === 2" class="header-right"><button><a routerLink="/lkuser">Личный кабинет</a></button></div>
   <div class="header-right"><button (click)="Exit()">Выйти</button></div>
 

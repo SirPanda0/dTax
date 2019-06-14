@@ -6,10 +6,9 @@
 
 <p>ФИО: {{User.firstName}} {{User.middleName}} {{User.lastName}}</p>
 <p>Почта: {{User.email}}</p>
-<p>Номер: {{User.PhoneNubmer}}</p>
 
 <div *ngIf="MyOrder != null">
-  <h2>Твой заказ:</h2>
+  <h2>Ваш заказ:</h2>
   <table>
     <tr>
       <th>Адрес отправки</th>
@@ -46,7 +45,7 @@
       <select name="Type" [(ngModel)]="TypeCar"> 
         <option [value]="1">Комфорт:{{Cars.comfort}} руб</option>
         <option [value]="2">Экстренный:{{Cars.emergency}} руб</option>
-        <option [value]="3">Минивэн:{{Cars.minivan}} руб</option>
+    
         <option [value]="4">Стандарт:{{Cars.standart}} руб</option>
       </select>
     </div>
