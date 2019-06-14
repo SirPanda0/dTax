@@ -370,3 +370,8 @@ footer p {
 	font-size: 10px;
 	text-align: right;
 }
+
+.link{
+	outline: none;
+	text-decoration: none;
+}
