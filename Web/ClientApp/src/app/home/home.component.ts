@@ -28,7 +28,7 @@ export class HomeComponent implements OnInit {
     this.User = this.user.GetCurrentUser();
     ymaps.ready(this.init);
     this.GetPayments();
-    setInterval(() => this.GetOrder(), 5000);
+    setInterval(() => this.GetOrder(), 10000);
   }
   init() {
     let Distan;
