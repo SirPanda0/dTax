@@ -53,7 +53,7 @@
     <div >
       <label >Тип оплаты: </label>
       <select name="TypePayment" [(ngModel)]="TypePayment"> 
-        <option *ngFor="let Payment of TypePayment" [value]="Payment.id">{{Payment.typeName}}</option>
+        <option *ngFor="let Payment of TypePayments" [value]="Payment.id">{{Payment.typeName}}</option>
       </select>
     </div>
 

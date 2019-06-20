@@ -20,6 +20,7 @@ export class HomeComponent implements OnInit {
 
   TypeCar;
   TypePayment;
+  TypePayments;
 
   constructor(private http: HttpService, private user: UserService) { }
 
@@ -91,7 +92,7 @@ export class HomeComponent implements OnInit {
 }
   GetPayments() {
     this.http.get('PaymentType/Get').subscribe(data => {
-      this.TypePayment = data;
+      this.TypePayments = data;
       this.GetOrder();
     });
   }
@@ -110,6 +111,8 @@ export class HomeComponent implements OnInit {
     console.log(body);
     this.http.post('CabRide/AddOrder', body).subscribe(data => {
       alert('Заказ успешен');
+    }, error => {
+      alert("У вас есть активный заказ")
     });
   }
 
