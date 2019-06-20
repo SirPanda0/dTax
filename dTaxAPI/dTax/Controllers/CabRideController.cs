@@ -458,7 +458,7 @@ namespace dTax.Controllers
                 //RideId не статуса а поездки
                 var ride = DBWorkflow.CabRideStatusRepository.GetCabRideStatusByRideId(id);
 
-                var check = DBWorkflow.CabRideStatusRepository.GetCabRideList().Where(_ => _.ShiftId == shift.Id).Count();
+                var check = DBWorkflow.CabRideStatusRepository.GetCabRideList().Where(_ => _.ShiftId == shift.Id && _.StatusId == GetStatusId((int)RideStatusEnum.Ended)).Count();
 
                 if (check != 0)
                 {
