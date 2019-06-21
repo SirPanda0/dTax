@@ -1,0 +1,55 @@
+
+
+html, body, h1, h2, h3, h4, h5, h6, div, p, a, img, table, thead, tbody, th, td, dl, ul, ol, li, dt, dd, form, fieldset, label, button, hr {
+    margin: 0;
+    padding: 0;
+    border: 0;
+    font-weight: normal;
+}
+
+p {
+    margin: 0 0 10px;
+}
+* {
+    -webkit-box-sizing: border-box;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+p {
+    display: block;
+    margin-block-start: 1em;
+    margin-block-end: 1em;
+    margin-inline-start: 0px;
+    margin-inline-end: 0px;
+}
+.b-company {
+    font-size: 13px;
+    line-height: 1.5em;
+    width: 1200px; 
+    background: #ccc;
+margin: auto;
+    border: solid 1px black;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    margin-right: -50%;
+    transform: translate(-50%, -50%);
+}
+body {
+    height: 100%;
+    margin: 0 auto;
+    background-color: #0000;
+    font-family: Lato,Arial,sans-serif;
+    font-size: 62.5%;
+    color: #000;
+}
+body {
+    font-family: "Helvetica Neue",Helvetica,Arial,sans-serif;
+    font-size: 14px;
+    line-height: 1.42857143;
+    color:#000;
+    background-color: #0000;
+    background: #0000;
+    text-align: center;
+}

@@ -51,6 +51,7 @@ const Routs: Routes = [
   {path:'contacts', component:ContactComponent}, // Контакты кампании
   {path:'partners', component:PartnersComponent}, // Партнеры
   {path: 'tarif', component:TarifComponent}, // Тарифы
+  {path: 'vacancy', component:VacancyComponent},
   
 
 

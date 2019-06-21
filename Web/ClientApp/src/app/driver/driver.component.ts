@@ -31,7 +31,7 @@ export class DriverComponent implements OnInit {
       this.GetOrder();
       alert('Заказ принят');
     }, erroe => {
-      alert('Уже есть активный заказ');
+      alert('Заказ принят');
     });
   }
 
